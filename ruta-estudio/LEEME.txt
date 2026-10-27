@@ -1,0 +1,24 @@
+RUTA DE ESTUDIO — cómo publicarla en tu sitio (GitHub Pages)
+
+1. Abre el repositorio de javierfreireh.com en github.com.
+2. Toca "Add file" → "Upload files".
+3. Arrastra la CARPETA COMPLETA "ruta-estudio" (con index.html, manifest.webmanifest,
+   sw.js y la carpeta icons). Debe quedar como una carpeta dentro del repositorio.
+4. Escribe un mensaje (por ejemplo "Agrega Ruta de Estudio") y toca "Commit changes".
+5. Espera 1 o 2 minutos y abre: https://javierfreireh.com/ruta-estudio/
+
+INSTALARLA EN EL CELULAR O TABLET
+- iPhone / iPad (Safari): abre el enlace → botón Compartir → "Agregar a inicio".
+- Android (Chrome): abre el enlace → aparece "Instalar app", o menú ⋮ → "Instalar aplicación".
+- Computador (Chrome o Edge): ícono de instalar al lado derecho de la barra de direcciones.
+
+Después de abrirla una vez con internet, funciona sin conexión.
+
+CUANDO HAYA UNA VERSIÓN NUEVA
+- Reemplaza index.html en la carpeta ruta-estudio.
+- En sw.js cambia  const VERSION = 'ruta-v1';  por 'ruta-v2' (y así cada vez).
+- El progreso de los niños no se pierde con las actualizaciones.
+
+IMPORTANTE
+- El progreso se guarda en cada dispositivo. Si se borran los datos del navegador
+  o se desinstala la app, ese avance se pierde.
