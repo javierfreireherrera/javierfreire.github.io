@@ -1,6 +1,6 @@
 // Ruta de Estudio: funciona sin internet.
 // Cuando subas una versión nueva de index.html, cambia el número de VERSION.
-const VERSION = 'ruta-v1';
+const VERSION = 'ruta-v2'; // v2: mascota Goliat e íconos nuevos
 const SHELL = [
   './',
   './index.html',

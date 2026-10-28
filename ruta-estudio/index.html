@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-title" content="Ruta de Estudio">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/favicon-64.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon-64.png?v=2">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;font:14px system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
@@ -293,11 +293,34 @@ td.act{white-space:nowrap;text-align:right}
 .legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
 @media (max-width:520px){.top .in{gap:8px}.brand{font-size:1.1rem}.stats{gap:8px}}
 
+/* mascota Goliat */
+.buddy{display:flex;align-items:center;gap:12px;margin-top:12px}
+.masc{width:70px;height:70px;flex:none;background:none;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.masc svg{width:100%;height:100%;display:block;overflow:visible;transform-origin:50% 92%}
+.masc.idle svg{animation:m-bob 3s ease-in-out infinite}
+.masc.happy svg{animation:m-hop .55s ease 3}
+.masc.party svg{animation:m-hop .6s ease infinite}
+.masc.sad svg,.masc.cry svg{animation:m-droop .7s ease forwards}
+.m-eyes{animation:m-blink 4.5s infinite;transform-box:fill-box;transform-origin:center}
+.m-tear{animation:m-tear 1.5s ease-in infinite}
+@keyframes m-bob{50%{transform:translateY(-3px)}}
+@keyframes m-hop{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-14px) rotate(-7deg)}60%{transform:translateY(-4px) rotate(6deg)}}
+@keyframes m-droop{to{transform:translateY(5px) rotate(-7deg) scale(.95)}}
+@keyframes m-blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes m-tear{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(18px);opacity:0}}
+.bubble{position:relative;flex:1;min-width:0;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:9px 13px;font-weight:800;font-size:.98rem;line-height:1.35}
+.bubble::before{content:"";position:absolute;left:-8px;top:50%;width:12px;height:12px;background:var(--surface);border:0 solid;border-color:inherit;border-left-width:2px;border-bottom-width:2px;transform:translateY(-50%) rotate(45deg)}
+.bubble.ok{border-color:var(--ok);color:var(--ok)}
+.bubble.no{border-color:var(--bad);color:var(--bad)}
+.buddy.big{flex-direction:column;gap:14px}
+.buddy.big .masc{width:130px;height:130px}
+.buddy.big .bubble{flex:none;max-width:340px}
+.buddy.big .bubble::before{left:50%;top:-8px;transform:translateX(-50%) rotate(135deg)}
+.goal .masc{width:62px;height:62px}
+
 @media (max-width:440px){.uhead h2{font-size:1.15rem}.prompt{font-size:1.15rem}.prompt .math{font-size:1.4rem}.kpi b{font-size:1.3rem}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-</head>
-<body>
 
 <header class="top"><div class="in">
   <div class="brand">Ruta de Estudio</div>
@@ -1876,6 +1899,64 @@ const IC = {
   bolt:'<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
 };
 const starsHtml = (n, cls='stars') => `<span class="${cls}">${[1,2,3].map(i=>`<span class="${i<=n?'on':''}">${IC.star}</span>`).join('')}</span>`;
+/* ============ mascota: Goliat, el perrito ============ */
+function goliat(mood){
+  const fur='#231d1a', tan='#c98a4b', tanLight='#e0aa6e', inner='#e7a98e', ink='#0d0907', ring='#7a4a2a';
+  const happy = mood==='happy' || mood==='party', sad = mood==='sad' || mood==='cry';
+  // orejas grandes y paradas; tristes = caídas hacia los lados
+  const earL = sad ? 'rotate(-38 48 50)' : happy ? 'rotate(4 48 50)' : '';
+  const earR = sad ? 'rotate(38 72 50)' : happy ? 'rotate(-4 72 50)' : '';
+  let eyes, brows, mouth, extra = '';
+  if (happy){
+    eyes = `<path d="M40 64 Q47 55 54 64 M66 64 Q73 55 80 64" fill="none" stroke="${tanLight}" stroke-width="3.8" stroke-linecap="round"/>`;
+    brows = `<ellipse cx="46" cy="52" rx="4.2" ry="3" fill="${tan}"/><ellipse cx="74" cy="52" rx="4.2" ry="3" fill="${tan}"/>`;
+    mouth = `<path d="M51 85 Q60 99 69 85 Z" fill="#5a1a22"/><path d="M55.5 90 Q60 104 64.5 90 Z" fill="#f07a8a"/>`;
+    extra = `<circle cx="38" cy="78" r="5" fill="#f19a9a" opacity=".8"/><circle cx="82" cy="78" r="5" fill="#f19a9a" opacity=".8"/>`;
+  } else {
+    eyes = `<g class="m-eyes"><circle cx="47" cy="64" r="9" fill="${ring}"/><circle cx="73" cy="64" r="9" fill="${ring}"/><circle cx="47" cy="64" r="7.4" fill="${ink}"/><circle cx="73" cy="64" r="7.4" fill="${ink}"/><circle cx="49.6" cy="61" r="2.6" fill="#fff"/><circle cx="75.6" cy="61" r="2.6" fill="#fff"/></g>`;
+    brows = sad
+      ? `<path d="M40 54 L51 49 M80 54 L69 49" stroke="${tan}" stroke-width="4.5" stroke-linecap="round"/>`
+      : `<ellipse cx="46" cy="52" rx="4.2" ry="3" fill="${tan}"/><ellipse cx="74" cy="52" rx="4.2" ry="3" fill="${tan}"/>`;
+    mouth = sad
+      ? `<path d="M54 91 Q60 85 66 91" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round"/>`
+      : `<path d="M54 86 Q57 89 60 86 Q63 89 66 86" fill="none" stroke="${ink}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if (sad) extra = `<path class="m-tear" d="M45 73 q-3.5 6 0 8 q3.5 -2 0 -8z" fill="#5bb4ff"/>${mood==='cry'?`<path class="m-tear" style="animation-delay:.7s" d="M75 73 q-3.5 6 0 8 q3.5 -2 0 -8z" fill="#5bb4ff"/>`:''}`;
+  }
+  return `<svg viewBox="0 4 120 116" aria-hidden="true">
+    <path d="M34 120 Q36 92 60 91 Q84 92 86 120 Z" fill="${fur}"/>
+    <ellipse cx="60" cy="111" rx="11" ry="9" fill="${tan}"/>
+    <g transform="${earL}"><path d="M57 44 Q38 14 18 6 Q19 36 37 58 Z" fill="${fur}"/><path d="M51 44 Q38 22 25 15 Q27 36 39 52 Z" fill="${inner}"/></g>
+    <g transform="${earR}"><path d="M63 44 Q82 14 102 6 Q101 36 83 58 Z" fill="${fur}"/><path d="M69 44 Q82 22 95 15 Q93 36 81 52 Z" fill="${inner}"/></g>
+    <ellipse cx="60" cy="66" rx="27" ry="25" fill="${fur}"/>
+    <ellipse cx="42" cy="78" rx="8" ry="7" fill="${tan}"/><ellipse cx="78" cy="78" rx="8" ry="7" fill="${tan}"/>
+    <ellipse cx="60" cy="84" rx="12.5" ry="10" fill="${tan}"/>
+    ${brows}${eyes}${extra}
+    <ellipse cx="60" cy="78.5" rx="5.6" ry="4" fill="${ink}"/><ellipse cx="58.4" cy="77.4" rx="1.6" ry="1" fill="#6b5a52"/>
+    ${mouth}
+    <path d="M41 96 Q60 104 79 96" fill="none" stroke="#c43b3b" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="103" r="3.6" fill="#f0c03a"/>
+  </svg>`;
+}
+const BUD = {
+  start:['¡Guau! Soy Goliat. ¡Vamos que tú puedes!','Lee con calma y responde. Yo te acompaño.','¡A practicar se ha dicho! ¡Guau!'],
+  next:['¿Y esta?','Vamos con la siguiente.','Tú puedes.','Piensa con calma.'],
+  ok:['¡Guau guau! ¡Bien hecho!','¡Eso! ¡Correcto!','¡Bacán! Sigue así.','¡Jiji! Esa te salió muy bien.','¡Bien! Me pusiste feliz, mira cómo muevo la cola.'],
+  combo:n=>`¡Guau! ¡${n} seguidas! ¡Estás imparable!`,
+  no:['Auuu… no era esa. Lee la explicación.','Uy, casi. ¡La próxima sale!','Me puse triste, pero de los errores se aprende.','No pasa nada. Mira cómo se hace.'],
+  out:'Snif… se acabaron las vidas. ¿Lo intentamos otra vez?',
+  tickle:['¡Jiji, me haces cosquillas!','¡Guau guau! ¡Para, para!','¡Hola! Soy Goliat. Chiquitito, pero valiente.'],
+};
+const mascBtn = mood => `<button class="masc ${mood}" data-masc data-mood="${mood}" aria-label="Goliat, la mascota">${goliat(mood)}</button>`;
+const buddy = (mood, msg, tone='', big=false) => `<div class="buddy${big?' big':''}">${mascBtn(mood)}<div class="bubble ${tone}" role="status">${msg}</div></div>`;
+document.addEventListener('click', e=>{
+  const m = e.target.closest('[data-masc]'); if (!m) return;
+  const prev = m.dataset.mood, b = m.parentElement.querySelector('.bubble');
+  if (!m._old) m._old = {txt: b ? b.innerHTML : '', cls: b ? b.className : ''};
+  m.className='masc happy'; m.innerHTML=goliat('happy');
+  if (b){ b.className='bubble'; b.innerHTML=pick(BUD.tickle); }
+  clearTimeout(m._t);
+  m._t = setTimeout(()=>{ if (!m.isConnected) return; m.className='masc '+prev; m.innerHTML=goliat(prev); if (b){ b.innerHTML=m._old.txt; b.className=m._old.cls; } m._old=null; }, 1800);
+});
+
 function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ============ vistas ============ */
@@ -1957,7 +2038,8 @@ function renderPath(){
   const subMax = id => COURSES[s.cc][id].reduce((a,u)=>a+u.L.length*3,0);
   app.innerHTML = `
   <section class="goal">
-    <div class="txt"><h2>¡Hola, ${s.name}!</h2>
+    ${mascBtn('idle')}
+    <div class="txt"><h2>¡Hola, ${esc(s.name)}!</h2>
       <p>${xpT>=GOAL?'Meta de hoy cumplida. ¡Bien!':`Llevas ${xpT} de ${GOAL} XP hoy.`} · ${courseLabel(s.cc)}</p>
       <div class="bar"><i style="width:${pct}%"></i></div></div>
     <button class="btn ghost" id="bWeak" ${weak.length?'':'disabled'} title="${weak.length?'Practica lo que más te ha costado en esta asignatura':'Aparece cuando tengas algunos errores para repasar'}">Repasar errores</button>
@@ -1979,7 +2061,7 @@ function renderPath(){
 function startLesson(id, skills){
   const sk = skills || LESSONS[id].sk;
   let q=[]; while(q.length<PER_LESSON) q=q.concat(shuffle(sk));
-  LS = {who, id, title: id==='repaso'?'Repaso de errores · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,PER_LESSON), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false};
+  LS = {who, id, title: id==='repaso'?'Repaso de errores · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,PER_LESSON), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false, combo:0};
   view='lesson'; setTab('path'); window.scrollTo({top:0}); nextQ();
 }
 function nextQ(){
@@ -1994,6 +2076,7 @@ function drawQ(){
     <div class="lbar"><button class="x" id="bQuit" aria-label="Salir de la lección">${IC.x}</button>
       <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="${PER_LESSON}" aria-valuenow="${LS.correct}"><i style="width:${LS.correct/PER_LESSON*100}%"></i></div>
       <div class="hearts" aria-label="${LS.hearts} vidas">${[1,2,3].map(i=>`<span class="${i<=LS.hearts?'':'off'}">${IC.heart}</span>`).join('')}</div></div>
+    <div id="buddy">${buddy('idle', pick(LS.i===0?BUD.start:BUD.next))}</div>
     <div class="skill">${SKILLS[q.key].name}</div>
     <div class="prompt">${q.prompt}</div>
     ${q.figure?`<div class="fig">${q.figure}</div>`:''}
@@ -2026,8 +2109,11 @@ function check(){
   }
   LS.done=true;
   const t=LS.tally[q.key]||(LS.tally[q.key]={ok:0,n:0}); t.n++;
-  if (ok){ LS.correct++; t.ok++; } else { LS.mistakes++; LS.hearts--; LS.queue.push(q.key); }
+  if (ok){ LS.correct++; t.ok++; LS.combo++; } else { LS.mistakes++; LS.hearts--; LS.queue.push(q.key); LS.combo=0; }
   LS.i++;
+  const bmood = ok ? (LS.combo>=3 ? 'party' : 'happy') : (LS.hearts<=0 ? 'cry' : 'sad');
+  const bmsg = ok ? (LS.combo>=3 ? BUD.combo(LS.combo) : pick(BUD.ok)) : (LS.hearts<=0 ? BUD.out : pick(BUD.no));
+  $('#buddy').innerHTML = buddy(bmood, bmsg, ok?'ok':'no');
   const right = q.type==='mc' ? q.options[q.correct] : `${q.unit==='$'?'$':''}${fmt(q.ans)}${q.unit&&q.unit!=='$'?' '+q.unit:''}`;
   $('#footBox').innerHTML='';
   $('#fbBox').innerHTML = `<div class="fb ${ok?'ok':'no'}" role="status">
@@ -2053,7 +2139,9 @@ function finish(){
   S.updatedAt = Date.now();
   saveLocal(LS.who); push(LS.who);
   renderStats();
+  const rMsg = !won ? 'Estoy un poquito triste… pero la próxima lo hacemos mejor juntos.' : stars===3 ? '¡Guau guau! ¡Perfecto! ¡Estoy saltando de alegría!' : '¡Lo lograste! ¡Qué contento estoy!';
   app.innerHTML = `<div class="result">
+    ${buddy(!won?'sad':stars===3?'party':'happy', rMsg, won?'ok':'no', true)}
     ${won?starsHtml(stars,'big-stars'):''}
     <h1>${won?(stars===3?'¡Lección perfecta!':'¡Lección completada!'):'Se acabaron las vidas'}</h1>
     <p>${won?LS.title:'Repasa las explicaciones y vuelve a intentarlo. Los ejercicios cambian cada vez.'}</p>
