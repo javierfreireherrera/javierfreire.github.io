@@ -64,6 +64,17 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
 .tabs{display:flex;gap:6px}
 .tab{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:5px 12px;font-weight:800;font-size:.9rem}
 .tab[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.snd{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:3px 7px;display:flex;align-items:center}
+.snd[aria-pressed="false"]{color:var(--muted)}
+.snd .ico{width:1.25em;height:1.25em}
+.say{display:inline-flex;align-items:center;gap:8px;margin:12px 0 16px;border:2px solid var(--line);background:var(--surface);color:var(--accent);border-radius:14px;padding:9px 16px;font-weight:800;box-shadow:0 3px 0 var(--line)}
+.say.big{padding:16px 24px;font-size:1.1rem}
+.say .ico{width:1.4em;height:1.4em}
+.say:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.cnt{display:inline-block;min-width:1.5em;padding:0 6px;margin-left:4px;border-radius:99px;background:var(--bad);color:#fff;font-size:.85em;line-height:1.5em;text-align:center}
+.nuc{display:inline-flex;align-items:center;font-weight:800;white-space:nowrap;vertical-align:middle}
+.nuc .zs{display:inline-flex;flex-direction:column;align-items:flex-end;font-size:.6em;line-height:1.05;margin-right:2px}
+.nuc sup{font-size:.6em;align-self:flex-start}
 
 /* goal card */
 .goal{margin-top:18px;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
@@ -193,7 +204,7 @@ table.sk tr:last-child td{border-bottom:none}
 .sync.on i{background:var(--ok)}
 a{color:var(--accent)}
 
-.subjects{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+.subjects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
 @media (max-width:560px){.subjects{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .subj{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:9px 12px;box-shadow:0 3px 0 var(--line);font-weight:800;line-height:1.2}
 .subj small{color:var(--muted);font-weight:700;font-size:.78rem;display:flex;align-items:center;gap:3px}
@@ -351,6 +362,7 @@ table.rv td{border-top:1px solid var(--line);padding:7px 6px;vertical-align:top}
     <button class="tab" id="tPath" aria-pressed="true">Aprender</button>
     <button class="tab" id="tRew" aria-pressed="false" hidden>Premios</button>
     <button class="tab" id="tPanel" aria-pressed="false">Panel</button>
+    <button class="snd" id="bSnd" aria-pressed="true" aria-label="Sonido de Goliat"></button>
   </nav>
 </div></header>
 <main class="wrap" id="app"></main>
@@ -1951,6 +1963,419 @@ Object.assign(SKILLS, {
   }},
 });
 
+/* ============ v3: Física y Química 8° (Talleres), Inglés 6° (Be Curious 6) ============ */
+const nuc = (sym, A, Z, ch='') => `<span class="nuc"><span class="zs"><span>${A}</span><span>${Z}</span></span>${sym}${ch?`<sup>${ch}</sup>`:''}</span>`;
+const unitTxt = (v,u) => `${fmt(v)} ${u}`;
+
+Object.assign(SKILLS, {
+  /* ---------- Física ---------- */
+  fis_carga: {name:'Intensidad y carga', gen(){
+    const v=R(1,3);
+    if (v===1){ const i=R(2,12), m=R(1,5), t=m*60;
+      return num(i*t,{unit:'C', prompt:`Por un conductor circula una corriente de ${i} A durante ${m} min. ¿Cuánta carga se desplazó?`, explain:`Pasa el tiempo a segundos: ${m} min = ${t} s. Como i = q : t, entonces q = i · t = ${i} · ${t} = <b>${fmt(i*t)} C</b>.`}); }
+    if (v===2){ const i=R(2,10), t=R(2,12)*10;
+      return num(i,{unit:'A', prompt:`Por un cable pasan ${fmt(i*t)} C de carga en ${t} s. ¿Cuál es la intensidad de la corriente?`, explain:`i = q : t = ${fmt(i*t)} : ${t} = <b>${i} A</b>.`}); }
+    const i=pick([2,4,5,8,10]), h=R(1,3), s=h*3600;
+    return num(h,{unit:'h', prompt:`Una celda absorbe una corriente de ${i} A. ¿Cuántas horas tardan en pasar ${fmt(i*s)} C?`, explain:`t = q : i = ${fmt(i*s)} : ${i} = ${fmt(s)} s. Como 1 h = 3.600 s: ${fmt(s)} : 3.600 = <b>${h} h</b>.`});
+  }},
+  fis_ohm_i: {name:'Ley de Ohm: calcular la intensidad', gen(){
+    const v=R(1,3);
+    if (v===1){ const R0=pick([2,4,5,6,8,10,11,20,22,24]), i=R(2,15);
+      return num(i,{unit:'A', prompt:`Una resistencia de ${R0} Ω se conecta a ${fmt(R0*i)} V. ¿Qué intensidad de corriente circula?`, explain:`Ley de Ohm: i = V : R = ${fmt(R0*i)} : ${R0} = <b>${i} A</b>.`}); }
+    if (v===2){ const [ap,R0,V]=pick([['un brasero',22,110],['un tostador',8,120],['un hervidor',22,220],['un calefactor',44,220],['una estufa',20,220],['una plancha',44,220]]);
+      return num(V/R0,{unit:'A', prompt:`¿Qué intensidad circula por ${ap} de ${R0} Ω conectado a ${V} V?`, explain:`i = V : R = ${V} : ${R0} = <b>${fmt(V/R0)} A</b>.`}); }
+    const [R0,V]=pick([[1000,200],[2000,200],[1100,220],[500,220],[400,24]]), mA=V/R0*1000;
+    return num(mA,{unit:'mA', prompt:`Un aparato de ${fmt(R0)} Ω se conecta a ${V} V. ¿Cuántos <b>miliamperes</b> circulan?`, explain:`i = ${V} : ${fmt(R0)} = ${fmt(V/R0)} A. Como 1 A = 1.000 mA: ${fmt(V/R0)} · 1.000 = <b>${fmt(mA)} mA</b>.`});
+  }},
+  fis_ohm_vr: {name:'Ley de Ohm: voltaje y resistencia', gen(){
+    if (Math.random()<.5){ const R0=pick([5,10,20,24,50,100,150]), i=pick([0.1,0.2,0.5,1,2,3,5]);
+      return num(R0*i,{unit:'V', prompt:`Por una resistencia de ${R0} Ω circulan ${fmt(i)} A. ¿Cuál es el voltaje entre sus extremos?`, explain:`V = i · R = ${fmt(i)} · ${R0} = <b>${fmt(R0*i)} V</b>.`}); }
+    const i=pick([0.5,1.6,2,4,5,8,10,11]), R0=pick([5,10,20,25,48,75]);
+    return num(R0,{unit:'Ω', prompt:`Un aparato funciona con ${fmt(R0*i)} V y absorbe ${fmt(i)} A. ¿Cuál es su resistencia?`, explain:`R = V : i = ${fmt(R0*i)} : ${fmt(i)} = <b>${R0} Ω</b>.`});
+  }},
+  fis_ohm_prob: {name:'Problemas de Ley de Ohm', gen(){
+    const v=R(1,4);
+    if (v===1){ const [ap,V,i,R0]=pick([['Una ampolleta',120,1.6,75],['Un calefactor',110,5,22],['Un computador',24,0.12,200],['Un equipo de música',220,0.1,2200],['Un receptor',110,0.25,440]]);
+      return num(R0,{unit:'Ω', prompt:`${ap} se conecta a ${fmt(V)} V y absorbe ${fmt(i)} A. Calcula su resistencia.`, explain:`R = V : i = ${fmt(V)} : ${fmt(i)} = <b>${fmt(R0)} Ω</b>.`}); }
+    if (v===2){ const R0=pick([24,30,40,60]), i=R(2,6);
+      return num(R0*i,{unit:'V', prompt:`Un calientaplatos tiene una resistencia de ${R0} Ω y absorbe ${i} A. ¿Cuál es la caída de tensión (voltaje)?`, explain:`V = i · R = ${i} · ${R0} = <b>${R0*i} V</b>.`}); }
+    if (v===3){ const V=R(2,6)*10, R0=V/2, k=pick([2,3]);
+      return mc('Se reduce a la '+(k===2?'mitad':'tercera parte'),['Se '+(k===2?'duplica':'triplica'),'No cambia','Aumenta en '+k+' A'],{prompt:`Si la resistencia de un circuito se hace ${k===2?'el doble':'el triple'} y el voltaje se mantiene, ¿qué pasa con la intensidad?`, explain:`i = V : R. Si R se multiplica por ${k}, i se divide por ${k}: <b>se reduce a la ${k===2?'mitad':'tercera parte'}</b>. Son inversamente proporcionales.`}); }
+    const R0=pick([2,3,4,5]);
+    return num(R0,{unit:'Ω', prompt:`En un gráfico voltaje versus intensidad, la recta pasa por i = 2 A, V = ${2*R0} V y por i = 4 A, V = ${4*R0} V. ¿Cuál es la resistencia?`, explain:`En un gráfico V/i la resistencia es la pendiente: (${4*R0} − ${2*R0}) : (4 − 2) = <b>${R0} Ω</b>.`});
+  }},
+  fis_req: {name:'Resistencia equivalente', gen(){
+    const v=R(1,4);
+    if (v===1){ const rs=Array.from({length:R(2,3)},()=>R(2,12)), s=rs.reduce((a,b)=>a+b,0);
+      return num(s,{unit:'Ω', prompt:`Se conectan en <b>serie</b> resistencias de ${rs.map(r=>r+' Ω').join(', ').replace(/, ([^,]*)$/,' y $1')}. ¿Cuál es la resistencia equivalente?`, explain:`En serie se suman: ${rs.join(' + ')} = <b>${s} Ω</b>.`}); }
+    if (v===2){ const [a,b,e]=pick([[3,6,2],[4,4,2],[6,12,4],[10,10,5],[4,12,3],[12,12,6],[20,30,12],[10,40,8],[5,20,4],[2,2,1],[10,15,6],[6,3,2]]);
+      return num(e,{unit:'Ω', prompt:`Se conectan en <b>paralelo</b> dos resistencias de ${a} Ω y ${b} Ω. ¿Cuál es la resistencia equivalente?`, explain:`1/R = 1/${a} + 1/${b}. Para dos resistencias sirve el atajo R = (R₁ · R₂) : (R₁ + R₂) = ${a*b} : ${a+b} = <b>${e} Ω</b>.`}); }
+    if (v===3){ const r=pick([5,6,10,12,30]), n=pick([2,3]), e=r/n;
+      const ser=Math.random()<.5;
+      return num(ser?r*n:e,{unit:'Ω', tol:.011, prompt:`${n===2?'Dos':'Tres'} resistencias de ${r} Ω se conectan en <b>${ser?'serie':'paralelo'}</b>. ¿Cuál es la resistencia equivalente?`, hint:'Usa coma para decimales.', explain:ser?`En serie se suman: ${Array(n).fill(r).join(' + ')} = <b>${r*n} Ω</b>.`:`En paralelo, ${n} resistencias iguales dan R : ${n} = ${r} : ${n} = <b>${fmt(round(e,2))} Ω</b>. Siempre queda menor que cada una.`}); }
+    const r1=R(1,8), [a,b,e]=pick([[3,6,2],[4,4,2],[6,12,4],[10,10,5],[4,12,3],[2,2,1]]);
+    return num(r1+e,{unit:'Ω', prompt:`Un circuito mixto tiene R₁ = ${r1} Ω en serie con un grupo en paralelo formado por R₂ = ${a} Ω y R₃ = ${b} Ω. ¿Cuál es la resistencia equivalente total?`, explain:`Primero el paralelo: (${a} · ${b}) : (${a} + ${b}) = ${e} Ω. Luego se suma en serie con R₁: ${r1} + ${e} = <b>${r1+e} Ω</b>.`});
+  }},
+  fis_circ: {name:'Corrientes y voltajes en circuitos', gen(){
+    const v=R(1,4);
+    if (v===1){ const r1=R(1,6), r2=R(1,6), i=R(1,4), V=(r1+r2)*i;
+      return num(i,{unit:'A', prompt:`Una batería de ${V} V alimenta dos resistencias en <b>serie</b>: R₁ = ${r1} Ω y R₂ = ${r2} Ω. ¿Qué corriente sale de la batería?`, explain:`R total = ${r1} + ${r2} = ${r1+r2} Ω. i = V : R = ${V} : ${r1+r2} = <b>${i} A</b>. En serie esa misma corriente pasa por todas.`}); }
+    if (v===2){ const r1=R(1,6), r2=R(1,6), i=R(1,3), V=(r1+r2)*i;
+      return num(i*r2,{unit:'V', prompt:`Una batería de ${V} V alimenta en <b>serie</b> R₁ = ${r1} Ω y R₂ = ${r2} Ω. ¿Cuál es el voltaje entre los extremos de R₂?`, explain:`i = ${V} : (${r1} + ${r2}) = ${i} A. Luego V₂ = i · R₂ = ${i} · ${r2} = <b>${i*r2} V</b>. Los voltajes de la serie suman ${V} V.`}); }
+    if (v===3){ const V=pick([12,20,24,30,60]), [r1,r2]=pick([[2,4],[3,6],[4,12],[5,10],[6,12],[10,20],[2,3]]);
+      return num(V/r1,{unit:'A', tol:.011, prompt:`Una batería de ${V} V alimenta dos resistencias en <b>paralelo</b>: R₁ = ${r1} Ω y R₂ = ${r2} Ω. ¿Qué corriente pasa por R₁?`, hint:'Usa coma para decimales.', explain:`En paralelo cada resistencia recibe el voltaje completo (${V} V). i₁ = ${V} : ${r1} = <b>${fmt(round(V/r1,2))} A</b>.`}); }
+    const V=pick([12,24,30,60]), [r1,r2]=pick([[2,4],[3,6],[4,12],[6,12],[10,20],[2,3]]), I=V/r1+V/r2;
+    return num(I,{unit:'A', tol:.011, prompt:`Una batería de ${V} V alimenta en <b>paralelo</b> R₁ = ${r1} Ω y R₂ = ${r2} Ω. ¿Qué corriente total sale de la batería?`, hint:'Usa coma para decimales.', explain:`i₁ = ${V} : ${r1} = ${fmt(V/r1)} A; i₂ = ${V} : ${r2} = ${fmt(V/r2)} A. En paralelo las corrientes se suman: <b>${fmt(round(I,2))} A</b>.`});
+  }},
+  fis_pot: {name:'Potencia eléctrica', gen(){
+    const v=R(1,4);
+    if (v===1){ const V=pick([12,110,220]), i=pick([2,3,5,8,10]);
+      return num(V*i,{unit:'W', prompt:`Un aparato conectado a ${V} V absorbe ${i} A. ¿Cuál es su potencia?`, explain:`P = V · i = ${V} · ${i} = <b>${fmt(V*i)} W</b>.`}); }
+    if (v===2){ const [ap,P]=pick([['una plancha',1100],['un hervidor',2200],['un secador de pelo',1320],['una estufa',1760],['un microondas',880]]);
+      return num(P/220,{unit:'A', prompt:`Carla le regala a su mamá ${ap} de ${fmt(P)} W. Si la red de la casa es de 220 V, ¿qué corriente circula por el aparato?`, explain:`Como P = V · i, entonces i = P : V = ${fmt(P)} : 220 = <b>${fmt(P/220)} A</b>.`}); }
+    if (v===3){ const i=R(2,5), R0=pick([5,10,20,40]);
+      return num(i*i*R0,{unit:'W', prompt:`Por una resistencia de ${R0} Ω circulan ${i} A. ¿Cuánta potencia se disipa como calor (efecto Joule)?`, explain:`Ley de Joule: P = i² · R = ${i}² · ${R0} = ${i*i} · ${R0} = <b>${fmt(i*i*R0)} W</b>.`}); }
+    const V=pick([12,24,220]), R0=V===220?pick([22,44,110]):pick([4,6,12]);
+    return num(V*V/R0,{unit:'W', prompt:`Una resistencia de ${R0} Ω se conecta a ${V} V. ¿Qué potencia consume?`, explain:`P = V² : R = ${V}² : ${R0} = ${fmt(V*V)} : ${R0} = <b>${fmt(V*V/R0)} W</b>. (También: i = ${V} : ${R0} = ${fmt(V/R0)} A y P = V · i.)`});
+  }},
+  fis_ener: {name:'Energía eléctrica y su costo', gen(){
+    const v=R(1,3);
+    if (v===1){ const P=pick([100,500,1000,1100,1500,2000,2200]), h=pick([0.5,1,2,3,4,5,10]);
+      return num(P*h/1000,{unit:'kWh', prompt:`Un aparato de ${fmt(P)} W funciona ${fmt(h)} h. ¿Cuánta energía consume en kWh?`, explain:`Pasa a kilowatts: ${fmt(P)} W = ${fmt(P/1000)} kW. E = P · t = ${fmt(P/1000)} · ${fmt(h)} = <b>${fmt(P*h/1000)} kWh</b>.`}); }
+    if (v===2){ const P=pick([1000,1100,1500,2000]), h=pick([10,20,30]), pr=pick([150,180,200]), kwh=P*h/1000;
+      return num(kwh*pr,{unit:'$', prompt:`Una plancha de ${fmt(P)} W se usa ${h} horas en el mes. Si el kWh cuesta $${pr}, ¿cuánto se paga por usarla?`, explain:`E = ${fmt(P/1000)} kW · ${h} h = ${fmt(kwh)} kWh. Costo = ${fmt(kwh)} · ${pr} = <b>${money(kwh*pr)}</b>.`}); }
+    const P=pick([20,40,60,100]), s=pick([10,30,60,120]);
+    return num(P*s,{unit:'J', prompt:`Una ampolleta de ${P} W está encendida ${s} segundos. ¿Cuánta energía transforma, en joules?`, explain:`1 W = 1 J/s, así que E = P · t = ${P} · ${s} = <b>${fmt(P*s)} J</b>.`});
+  }},
+  /* ---------- Química ---------- */
+  qui_pne: {name:'Protones, neutrones y electrones', gen(){
+    const EL=[['H',1,1],['He',2,4],['Li',3,7],['C',6,12],['N',7,14],['O',8,16],['F',9,19],['Na',11,23],['Mg',12,24],['Al',13,27],['S',16,32],['Cl',17,35],['K',19,39],['Ca',20,40],['Fe',26,56]];
+    const IONS=[['Na',11,23,1],['Mg',12,24,2],['Al',13,27,3],['K',19,39,1],['Ca',20,40,2],['O',8,16,-2],['F',9,19,-1],['Cl',17,35,-1],['S',16,32,-2]];
+    const v=R(1,4);
+    if (v<=2){ const [s,Z,A]=pick(EL), ask=pick(['p','n','e']); const ans={p:Z,n:A-Z,e:Z}[ask]; const w={p:'protones',n:'neutrones',e:'electrones'}[ask];
+      return num(ans,{prompt:`El átomo neutro ${nuc(s,A,Z)} tiene Z = ${Z} y A = ${A}. ¿Cuántos <b>${w}</b> tiene?`, explain: ask==='n'?`Neutrones = A − Z = ${A} − ${Z} = <b>${A-Z}</b>.`: ask==='p'?`Los protones son el número atómico: <b>${Z}</b>.`:`En un átomo neutro los electrones son iguales a los protones: <b>${Z}</b>.`}); }
+    if (v===3){ const [s,Z,A,q]=pick(IONS), ch=(Math.abs(q)>1?Math.abs(q):'')+(q>0?'+':'−'), e=Z-q;
+      return num(e,{prompt:`¿Cuántos electrones tiene el ion ${nuc(s,A,Z,ch)}?`, explain:`Tiene ${Z} protones. ${q>0?`Es un catión: <b>perdió</b> ${q} electrón${q>1?'es':''}`:`Es un anión: <b>ganó</b> ${-q} electrón${q<-1?'es':''}`}. ${Z} ${q>0?'−':'+'} ${Math.abs(q)} = <b>${e}</b>. (Carga = p⁺ − e⁻.)`}); }
+    const [s,Z,A]=pick(EL);
+    return num(A,{prompt:`Un átomo tiene ${Z} protones y ${A-Z} neutrones. ¿Cuál es su número másico (A)?`, explain:`A = protones + neutrones = ${Z} + ${A-Z} = <b>${A}</b>. Es ${s}.`});
+  }},
+  qui_iso: {name:'Isótopos, isóbaros e isótonos', gen(){
+    const P=[
+      ['Isótopos',['C',12,6],['C',14,6]],['Isótopos',['H',1,1],['H',2,1]],['Isótopos',['O',16,8],['O',18,8]],['Isótopos',['Cl',35,17],['Cl',37,17]],['Isótopos',['U',235,92],['U',238,92]],
+      ['Isóbaros',['C',14,6],['N',14,7]],['Isóbaros',['Ar',40,18],['Ca',40,20]],['Isóbaros',['K',40,19],['Ca',40,20]],
+      ['Isótonos',['C',14,6],['O',16,8]],['Isótonos',['N',15,7],['O',16,8]],['Isótonos',['Na',23,11],['Mg',24,12]],['Isótonos',['Ar',40,18],['Ca',42,20]]];
+    if (Math.random()<.75){ const [t,a,b]=pick(P);
+      const why={Isótopos:`Tienen el mismo Z (${a[2]}): son del mismo elemento, con distinto número de neutrones (${a[1]-a[2]} y ${b[1]-b[2]}).`, Isóbaros:`Son elementos distintos (Z = ${a[2]} y ${b[2]}) con el mismo número másico A = ${a[1]}.`, Isótonos:`Son elementos distintos con el mismo número de neutrones: ${a[1]} − ${a[2]} = ${a[1]-a[2]} y ${b[1]} − ${b[2]} = ${b[1]-b[2]}.`}[t];
+      return mc(t,['Isótopos','Isóbaros','Isótonos'].filter(x=>x!==t).concat(['Iones isoelectrónicos']),{prompt:`¿Qué relación hay entre ${nuc(a[0],a[1],a[2])} y ${nuc(b[0],b[1],b[2])}?`, explain:`${why} Son <b>${t.toLowerCase()}</b>.`}); }
+    const D=[['Isótopos','igual Z y distinto A (mismo elemento)'],['Isóbaros','igual A y distinto Z'],['Isótonos','igual número de neutrones'],['Iones isoelectrónicos','igual cantidad de electrones']];
+    const [t,d]=pick(D);
+    return mc(t,D.map(x=>x[0]).filter(x=>x!==t),{prompt:`¿Cómo se llaman las especies que tienen <b>${d}</b>?`, explain:`Truco: isóto<b>P</b>os = mismos <b>p</b>rotones; isóbaros = misma masa (A); isóto<b>N</b>os = mismos <b>n</b>eutrones. Respuesta: <b>${t}</b>.`});
+  }},
+  qui_orb: {name:'Subniveles y orbitales', gen(){
+    const SUB=[['s',0,1],['p',1,3],['d',2,5],['f',3,7]], v=R(1,4);
+    if (v===1){ const [s,l,o]=pick(SUB); return num(o,{prompt:`¿Cuántos orbitales tiene el subnivel <b>${s}</b>?`, explain:`Los valores de mₗ van de −l a +l. Para ${s}, l = ${l}: ${l?`${Array.from({length:o},(_,k)=>fmt(k-l)).join(', ')}`:'solo 0'}. Son <b>${o}</b> orbitales.`}); }
+    if (v===2){ const [s,l]=pick(SUB); return mc(s,SUB.map(x=>x[0]).filter(x=>x!==s),{prompt:`Si l = ${l}, ¿de qué subnivel se trata?`, explain:`l = 0 → s; l = 1 → p; l = 2 → d; l = 3 → f. Respuesta: <b>${s}</b>.`}); }
+    if (v===3){ const [s,l]=pick(SUB.slice(0,3)), n=R(l+1,4), ask=Math.random()<.5;
+      return num(ask?n:l,{prompt:`Un electrón está en el subnivel <b>${n}${s}</b>. ¿Cuál es el valor de <b>${ask?'n':'l'}</b>?`, explain:`El número delante es n = ${n} (nivel de energía). La letra indica l: ${s} → l = ${l}. Respuesta: <b>${ask?n:l}</b>.`}); }
+    const n=R(1,4); return num(n,{prompt:`¿Cuántos subniveles distintos hay en el nivel n = ${n}?`, explain:`l puede valer de 0 hasta n − 1: ${Array.from({length:n},(_,k)=>k).join(', ')}. Son <b>${n}</b> subnivel${n>1?'es':''} (${SUB.slice(0,n).map(x=>n+x[0]).join(', ')}).`});
+  }},
+  qui_qn: {name:'¿Números cuánticos posibles?', gen(){
+    let n=R(1,4), l=R(0,n-1), ml=R(-l,l), ms=pick(['+½','−½']), bad='';
+    const r=R(1,4);
+    if (r===2){ l=n+R(0,1); ml=R(-Math.min(l,2),Math.min(l,2)); bad=`l debe ser menor que n (l ≤ ${n-1}), y aquí l = ${l}.`; }
+    if (r===3 && l<3){ ml=(l+1)*pick([1,-1]); bad=`mₗ solo puede ir de −${l} a +${l} cuando l = ${l}, y aquí mₗ = ${fmt(ml)}.`; }
+    if (r===4 && Math.random()<.5){ n=0; l=0; ml=0; bad='n parte en 1 (n = 1, 2, 3, …); n = 0 no existe.'; }
+    const ok=bad?'Imposible':'Posible';
+    return mc(ok,[bad?'Posible':'Imposible'],{prompt:`¿Es posible este conjunto de números cuánticos?<br><span class="math" style="font-size:1.15rem">n = ${n}, l = ${l}, mₗ = ${fmt(ml)}, mₛ = ${ms}</span>`, explain: bad?`<b>Imposible</b>: ${bad}`:`<b>Posible</b>: l = ${l} es menor que n = ${n}; mₗ = ${fmt(ml)} está entre −${l} y +${l}; y mₛ es +½ o −½.`});
+  }},
+});
+
+/* ---------- Física y Química salen de Ciencias y pasan a ser asignaturas propias ---------- */
+const OLD_FQ = BANKS8.cie.splice(3, 2);   // [Electricidad (Física), El átomo (Química)]
+const OLD_ELEC = OLD_FQ[0].L, OLD_ATOM = OLD_FQ[1].L;
+
+BANKS8.fis = [
+  {t:'Corriente, voltaje y resistencia', c:'#c43b6c', d:'#952450', src:'Electricidad II: Ley de Ohm (PPT); Guía N°3 de Ley de Ohm (Taller de Física 8°C)', L:[
+    {t:'Carga y circuitos', q: OLD_ELEC[0].q},
+    {t:'Tipos de corriente y resistencia', q:[
+      ['¿Qué es la intensidad de corriente eléctrica?','La carga que pasa por la sección de un conductor por unidad de tiempo',['La energía de cada carga','La oposición al paso de la corriente','La rapidez de la luz en un cable'],'Se calcula como i = q : t y se mide en ampere (A).'],
+      ['¿En qué unidad se mide la carga eléctrica?','Coulomb (C)',['Ampere (A)','Volt (V)','Ohm (Ω)'],'1 A significa que pasa 1 C cada segundo.'],
+      ['El voltaje también se llama:','Tensión, diferencia de potencial o fuerza electromotriz',['Resistencia o resistividad','Intensidad o amperaje','Potencia o energía'],'Lo produce una pila, batería o generador.'],
+      ['En la corriente <b>continua</b>, las cargas:','Circulan siempre en el mismo sentido',['Van y vuelven todo el tiempo','No se mueven','Solo se mueven de noche'],'La generan pilas y baterías.'],
+      ['En la corriente <b>alterna</b>, las cargas:','Van y vuelven, cambiando de sentido cíclicamente',['Avanzan siempre en un sentido','Se quedan quietas','Solo salen de las pilas'],'La producen los generadores eléctricos; es la del enchufe de la casa.'],
+      ['¿Qué produce corriente continua?','Una pila',['El enchufe de la casa','Una central hidroeléctrica','Un generador de la red'],'Pilas y baterías dan corriente continua.'],
+      ['La resistencia de un cable depende de:','Su longitud, el área de su sección y la resistividad del material',['Solo de su color','Solo del voltaje','De la hora del día'],'R = ρ · L : A.'],
+      ['Un alambre es mejor conductor cuanto menor sea su: I) resistividad II) sección III) longitud','Solo I y III',['Solo I','Solo II','Solo I y II'],'Conduce mejor si es de un material de baja resistividad y más corto. Una sección <b>mayor</b> (más grueso) también ayuda, por eso II es falsa.'],
+      ['Si un cable se hace más largo, su resistencia:','Aumenta',['Disminuye','No cambia','Se hace cero'],'Las cargas recorren más camino con oposición.'],
+      ['Si un cable se hace más grueso, su resistencia:','Disminuye',['Aumenta','No cambia','Se duplica'],'Hay más espacio para que pasen las cargas.'],
+      ['Según la tabla de resistividades de la clase, ¿cuál es el mejor conductor?','Plata',['Cobre','Hierro','Platino'],'Tiene la resistividad más baja (1,59 × 10⁻⁸ Ω·m). El cobre la sigue y es mucho más barato.'],
+      ['Si el voltaje aumenta y la resistencia no cambia, la intensidad:','Aumenta',['Disminuye','No cambia','Se vuelve alterna'],'i = V : R: más voltaje, más corriente.'],
+      ['¿Cuántos miliamperes hay en 1 A?','1.000 mA',['100 mA','10 mA','1.000.000 mA'],'Mili = milésima.'],
+    ]},
+    ['Intensidad y carga', ['fis_carga']],
+  ]},
+  {t:'Ley de Ohm', c:'#d9771a', d:'#a85808', src:'Guías de Ley de Ohm (clases 14, 21 y 28 de julio); Electricidad II (Taller de Física 8°C)', L:[
+    ['Calcular la intensidad', ['fis_ohm_i']],
+    ['Voltaje y resistencia', ['fis_ohm_vr']],
+    ['Problemas', ['fis_ohm_prob','fis_ohm_i','fis_ohm_vr']],
+  ]},
+  {t:'Circuitos en serie y en paralelo', c:'#2c62d8', d:'#1d48a6', src:'Clase 7 de julio; Guía de circuitos y energía eléctrica; Desafío científico N°1 (Taller de Física 8°C)', L:[
+    {t:'Serie y paralelo', q:[
+      ['En un circuito en <b>serie</b>, la corriente:','Es la misma en todas las resistencias',['Se reparte entre las resistencias','Es cero','Es mayor en la última'],'Hay un solo camino: i total = i₁ = i₂ = i₃.'],
+      ['En un circuito en <b>serie</b>, el voltaje total:','Se reparte: V = V₁ + V₂ + V₃',['Es igual en todas','Es cero en todas','Se multiplica'],'Cada resistencia "usa" una parte del voltaje.'],
+      ['En un circuito en <b>paralelo</b>, el voltaje:','Es el mismo en todas las ramas',['Se reparte entre las ramas','Es mayor en la primera','Desaparece'],'V total = V₁ = V₂ = V₃.'],
+      ['En un circuito en <b>paralelo</b>, la corriente total:','Se reparte entre las ramas y es la suma de ellas',['Es igual en todas las ramas siempre','Es cero','Pasa solo por una rama'],'i total = i₁ + i₂ + i₃.'],
+      ['¿Cómo se calcula la resistencia total en serie?','Sumando las resistencias',['Sumando los inversos','Multiplicándolas','Restándolas'],'R = R₁ + R₂ + R₃.'],
+      ['¿Cómo se calcula la resistencia total en paralelo?','1/R = 1/R₁ + 1/R₂ + 1/R₃',['R = R₁ + R₂ + R₃','R = R₁ · R₂ · R₃','R = R₁ − R₂'],'Se suman los inversos.'],
+      ['La resistencia equivalente en paralelo siempre es:','Menor que la menor de las resistencias',['Mayor que la mayor','Igual a la suma','Igual a cero'],'Hay más caminos para la corriente.'],
+      ['Con las mismas resistencias, ¿dónde es mayor la resistencia total?','En serie',['En paralelo','Es igual en ambos','Depende del color del cable'],'En serie se suman; en paralelo queda menor.'],
+      ['Tres ampolletas iguales con la misma pila: ¿dónde brillan más?','En paralelo',['En serie','Igual en ambos','No encienden en paralelo'],'En paralelo cada ampolleta recibe todo el voltaje.'],
+      ['En serie, si desconectas una ampolleta:','Se apagan todas',['Las otras brillan más','Las otras siguen igual','Se quema la pila'],'Se interrumpe el único camino.'],
+      ['¿Qué conexión se recomienda para iluminar una casa?','En paralelo, para que cada aparato funcione independiente',['En serie, para ahorrar cables','Sin interruptores','En serie con una sola ampolleta'],'Si una ampolleta falla, las demás siguen funcionando.'],
+      ['¿Qué función cumple el interruptor?','Abrir o cerrar el circuito (controlarlo)',['Generar la energía','Transformar la energía en luz','Aumentar el voltaje'],'Es el elemento de control.'],
+      ['En un circuito, la ampolleta es el:','Receptor (consumo)',['Fuente de energía','Conductor','Interruptor'],'Transforma energía eléctrica en luz.'],
+      ['¿Qué es un circuito mixto?','Uno con partes en serie y partes en paralelo',['Uno sin pilas','Uno con corriente alterna y continua','Uno con un solo cable'],'Primero se resuelve el paralelo y luego se suma la serie.'],
+    ]},
+    ['Resistencia equivalente', ['fis_req']],
+    ['Corrientes y voltajes', ['fis_circ']],
+  ]},
+  {t:'Potencia y energía eléctrica', c:'#1f8a4c', d:'#146536', src:'Electricidad III: Potencia eléctrica; Potencia, energía y efecto Joule; Guía de circuitos y energía (Taller de Física 8°C)', L:[
+    {t:'Centrales y efecto Joule', q:[
+      ['En una central hidroeléctrica, los generadores:','Transforman la energía mecánica del agua en energía eléctrica',['Extraen la electricidad que tiene el agua','Crean energía por frotación','Transfieren energía química del agua'],'Pregunta oficial PSU: la energía no se crea, se transforma.'],
+      ['¿Qué aprovecha una central fotovoltaica?','La luz del sol, mediante el efecto fotoeléctrico',['El calor del interior de la Tierra','El viento','Las mareas'],'Algunos materiales generan corriente cuando les llega luz.'],
+      ['¿Qué aprovecha una central eólica?','La energía del viento',['La energía del agua de un embalse','El carbón','El uranio'],'El viento mueve las aspas del generador.'],
+      ['En una central termoeléctrica:','Se quema carbón, petróleo o gas para producir vapor que mueve un generador',['Se usa la luz del sol directamente','Se aprovechan las mareas','Se usa el viento'],'Como soplar un remolino de papel, pero con vapor.'],
+      ['¿Qué central usa el vapor o agua caliente del subsuelo?','Geotérmica',['Mareomotriz','Eólica','Fotovoltaica'],'Depósitos subterráneos a alta presión.'],
+      ['¿Qué central usa la subida y bajada del mar?','Mareomotriz',['Geotérmica','Termosolar','Termoeléctrica'],'Recoge agua en marea alta y la libera en marea baja.'],
+      ['En una central termonuclear, el calor se obtiene de:','La fisión del uranio',['Quemar leña','El viento','La luz del sol'],'Es un tipo de termoeléctrica.'],
+      ['Las centrales Ralco y Pangue, en el río Biobío, son:','Hidroeléctricas',['Eólicas','Geotérmicas','Termonucleares'],'Usan el agua de embalses.'],
+      ['¿Qué es el efecto Joule?','Parte de la energía eléctrica se transforma en calor al circular por un material',['La luz que emite un imán','El sonido de un cable','La creación de cargas'],'Lo descubrió James Prescott Joule en 1840.'],
+      ['¿Qué aparato aprovecha el efecto Joule?','Una plancha',['Un imán','Una brújula','Una pila'],'También hervidores, estufas y ampolletas incandescentes.'],
+      ['¿Para qué sirve un fusible?','Para cortar la corriente si su intensidad supera un límite',['Para aumentar el voltaje','Para guardar energía','Para encender la luz'],'Hoy se usan protectores termomagnéticos ("automáticos").'],
+      ['En un motor eléctrico, la energía eléctrica se transforma en:','Energía mecánica (movimiento)',['Energía química','Energía nuclear','Más energía eléctrica'],'En una lámpara, en energía lumínica.'],
+      ['La potencia eléctrica se mide en:','Watt (W), que es joule por segundo',['Volt','Ohm','Coulomb'],'Es la rapidez con que se transforma la energía.'],
+      ['¿Cuál de estas fórmulas NO sirve para la potencia?','P = V : i',['P = V · i','P = i² · R','P = V² : R'],'Las otras tres son equivalentes por la Ley de Ohm.'],
+      ['¿En qué unidad cobra la compañía eléctrica?','Kilowatt-hora (kWh)',['Watt','Volt','Ampere'],'No es del Sistema Internacional, pero es la más usada en las cuentas.'],
+    ]},
+    ['Calcular la potencia', ['fis_pot']],
+    ['Energía y su costo', ['fis_ener','fis_pot']],
+  ]},
+];
+
+BANKS8.qui = [
+  {t:'Modelos atómicos', c:'#7b4fd6', d:'#5a33ad', src:'Guía Constitución atómica de la materia 2026; Trabajo Evolución de los modelos atómicos (Taller de Química 8°C)', L:[
+    {t:'De Dalton a Thomson', q:[
+      OLD_ATOM[0].q[0], OLD_ATOM[0].q[1], OLD_ATOM[0].q[2], OLD_ATOM[0].q[7], OLD_ATOM[0].q[8], OLD_ATOM[0].q[11],
+      ['¿Qué postuló Dalton sobre los átomos de un mismo elemento?','Que son idénticos, con las mismas propiedades',['Que todos son distintos','Que tienen distinto número de protones','Que pueden transformarse en oro'],'Hoy sabemos que no siempre: existen los isótopos.'],
+      ['Según Dalton, los átomos de elementos distintos se combinan:','En relaciones de números enteros y sencillos',['Al azar','Solo de a uno','Nunca'],'Así forman los compuestos.'],
+      ['¿Cuál fue una falla del modelo de Dalton?','El átomo no es indivisible: tiene partículas',['Los átomos no existen','Los átomos son cuadrados','Los elementos no se combinan'],'Otras fallas: átomos de un mismo elemento pueden no ser iguales, y no son invariables.'],
+      ['Los rayos catódicos se desvían al acercar un imán. Eso muestra que:','Están formados por partículas con carga negativa',['Son luz','No tienen carga','Son protones'],'Además movían un molinete: tienen masa.'],
+      ['¿Hacia dónde viajan los rayos catódicos?','Del cátodo (−) al ánodo (+)',['Del ánodo al cátodo','En círculos','No se mueven'],'Por eso se llaman catódicos.'],
+      ['¿Qué midió Millikan con su experimento de la gota de aceite?','La carga del electrón',['La masa del núcleo','El número de neutrones','La velocidad de la luz'],'−1,6 × 10⁻¹⁹ C. Con la relación carga/masa de Thomson calculó la masa del electrón.'],
+      ['¿Qué descubrió Goldstein con un cátodo perforado (1886)?','Los rayos canales, de carga positiva',['El neutrón','El núcleo','Los orbitales'],'Llevaron a identificar el protón.'],
+    ]},
+    {t:'Rutherford, Bohr y el modelo actual', q:[
+      OLD_ATOM[0].q[3], OLD_ATOM[0].q[4], OLD_ATOM[0].q[5], OLD_ATOM[0].q[6], OLD_ATOM[0].q[9], OLD_ATOM[0].q[10], OLD_ATOM[0].q[12],
+      ['¿Quién propuso que debía existir el neutrón?','Rutherford',['Dalton','Demócrito','Millikan'],'Notó que la masa de protones y electrones no alcanzaba para la masa del átomo. Chadwick lo detectó en 1932.'],
+      ['¿Por qué Rutherford pensó que había otra partícula en el núcleo?','La masa de protones y electrones era casi la mitad de la masa real del átomo',['Porque vio el neutrón en un microscopio','Porque los electrones no tenían carga','Porque el átomo era indivisible'],'Faltaba masa sin carga eléctrica.'],
+      ['El protón tiene una masa:','Mucho mayor que la del electrón (cerca de 1.840 veces)',['Igual a la del electrón','Menor que la del electrón','Igual a cero'],'Por eso casi toda la masa del átomo está en el núcleo.'],
+      ['¿Qué modelo usó la idea de electrones en órbitas con energía fija?','El de Bohr',['El de Dalton','El de Thomson','El de Demócrito'],'Explicaba los espectros de emisión.'],
+      ['¿Qué modelo está más cerca del conocimiento actual?','El mecano-cuántico',['El de Dalton','El budín de pasas','El de Demócrito'],'Describe a los electrones en orbitales (zonas de probabilidad).'],
+    ]},
+  ]},
+  {t:'Constitución atómica', c:'#0f8f8a', d:'#0a6a66', src:'Guía Constitución atómica de la materia 2026 (Taller de Química 8°C)', L:[
+    {t:'Partículas y notación', q:[
+      ...OLD_ATOM[1].q.filter((_,i)=>![10,11].includes(i)),
+      ['En la notación de un átomo, el número de <b>abajo</b> a la izquierda del símbolo es:','El número atómico Z',['El número másico A','La carga','Los neutrones'],'Arriba va A y abajo va Z.'],
+      ['¿Cómo se calcula la carga de una especie?','q = protones − electrones',['q = protones + neutrones','q = A − Z','q = neutrones − electrones'],'Si hay más protones es positiva (catión); si hay más electrones, negativa (anión).'],
+      ['¿Qué partícula tiene carga negativa y masa despreciable?','El electrón',['El protón','El neutrón','El núcleo'],'Gira alrededor del núcleo.'],
+      ['La masa atómica promedio del hidrógeno es cercana a 1 porque:','El isótopo más abundante es el protio (99,98%)',['El tritio es el más abundante','No tiene isótopos','Tiene un neutrón'],'La masa promedio se acerca a la del isótopo más abundante.'],
+      ['Cuando un núcleo emite partículas y cambia su número de protones, ocurre una:','Transmutación (cambia de elemento)',['Ionización','Combustión','Evaporación'],'Al cambiar Z, cambia el elemento.'],
+      ['Na⁺, Mg²⁺ y F⁻ tienen 10 electrones cada uno. Se llaman:','Iones isoelectrónicos',['Isótopos','Isóbaros','Isótonos'],'Igual cantidad de electrones.'],
+    ]},
+    ['Calcular p, n y e', ['qui_pne']],
+    ['Isótopos, isóbaros e isótonos', ['qui_iso']],
+  ]},
+  {t:'Números cuánticos', c:'#d9771a', d:'#a85808', src:'Guía de ejercicios Números cuánticos 8° básico (Taller de Química 8°C)', L:[
+    {t:'Los cuatro números', q:[
+      ['¿Qué indica el número cuántico principal (n)?','El nivel de energía',['El tipo de subnivel','El orbital','El giro del electrón'],'n = 1, 2, 3, 4…'],
+      ['¿Qué indica el número cuántico secundario o azimutal (l)?','El tipo de subnivel (s, p, d, f)',['El nivel de energía','El giro del electrón','La masa'],'l = 0 → s, 1 → p, 2 → d, 3 → f.'],
+      ['¿Qué indica el número cuántico magnético (mₗ)?','En qué orbital del subnivel está el electrón',['El nivel de energía','El giro','La carga'],'Va de −l a +l.'],
+      ['¿Qué indica el número cuántico de espín (mₛ)?','El giro del electrón',['El nivel de energía','El subnivel','El número de protones'],'Puede ser +½ o −½.'],
+      ['¿Qué valores puede tener mₛ?','+½ o −½',['0 o 1','Cualquier número','1, 2 o 3'],'Dos sentidos de giro.'],
+      ['Los números cuánticos se pueden imaginar como:','La dirección para ubicar un electrón en el átomo',['La edad del átomo','El peso del núcleo','La receta de una molécula'],'Como calle, número, piso y departamento.'],
+      ['¿Es verdad que todos los electrones de un átomo tienen los mismos números cuánticos?','No: dos electrones no pueden tener los cuatro iguales',['Sí, siempre','Solo en el hidrógeno','Sí, si están en el mismo nivel'],'Aunque compartan orbital, su espín es distinto.'],
+      ['¿Qué valor de l corresponde al subnivel p?','1',['0','2','3'],'s = 0, p = 1, d = 2, f = 3.'],
+      ['¿Cuántos orbitales tiene el subnivel d?','5',['1','3','7'],'mₗ = −2, −1, 0, +1, +2.'],
+      ['Para un electrón en 2s, ¿cuánto vale mₗ?','0',['1','−1','2'],'En s, l = 0, así que mₗ solo puede ser 0.'],
+      ['El conjunto n = 2, l = 0, mₗ = 0, mₛ = +½ describe un electrón en:','El subnivel 2s',['El subnivel 2p','El subnivel 1s','El subnivel 0s'],'n = 2 y l = 0 (s). Es un conjunto posible.'],
+      ['¿Por qué se necesitan varios números cuánticos y no uno solo?','Porque cada uno describe algo distinto: nivel, subnivel, orbital y giro',['Porque los científicos querían complicarlo','Porque el electrón tiene cuatro cargas','Porque hay cuatro protones'],'Juntos ubican al electrón sin ambigüedad.'],
+    ]},
+    ['Subniveles y orbitales', ['qui_orb']],
+    ['¿Posible o imposible?', ['qui_qn']],
+  ]},
+];
+
+/* ---------- Inglés 6°: Be Curious 6, Units 1, 3 y 4 ---------- */
+// [pregunta, correcta, distractores, explicación, pasaje, texto que se lee en voz alta, 1 = solo audio]
+const LI = (w, ds, es) => ['Escucha y elige la palabra que oyes.', w, ds, `Se dice <b>${w}</b>: ${es}.`, null, w, 1];
+const SQ = (q, ok, ds, ex, say) => [q, ok, ds, ex, null, say];
+
+BANKS6.ing = [
+  {t:'Fashion (Unit 1)', c:'#0f8f8a', d:'#0a6a66', src:'Be Curious 6, Unit 1: Vocabulary 1 y 2, Grammar 1 y 2 (Inglés 6°C)', L:[
+    {t:'Clothes', q:[
+      SQ('What is a <b>jumper</b>?','Un chaleco o suéter de lana',['Una chaqueta para la lluvia','Unos pantalones','Un traje de baño'],'<b>Jumper</b> = prenda tejida que se pone por la cabeza.','jumper'),
+      SQ('What is a <b>raincoat</b>?','Un impermeable',['Un abrigo de piel','Un traje de baño','Una bufanda'],'<b>Rain</b> = lluvia, <b>coat</b> = abrigo.','raincoat'),
+      SQ('What is a <b>blouse</b>?','Una blusa',['Una bota','Un cinturón','Un buzo'],'Se pronuncia parecido a "blaus".','blouse'),
+      SQ('What is a <b>tracksuit</b>?','Un buzo deportivo',['Un traje elegante','Una corbata','Un pijama'],'<b>Track</b> = pista: ropa para hacer deporte.','tracksuit'),
+      SQ('What are <b>trainers</b>?','Zapatillas deportivas',['Entrenadores de fútbol','Calcetines','Pantalones cortos'],'En inglés británico, <b>trainers</b> son zapatillas.','trainers'),
+      SQ('¿Cómo se dice <b>traje de baño</b> en inglés?','swimming costume',['tracksuit','raincoat','sweatshirt'],'<b>Swimming</b> = nadar, <b>costume</b> = traje.','swimming costume'),
+      SQ('¿Cómo se dice <b>corbata</b> en inglés?','tie',['suit','scarf','collar'],'"He was wearing a black suit and a tie."','tie'),
+      SQ('¿Cómo se dice <b>traje (de vestir)</b> en inglés?','suit',['tie','boots','jumper'],'Un <b>suit</b> es chaqueta y pantalón del mismo material.','suit'),
+      SQ('¿Cómo se dice <b>botas</b> en inglés?','boots',['trousers','trainers','socks'],'"A dress and a pair of black boots."','boots'),
+      SQ('¿Cómo se dice <b>pantalones</b> en inglés?','trousers',['shorts','boots','sleeves'],'En Estados Unidos dicen <i>pants</i>; en el libro (británico), <b>trousers</b>.','trousers'),
+      SQ('At the fashion show, the man looked very smart. He was wearing a black ___ and a tie.','suit',['raincoat','swimming costume','tracksuit'],'Con corbata se usa un <b>suit</b>.','He was wearing a black suit and a tie.'),
+      SQ('It’s raining! Put on your ___.','raincoat',['swimming costume','trainers','blouse'],'Para la lluvia: <b>raincoat</b>.','It’s raining! Put on your raincoat.'),
+      LI('jumper',['jacket','jumped','summer'],'chaleco o suéter'),
+      LI('blouse',['boots','house','mouse'],'blusa'),
+      LI('trainers',['trousers','trains','tracksuit'],'zapatillas'),
+    ]},
+    {t:'Materials and details', q:[
+      SQ('Most T-shirts are made of this.','cotton',['leather','silk','chain'],'<b>Cotton</b> = algodón: fresco para el verano.','Most T-shirts are made of this.'),
+      SQ('It’s a soft material that insects make.','silk',['cotton','leather','wool'],'<b>Silk</b> = seda, la hacen los gusanos de seda.','It’s a soft material that insects make.'),
+      SQ('Most shoes are made of this.','leather',['silk','cotton','paper'],'<b>Leather</b> = cuero.','Most shoes are made of this.'),
+      SQ('The parts of a blouse or shirt that cover your arms.','sleeves',['buttons','collar','size'],'<b>Sleeves</b> = mangas.','The parts of a blouse or shirt that cover your arms.'),
+      SQ('It tells you how much something is in a shop.','price',['size','pattern','button'],'<b>Price</b> = precio.','It tells you how much something is in a shop.'),
+      SQ('I have ten of these on my blouse.','buttons',['sleeves','collars','prices'],'<b>Buttons</b> = botones.','I have ten of these on my blouse.'),
+      SQ('My blouse has got a ___ which fits around my neck.','collar',['sleeve','size','chain'],'<b>Collar</b> = cuello de la prenda.','My blouse has got a collar which fits around my neck.'),
+      SQ('My mum measured me, so I have the correct ___. It isn’t too big!','size',['price','collar','button'],'<b>Size</b> = talla.','I have the correct size. It isn’t too big!'),
+      SQ('I used a silver ___ from an old necklace.','chain',['cotton','sleeve','price'],'<b>Chain</b> = cadena.','I used a silver chain from an old necklace.'),
+      SQ('My T-shirt has got a ___ with lots of small dogs on it.','pattern',['size','price','collar'],'<b>Pattern</b> = estampado o diseño.','My T-shirt has got a pattern with lots of small dogs on it.'),
+      LI('sleeves',['slips','leaves','sheep'],'mangas'),
+      LI('leather',['weather','feather','letter'],'cuero'),
+      LI('cotton',['button','kitten','cutting'],'algodón'),
+    ]},
+    {t:'Comparatives', q:[
+      SQ('The blue trainers look ___ than the green ones. (comfortable)','more comfortable',['comfortabler','most comfortable','comfortable'],'Adjetivos largos: <b>more</b> + adjetivo + <b>than</b>.','The blue trainers look more comfortable than the green ones.'),
+      SQ('The black tracksuit is ___ than the white one. (expensive)','more expensive',['expensiver','the most expensive','expensive more'],'Adjetivo largo → <b>more expensive</b>.','The black tracksuit is more expensive than the white one.'),
+      SQ('This red blouse is ___ than the other one. (pretty)','prettier',['more pretty','prettyer','prettiest'],'Termina en consonante + y → cambia a <b>-ier</b>.','This red blouse is prettier than the other one.'),
+      SQ('Yes, but this one is ___. (cheap)','cheaper',['more cheap','cheapest','cheapper'],'Adjetivo corto → <b>-er</b>.','Yes, but this one is cheaper.'),
+      SQ('The grey trousers are ___ than the blue ones. (long)','longer',['more long','longest','longger'],'Adjetivo corto → <b>-er</b>.','The grey trousers are longer than the blue ones.'),
+      SQ('Peter is ___ than Tom. (short)','shorter',['more short','shortest','shortter'],'"Peter is shorter than Tom."','Peter is shorter than Tom.'),
+      SQ('Grandad is ___ than Charlie. (old)','older',['more old','oldest','elder than'],'"Grandad is older than Charlie."','Grandad is older than Charlie.'),
+      SQ('My handbag is ___ than your handbag. (small)','smaller',['more small','smallest','smaler'],'"My handbag is smaller than your handbag."','My handbag is smaller than your handbag.'),
+      SQ('My bag is ___ than yours. (big)','bigger',['biger','more big','biggest'],'Consonante-vocal-consonante → se duplica la última: <b>bigger</b>.','My bag is bigger than yours.'),
+      SQ('This jumper is ___ than that one. (good)','better',['gooder','more good','best'],'Irregular: good → <b>better</b>.','This jumper is better than that one.'),
+      SQ('Both jumpers cost £50. Jumper A is ___ jumper B.','as expensive as',['more expensive than','expensiver than','not as expensive as'],'Si son iguales: <b>as</b> + adjetivo + <b>as</b>.','Jumper A is as expensive as jumper B.'),
+      SQ('"Tom isn’t as tall as Peter" means:','Peter is taller than Tom',['Tom is taller than Peter','They are the same height','Tom is very tall'],'<b>Not as … as</b> = menos que.','Tom isn’t as tall as Peter.'),
+    ]},
+    {t:'Timetables', q:[
+      SQ('The fashion market ___ on Tuesday and Thursday.','opens',['open','opening','is open to'],'Horarios fijos: <b>present simple</b>; con he/she/it se agrega <b>-s</b>.','The fashion market opens on Tuesday and Thursday.'),
+      SQ('It ___ at 6 pm.','closes',['close','closing','are close'],'It → <b>closes</b>.','It closes at 6 pm.'),
+      SQ('The sewing workshop ___ at 5 pm.','finishes',['finish','finishs','finishing'],'Termina en -sh → se agrega <b>-es</b>.','The sewing workshop finishes at 5 pm.'),
+      SQ('The workshop ___ at the weekend.','is',['be','are','am'],'It → <b>is</b>.','The workshop is at the weekend.'),
+      SQ('The book reading ___ on Sunday 16th July. (It’s on Saturday 15th.)','isn’t',['is','aren’t','doesn’t'],'Negativo de "is" → <b>isn’t</b>.','The book reading isn’t on Sunday.'),
+      SQ('What time ___ the train to Manchester leave?','does',['do','is','are'],'Pregunta en present simple con it/he/she: <b>does</b> + verbo base.','What time does the train to Manchester leave?'),
+      SQ('What time does the train leave? — It ___ at 9:30.','leaves',['leave','leaving','is leave'],'It → <b>leaves</b>.','It leaves at nine thirty.'),
+      SQ('Answer: "The film starts at 7 pm." Which is the question?','What time does the film start?',['Where does the film start?','What day does the film start?','What time do the film start?'],'Hora → <b>What time</b>; film = it → <b>does</b>.','What time does the film start?'),
+      SQ('Answer: "This bus goes to Manchester." Which is the question?','Where does this bus go?',['What time does this bus go?','When do this bus go?','What day does this bus go?'],'Lugar → <b>Where</b>.','Where does this bus go?'),
+      SQ('Answer: "The next bus leaves on Monday." Which is the question?','What day does the next bus leave?',['Where does the next bus leave?','What time does the next bus leave?','What day do the next bus leave?'],'Día → <b>What day</b>.','What day does the next bus leave?'),
+    ]},
+  ]},
+  {t:'Sport (Unit 3)', c:'#d9771a', d:'#a85808', src:'Be Curious 6, Unit 3: Vocabulary 1 y 2, Grammar 1 (Inglés 6°C)', L:[
+    {t:'Sports', q:[
+      SQ('Players hit a small white ball into a hole in the ground.','golf',['cricket','rugby','boxing'],'<b>Golf</b>.','The players play outside and hit a small, white ball into a hole in the ground.'),
+      SQ('Popular in Canada in winter. Players skate very quickly on the ice.','ice hockey',['skiing','surfing','diving'],'<b>Ice hockey</b> = hockey sobre hielo.','This sport is popular in Canada in the winter. The players skate very quickly on the ice.'),
+      SQ('A boat pulls you very quickly over the water.','waterskiing',['diving','surfing','cycling'],'<b>Waterskiing</b> = esquí acuático.','A boat pulls you very quickly over the water to do this sport.'),
+      SQ('You stand on a board in the sea and move quickly.','surfing',['waterskiing','diving','athletics'],'<b>Surfing</b>.','You do this sport in the sea. You stand on a board and move quickly.'),
+      SQ('You do this sport on a bike.','cycling',['boxing','golf','gymnastics'],'<b>Cycling</b> = ciclismo.','You do this sport on a bike.'),
+      SQ('An Olympic sport: you jump, dance and stretch.','gymnastics',['boxing','rugby','cricket'],'<b>Gymnastics</b> = gimnasia.','This is an Olympic sport. You jump, dance and stretch to do this sport.'),
+      SQ('¿Qué es <b>athletics</b>?','Atletismo',['Gimnasia','Ciclismo','Boxeo'],'Correr, saltar y lanzar.','athletics'),
+      SQ('¿Qué es <b>diving</b>?','Clavados o buceo',['Ciclismo','Golf','Esquí'],'<b>Dive</b> = zambullirse.','diving'),
+      SQ('¿Cuál de estos deportes se juega con bate y es muy popular en el Reino Unido?','cricket',['rugby','boxing','surfing'],'<b>Cricket</b> se juega en verano en el Reino Unido.','cricket'),
+      LI('rugby',['ruby','rubber','rugged'],'rugby'),
+      LI('boxing',['box','boxes','biking'],'boxeo'),
+      LI('cycling',['cyclist','circling','sailing'],'ciclismo'),
+      LI('gymnastics',['gym','athletics','gymnast'],'gimnasia'),
+    ]},
+    {t:'Sports equipment', q:[
+      SQ('The ___ makes the team work hard.','coach',['net','court','helmet'],'<b>Coach</b> = entrenador.','The coach makes the team work hard.'),
+      SQ('It’s important to wear a ___ to protect your head.','helmet',['track','racket','net'],'<b>Helmet</b> = casco.','It’s important to wear a helmet to protect your head.'),
+      SQ('There’s a basketball ___ in the gym.','court',['surfboard','goal','track'],'<b>Court</b> = cancha (básquetbol, tenis).','There’s a basketball court in the gym.'),
+      SQ('That’s Jason on the purple ___, riding the big waves.','surfboard',['coach','helmet','court'],'<b>Surfboard</b> = tabla de surf.','That’s Jason on the purple surfboard.'),
+      SQ('The football player scored a ___ in the last five minutes.','goal',['court','net','track'],'<b>Score a goal</b> = marcar un gol.','The football player scored a goal in the last five minutes.'),
+      SQ('The tennis player hit the ball over the ___.','net',['racket','goal','helmet'],'<b>Net</b> = red.','The tennis player hit the ball over the net.'),
+      SQ('He hit the ball with his ___.','racket',['goal','net','coach'],'<b>Racket</b> = raqueta.','He hit the ball with his racket.'),
+      SQ('We aren’t cycling on the ___ today because it’s wet.','track',['court','surfboard','net'],'<b>Track</b> = pista.','We aren’t cycling on the track today because it’s wet.'),
+      SQ('Jane is ___ for the athletics competition. She runs for two hours every morning.','training',['hitting','scoring','coaching'],'<b>Training</b> = entrenando.','Jane is training for the athletics competition.'),
+      SQ('The dog ran into the road and the ___ fell off her bike.','cyclist',['coach','surfboard','court'],'<b>Cyclist</b> = ciclista.','The dog ran into the road and the cyclist fell off her bike.'),
+      SQ('¿Qué palabra va con <b>tennis</b>?','racket',['surfboard','helmet','track'],'Tenis: <b>racket, net, court</b>.','tennis'),
+      LI('helmet',['hello','camel','planet'],'casco'),
+      LI('coach',['couch','catch','coast'],'entrenador'),
+      LI('court',['coat','caught','cart'],'cancha'),
+    ]},
+    {t:'Present simple passive', q:[
+      SQ('"Spanish is spoken in many South American countries." Is it active or passive?','Passive',['Active'],'<b>is + participio</b> (spoken) = voz pasiva.','Spanish is spoken in many South American countries.'),
+      SQ('"Many children use mobile phones to chat to their friends." Is it active or passive?','Active',['Passive'],'El sujeto (children) hace la acción: <b>activa</b>.','Many children use mobile phones to chat to their friends.'),
+      SQ('"Cricket is played in the summer in the UK." Is it active or passive?','Passive',['Active'],'<b>is played</b> = voz pasiva.','Cricket is played in the summer in the UK.'),
+      SQ('Ice hockey ___ in the winter in Canada.','is played',['plays','is play','are played'],'Pasiva: <b>is/are + participio</b>. Ice hockey es singular → <b>is played</b>.','Ice hockey is played in the winter in Canada.'),
+      SQ('The winners ___ a trophy.','are given',['is given','are give','give'],'Winners es plural → <b>are given</b>.','The winners are given a trophy.'),
+      SQ('This cake ___ with chocolate. (negative)','isn’t made',['doesn’t made','isn’t make','aren’t made'],'Negativo pasivo: <b>isn’t + participio</b>.','This cake isn’t made with chocolate.'),
+      SQ('At the weekend, sports matches ___ on TV by families.','are often watched',['is often watched','often watch','are often watch'],'Matches es plural → <b>are watched</b>.','At the weekend, sports matches are often watched on TV by families.'),
+      SQ('___ gymnastics taught at your school?','Is',['Are','Does','Do'],'Pregunta pasiva: <b>Is</b> + sujeto + participio.','Is gymnastics taught at your school?'),
+      SQ('Surfing ___ in the summer months in my country.','is done',['is do','does','are done'],'do → done: <b>is done</b>.','Surfing is done in the summer months in my country.'),
+      SQ('What sports event is held every four years?','The Olympic Games',['The school sports day','A tennis lesson','The weekend market'],'Los <b>Juegos Olímpicos</b> se celebran cada cuatro años.','What sports event is held every four years?'),
+      SQ('What language is spoken by the Manchester United players?','English',['Spanish','French','Arabic'],'Manchester está en Inglaterra.','What language is spoken by the Manchester United players?'),
+      SQ('¿Cuál es el participio de <b>speak</b>?','spoken',['speaked','spoke','speaking'],'speak → spoke → <b>spoken</b>.','speak, spoke, spoken'),
+    ]},
+  ]},
+  {t:'Health (Unit 4)', c:'#c43b6c', d:'#952450', src:'Be Curious 6, Unit 4: Vocabulary 1 y 2, Grammar 2 (Inglés 6°C)', L:[
+    {t:'The body and injuries', q:[
+      SQ('The part of your leg above your foot and below your knee.','ankle',['heart','elbow','hand'],'<b>Ankle</b> = tobillo.','The part of your leg above your foot and below your knee.'),
+      SQ('An organ that moves blood around the body.','heart',['ankle','lung','knee'],'<b>Heart</b> = corazón.','An organ that moves blood around the body.'),
+      SQ('Something that hurts a lot is ___.','painful',['patient','careful','injured'],'<b>Painful</b> = doloroso.','Something that hurts a lot.'),
+      SQ('A person who sees a doctor because they are ill.','patient',['nurse','doctor','secretary'],'<b>Patient</b> = paciente.','A person who sees a doctor because they are ill.'),
+      SQ('You usually book this with the doctor’s secretary.','an appointment',['an accident','an ankle','a prescription'],'<b>Appointment</b> = hora o cita médica.','You usually book this date with the doctor’s secretary.'),
+      SQ('This can happen to your bones in a bad accident.','break',['sneeze','rest','cough'],'<b>Break a bone</b> = quebrarse un hueso.','This can happen to your bones if you are in a bad accident.'),
+      SQ('Last week I fell off my bike. I had an ___.','accident',['appointment','ankle','patient'],'<b>Accident</b> = accidente.','I was riding my bike and I had an accident.'),
+      SQ('The doctor said my ankle was OK, but my arm was ___.','broken',['break','breaking','painful'],'<b>Broken</b> = quebrado. Le pusieron un yeso (cast).','The doctor told me that my ankle was OK, but my arm was broken.'),
+      SQ('¿Qué significa <b>knee</b>?','Rodilla',['Codo','Tobillo','Cuello'],'La k no se pronuncia: "ni".','knee'),
+      SQ('¿Qué significa <b>injured</b>?','Lesionado, herido',['Sano','Cansado','Hambriento'],'"I injured my arm" = me lesioné el brazo.','injured'),
+      LI('ankle',['angle','uncle','apple'],'tobillo'),
+      LI('heart',['hurt','hard','head'],'corazón'),
+      LI('patient',['patience','painting','parent'],'paciente'),
+    ]},
+    {t:'At the doctor’s', q:[
+      SQ('I’ve got the ___. My throat is sore and I can’t stop sneezing.','flu',['ankle','helmet','price'],'<b>Flu</b> = gripe.','I’ve got the flu. My throat is sore and I can’t stop sneezing.'),
+      SQ('The doctor gave me a ___ for some medicine.','prescription',['appointment','bandage','pattern'],'<b>Prescription</b> = receta médica.','She gave me a prescription for some medicine.'),
+      SQ('The medicine makes me tired, so the doctor told me to ___ for a few days.','rest',['run','train','surf'],'<b>Rest</b> = descansar.','She told me to rest for a few days.'),
+      SQ('I’m ___ in bed at the moment, but I’m so bored.','lying down',['lie down','lying up','laying'],'<b>Lie down</b> = acostarse; en present continuous: <b>lying down</b>.','I’m lying down in bed at the moment, but I’m so bored.'),
+      SQ('I hope you ___ soon, Peter!','feel better',['feel worse','fall better','feel good than'],'<b>Feel better</b> = mejorarse.','I hope you feel better soon, Peter!'),
+      SQ('¿Qué significa <b>sore throat</b>?','Dolor de garganta',['Dolor de cabeza','Tobillo quebrado','Tos seca'],'<b>Throat</b> = garganta.','sore throat'),
+      SQ('¿Qué significa <b>cough</b>?','Tos o toser',['Estornudar','Dormir','Correr'],'Se pronuncia "cof".','cough'),
+      SQ('¿Qué significa <b>sneeze</b>?','Estornudar',['Toser','Respirar','Llorar'],'¡Achís!','sneeze'),
+      SQ('¿Qué significa <b>pills</b>?','Pastillas',['Vendas','Recetas','Pacientes'],'Un tipo de medicine.','pills'),
+      SQ('¿Qué es un <b>bandage</b>?','Una venda',['Una banda de música','Una pastilla','Un casco'],'Se pone sobre una herida.','bandage'),
+      LI('flu',['fly','floor','flew'],'gripe'),
+      LI('medicine',['magazine','machine','midnight'],'remedio'),
+      LI('prescription',['description','subscription','prediction'],'receta médica'),
+    ]},
+    {t:'Future plans', q:[
+      SQ('Next weekend, we ___ on holiday! (go)','are going',['go','is going','going'],'Planes ya organizados: <b>present continuous</b> (am/is/are + -ing).','Next weekend, we are going on holiday!'),
+      SQ('We ___ by plane to Corfu. (travel)','are travelling',['travel','is travelling','are travel'],'We → <b>are</b> + travelling (en inglés británico se duplica la l).','We are travelling by plane to Corfu.'),
+      SQ('We ___ there for two weeks. (stay)','are staying',['stay','is staying','staying'],'We → <b>are staying</b>.','We are staying there for two weeks.'),
+      SQ('I ___ windsurfing on the last day. (try)','am trying',['are trying','try','is trying'],'I → <b>am</b> + trying.','I am trying windsurfing on the last day.'),
+      SQ('My sister ___ the windsurfing class. She injured her ankle. (not do)','isn’t doing',['doesn’t do','aren’t doing','not doing'],'Negativo: <b>isn’t + -ing</b>.','My sister isn’t doing the windsurfing class.'),
+      SQ('I / take / John / for his appointment / this afternoon','I’m taking John for his appointment this afternoon.',['I take John for his appointment this afternoon.','I’m take John for his appointment this afternoon.','I taking John for his appointment this afternoon.'],'<b>I’m taking</b>.','I’m taking John for his appointment this afternoon.'),
+      SQ('Peter / rest / this week?','Is Peter resting this week?',['Does Peter resting this week?','Peter is resting this week?','Are Peter resting this week?'],'Pregunta: <b>Is</b> + sujeto + -ing.','Is Peter resting this week?'),
+      SQ('Carl / not have / the operation / next week','Carl isn’t having the operation next week.',['Carl doesn’t having the operation next week.','Carl not have the operation next week.','Carl aren’t having the operation next week.'],'<b>isn’t having</b>.','Carl isn’t having the operation next week.'),
+      SQ('they / go / to New York / at the weekend?','Are they going to New York at the weekend?',['Is they going to New York at the weekend?','Do they going to New York at the weekend?','They are going to New York at the weekend?'],'They → <b>Are</b> they going…?','Are they going to New York at the weekend?'),
+      SQ('Are you going to the beach in the school holidays? — Yes, ___.','I am',['I’m','I do','I going'],'Respuesta corta: <b>Yes, I am</b> / <b>No, I’m not</b>. (No se contrae al final.)','Yes, I am.'),
+      SQ('He ___ a prescription from the doctor tomorrow. (get)','is getting',['are getting','gets','getting'],'He → <b>is getting</b>.','He is getting a prescription from the doctor tomorrow.'),
+    ]},
+  ]},
+];
+
 /* ============ cursos y estudiantes ============ */
 const MATH = {
   '8C': [
@@ -1983,12 +2408,16 @@ const SUBJ = [
   {id:'mat', t:'Matemáticas', c:'#2c62d8'},
   {id:'len', t:'Lenguaje', c:'#c43b6c'},
   {id:'cie', t:'Ciencias', c:'#1f8a4c'},
+  {id:'fis', t:'Física', c:'#c43b6c'},
+  {id:'qui', t:'Química', c:'#7b4fd6'},
   {id:'his', t:'Historia y Geografía', c:'#d9771a'},
+  {id:'ing', t:'Inglés', c:'#0f8f8a'},
 ];
 const SUBJ_T = Object.fromEntries(SUBJ.map(x=>[x.id,x.t]));
+const subjOf = cc => SUBJ.filter(x=>COURSES[cc][x.id].length);
 const COURSES = {
-  '8C': {mat: MATH['8C'], len: BANKS8.len, cie: BANKS8.cie, his: BANKS8.his},
-  '6C': {mat: MATH['6C'], len: BANKS6.len, cie: BANKS6.cie, his: BANKS6.his},
+  '8C': {mat: MATH['8C'], len: BANKS8.len, cie: BANKS8.cie, fis: BANKS8.fis, qui: BANKS8.qui, his: BANKS8.his, ing: []},
+  '6C': {mat: MATH['6C'], len: BANKS6.len, cie: BANKS6.cie, fis: [], qui: [], his: BANKS6.his, ing: BANKS6.ing},
 };
 const PASSAGES = {'8C': P8, '6C': P6};
 const LESSONS = {}, SKILL_SUBJ = {};
@@ -1997,13 +2426,16 @@ function bankSkill(name, list, passages){
   return {name, gen(){
     let i, tries=0; do{ i=Math.floor(Math.random()*list.length); tries++; }while(recent.includes(i) && tries<40);
     recent.push(i); if (recent.length>Math.min(8,list.length-2)) recent.shift();
-    const [q,ok,ds,ex,pk]=list[i];
-    return mc(ok, shuffle(ds), {prompt:(pk?`<div class="passage">${passages[pk]}</div>`:'')+q, explain:ex});
+    return this.at(i);
+  }, at(i){
+    if (!list[i]) return null;
+    const [q,ok,ds,ex,pk,say,listen]=list[i];
+    return mc(ok, shuffle(ds), {prompt:(pk?`<div class="passage">${passages[pk]}</div>`:'')+q, explain:ex, say, listen:!!listen, qi:i});
   }};
 }
 Object.entries(COURSES).forEach(([cc,subs])=>Object.entries(subs).forEach(([sj,units])=>units.forEach((u,i)=>{
   u.L=u.L.map((l,j)=>{
-    if (sj==='mat'){ const [t,sk]=l; const L={id:`${cc.toLowerCase()}-u${i+1}l${j+1}`,t,sk,u:i,cc,sj}; sk.forEach(k=>SKILL_SUBJ[k]='mat'); LESSONS[L.id]=L; return L; }
+    if (Array.isArray(l)){ const [t,sk]=l; const L={id: sj==='mat' ? `${cc.toLowerCase()}-u${i+1}l${j+1}` : `${cc.toLowerCase()}-${sj}-u${i+1}l${j+1}`,t,sk,u:i,cc,sj}; sk.forEach(k=>SKILL_SUBJ[k]=sj); LESSONS[L.id]=L; return L; }
     const id=`${cc.toLowerCase()}-${sj}-u${i+1}l${j+1}`, key='b-'+id;
     SKILLS[key]=bankSkill(l.t+' ('+u.t+')', l.q, PASSAGES[cc]); SKILL_SUBJ[key]=sj;
     const L={id,t:l.t,sk:[key],u:i,cc,sj,q:l.q}; LESSONS[id]=L; return L;
@@ -2029,9 +2461,14 @@ const courseLabel = cc => cc==='8C' ? '8° básico' : '6° básico';
 const GOAL = 30, PER_LESSON = 8;
 
 /* ============ estado y guardado ============ */
-const blank = () => ({v:2,xp:0,days:{},lessons:{},skills:{},sessions:[],updatedAt:0});
+const blank = () => ({v:2,xp:0,days:{},lessons:{},skills:{},sessions:[],errs:{},updatedAt:0});
 const ST = {};
-function loadST(id){ ST[id]=blank(); try{ const r=localStorage.getItem('ruta-v2-'+id); if(r) ST[id]=Object.assign(blank(),JSON.parse(r)); }catch(e){} }
+function loadST(id){ ST[id]=blank(); try{ const r=localStorage.getItem('ruta-v2-'+id); if(r) ST[id]=Object.assign(blank(),JSON.parse(r)); }catch(e){}
+  // Física y Química pasaron de Ciencias a asignaturas propias: se conservan las estrellas y repasos ya hechos
+  const S=ST[id], ML={'8c-cie-u4l1':'8c-fis-u1l1','8c-cie-u5l1':'8c-qui-u1l1','8c-cie-u5l2':'8c-qui-u2l1'}, MR={'8c-cie-u4':'8c-fis-u1','8c-cie-u5':'8c-qui-u1'};
+  Object.entries(ML).forEach(([a,b])=>{ if (S.lessons[a] && !S.lessons[b]) S.lessons[b]=S.lessons[a]; delete S.lessons[a]; });
+  if (S.reviews) Object.entries(MR).forEach(([a,b])=>{ if (S.reviews[a] && !S.reviews[b]) S.reviews[b]=S.reviews[a]; delete S.reviews[a]; });
+}
 STUDENTS.forEach(s=>loadST(s.id));
 let who = null; try { const w=localStorage.getItem('ruta-who'); if (w && STU[w]) who=w; } catch(e) {}
 const saveLocal = id => { try { localStorage.setItem('ruta-v2-'+id, JSON.stringify(ST[id])); } catch(e) {} };
@@ -2062,6 +2499,9 @@ const IC = {
   crown:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5z"/></svg>',
   fire:'<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5 5 5.6 5 10.5A5 5 0 0 1 12 18a5 5 0 0 1-5-5.2c0-2 1-3.3 2-4.3.2 1.6 1 2.6 2 3 0-3.4-.2-6.6 1-9.5zM8.5 19.5h7a5.5 5.5 0 0 1-7 0z"/></svg>',
   bolt:'<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
+  spk:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>',
+  sndOn:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>',
+  sndOff:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>',
 };
 const starsHtml = (n, cls='stars') => `<span class="${cls}">${[1,2,3].map(i=>`<span class="${i<=n?'on':''}">${IC.star}</span>`).join('')}</span>`;
 /* ============ mascota: Goliat, el perrito ============ */
@@ -2118,9 +2558,80 @@ document.addEventListener('click', e=>{
   if (!m._old) m._old = {txt: b ? b.innerHTML : '', cls: b ? b.className : ''};
   m.className='masc happy'; m.innerHTML=goliat('happy');
   if (b){ b.className='bubble'; b.innerHTML=pick(BUD.tickle); }
+  bark('happy');
   clearTimeout(m._t);
   m._t = setTimeout(()=>{ if (!m.isConnected) return; m.className='masc '+prev; m.innerHTML=goliat(prev); if (b){ b.innerHTML=m._old.txt; b.className=m._old.cls; } m._old=null; }, 1800);
 });
+
+/* ============ sonidos de Goliat (sintetizados, funcionan sin internet) ============ */
+const SND = {on:true, ctx:null, noise:null};
+try { SND.on = localStorage.getItem('ruta-sound')!=='off'; } catch(e) {}
+function actx(){
+  if (!SND.ctx){ const A=window.AudioContext||window.webkitAudioContext; if (!A) return null; try { SND.ctx=new A(); } catch(e){ return null; } }
+  if (SND.ctx.state==='suspended') SND.ctx.resume();
+  return SND.ctx;
+}
+// un "yip" de perro chico: tono que sube rápido y cae, con formantes y algo de aspereza
+function yip(c, t, o){
+  const env=c.createGain(), out=c.createGain(); out.gain.value=o.gain||2.6;
+  env.gain.setValueAtTime(0.0001,t); env.gain.exponentialRampToValueAtTime(o.vol,t+.012);
+  env.gain.setValueAtTime(o.vol,t+o.dur*.35); env.gain.exponentialRampToValueAtTime(0.0001,t+o.dur);
+  const osc=c.createOscillator(); osc.type='sawtooth';
+  osc.frequency.setValueAtTime(o.f0*.7,t); osc.frequency.linearRampToValueAtTime(o.f0,t+o.dur*.22); osc.frequency.exponentialRampToValueAtTime(o.f1,t+o.dur);
+  const fA=c.createBiquadFilter(); fA.type='bandpass'; fA.frequency.value=o.fA||1150; fA.Q.value=2.5;
+  const fB=c.createBiquadFilter(); fB.type='bandpass'; fB.frequency.value=o.fB||2500; fB.Q.value=3.5;
+  const gB=c.createGain(); gB.gain.value=.55;
+  osc.connect(fA); osc.connect(fB); fB.connect(gB); fA.connect(env); gB.connect(env);
+  if (!SND.noise){ SND.noise=c.createBuffer(1,Math.floor(c.sampleRate*.5),c.sampleRate); const d=SND.noise.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; }
+  const n=c.createBufferSource(); n.buffer=SND.noise; const nf=c.createBiquadFilter(); nf.type='bandpass'; nf.frequency.value=1900; nf.Q.value=1.2;
+  const ng=c.createGain(); ng.gain.value=o.rough==null?.3:o.rough; n.connect(nf); nf.connect(ng); ng.connect(env);
+  env.connect(out); out.connect(c.destination);
+  osc.start(t); osc.stop(t+o.dur+.03); n.start(t); n.stop(t+o.dur+.03);
+}
+// gemidito: hacia arriba = "¡vamos!", hacia abajo = triste
+function whine(c, t, up){
+  const o=c.createOscillator(), g=c.createGain(), lfo=c.createOscillator(), lg=c.createGain(), d=.42;
+  o.type='triangle'; o.frequency.setValueAtTime(up?720:980,t); o.frequency.exponentialRampToValueAtTime(up?1180:560,t+d);
+  lfo.frequency.value=7; lg.gain.value=22; lfo.connect(lg); lg.connect(o.frequency);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(.16,t+.05); g.gain.setValueAtTime(.16,t+d*.6); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+  o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+d+.03); lfo.start(t); lfo.stop(t+d+.03);
+}
+function bark(kind){
+  if (!SND.on) return; const c=actx(); if (!c) return;
+  try {
+    const t=c.currentTime+.03;
+    if (kind==='happy'){ yip(c,t,{f0:980,f1:650,dur:.12,vol:.5}); yip(c,t+.17,{f0:1080,f1:700,dur:.11,vol:.45}); }
+    else if (kind==='party'){ [0,.14,.28].forEach((dt,i)=>yip(c,t+dt,{f0:1000+i*70,f1:680+i*40,dur:.1,vol:.45})); }
+    else if (kind==='cheer'){ yip(c,t,{f0:760,f1:520,dur:.16,vol:.42,fA:950,rough:.25}); whine(c,t+.22,true); }
+    else if (kind==='sad'){ whine(c,t,false); }
+  } catch(e) {}
+}
+const SPEAK_OK = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance!=='undefined';
+function speak(text){
+  if (!SPEAK_OK) return;
+  try {
+    const u=new SpeechSynthesisUtterance(String(text).replace(/’/g,"'")); u.lang='en-GB'; u.rate=.88;
+    const vs=speechSynthesis.getVoices(); const v=vs.find(v=>/^en[-_]GB/i.test(v.lang))||vs.find(v=>/^en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang));
+    if (v) u.voice=v;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch(e) {}
+}
+if (SPEAK_OK) try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=()=>{}; } catch(e) {}
+
+/* ============ repaso de errores con repetición espaciada ============ */
+const addDays = n => { const d=new Date(); d.setDate(d.getDate()+n); return today(d); };
+const SRS_GAP = [1, 3, 7];   // días hasta volver a preguntar; después de 3 aciertos seguidos se da por aprendida
+function dueErrs(S, sj){
+  return Object.entries(S.errs||{}).filter(([r,e])=>e && e.sj===sj && e.due<=today() && SKILLS[r.split('#')[0]]).map(([r])=>r);
+}
+function srsMark(S, ref, ok, sj){
+  const E = S.errs || (S.errs = {});
+  if (!ok){ E[ref] = {due:addDays(SRS_GAP[0]), box:0, sj}; LS.wrongRefs.add(ref); return; }
+  if (LS.id==='repaso' && E[ref] && !LS.wrongRefs.has(ref)){
+    const b=E[ref].box+1;
+    if (b>=SRS_GAP.length) delete E[ref]; else E[ref] = {due:addDays(SRS_GAP[b]), box:b, sj:E[ref].sj};
+  }
+}
 
 function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -2128,7 +2639,13 @@ function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 let view = who ? 'path' : 'who', LS=null, panelSel = null;
 const app = $('#app');
 
+function renderSnd(){
+  const b=$('#bSnd'); if (!b) return;
+  b.innerHTML = SND.on ? IC.sndOn : IC.sndOff; b.setAttribute('aria-pressed', SND.on); b.title = SND.on ? 'Silenciar a Goliat' : 'Activar los ladridos de Goliat';
+  b.onclick = () => { SND.on=!SND.on; try{ localStorage.setItem('ruta-sound', SND.on?'on':'off'); }catch(e){} renderSnd(); if (SND.on) bark('happy'); };
+}
 function renderStats(){
+  renderSnd();
   const box=$('#stats');
   if (!who){ box.innerHTML=''; return; }
   const S=ST[who], s=STU[who];
@@ -2193,11 +2710,11 @@ function weakSkills(S, sj){
   return Object.entries(S.skills).filter(([k,v])=>v.n>=2 && SKILLS[k] && (!sj || SKILL_SUBJ[k]===sj)).map(([k,v])=>[k,v.ok/v.n]).sort((a,b)=>a[1]-b[1]).slice(0,3).filter(x=>x[1]<.9).map(x=>x[0]);
 }
 const SUBJ_MEM = {};
-function getSubj(){ if (SUBJ_MEM[who]) return SUBJ_MEM[who]; let v='mat'; try{ const r=localStorage.getItem('ruta-subj-'+who); if(r && SUBJ_T[r]) v=r; }catch(e){} return SUBJ_MEM[who]=v; }
+function getSubj(){ if (SUBJ_MEM[who]) return SUBJ_MEM[who]; let v='mat'; try{ const r=localStorage.getItem('ruta-subj-'+who); if(r && SUBJ_T[r] && COURSES[STU[who].cc][r].length) v=r; }catch(e){} return SUBJ_MEM[who]=v; }
 function setSubj(v){ SUBJ_MEM[who]=v; try{ localStorage.setItem('ruta-subj-'+who, v); }catch(e){} }
 
 function renderPath(){
-  const S=ST[who], s=STU[who], sj=getSubj(), xpT=S.days[today()]||0, pct=Math.min(100,xpT/GOAL*100), weak=weakSkills(S, sj);
+  const S=ST[who], s=STU[who], sj=getSubj(), xpT=S.days[today()]||0, pct=Math.min(100,xpT/GOAL*100), weak=weakSkills(S, sj), due=dueErrs(S, sj);
   const offs=[0,56,80,56,0,-56,-80,-56]; let k=0;
   const subStars = id => COURSES[s.cc][id].reduce((a,u)=>a+u.L.reduce((b,l)=>b+((S.lessons[l.id]||{}).stars||0),0),0);
   const subMax = id => COURSES[s.cc][id].reduce((a,u)=>a+u.L.length*3,0);
@@ -2207,9 +2724,9 @@ function renderPath(){
     <div class="txt"><h2>¡Hola, ${esc(s.name)}!</h2>
       <p>${xpT>=GOAL?'Meta de hoy cumplida. ¡Bien!':`Llevas ${xpT} de ${GOAL} XP hoy.`} · ${courseLabel(s.cc)}</p>
       <div class="bar"><i style="width:${pct}%"></i></div></div>
-    <button class="btn ghost" id="bWeak" ${weak.length?'':'disabled'} title="${weak.length?'Practica lo que más te ha costado en esta asignatura':'Aparece cuando tengas algunos errores para repasar'}">Repasar errores</button>
+    <button class="btn ghost" id="bWeak" ${due.length||weak.length?'':'disabled'} title="${due.length?'Vuelve a las preguntas que fallaste en días anteriores':weak.length?'Practica lo que más te ha costado en esta asignatura':'Las preguntas que falles volverán aquí al día siguiente'}">${due.length?`Repasar errores <span class="cnt">${due.length}</span>`:weak.length?'Practicar lo difícil':'Repasar errores'}</button>
   </section>
-  <nav class="subjects" aria-label="Asignaturas">${SUBJ.map(x=>`<button class="subj" data-s="${x.id}" aria-pressed="${x.id===sj}" style="--sc:${x.c}"><span>${x.t}</span><small>${IC.star.replace('<svg','<svg class="ico"')} ${subStars(x.id)}/${subMax(x.id)}</small></button>`).join('')}</nav>
+  <nav class="subjects" aria-label="Asignaturas">${subjOf(s.cc).map(x=>`<button class="subj" data-s="${x.id}" aria-pressed="${x.id===sj}" style="--sc:${x.c}"><span>${x.t}</span><small>${IC.star.replace('<svg','<svg class="ico"')} ${subStars(x.id)}/${subMax(x.id)}</small></button>`).join('')}</nav>
   ${COURSES[s.cc][sj].map((u,ui)=>{ const st=u.L.reduce((a,l)=>a+((S.lessons[l.id]||{}).stars||0),0);
     return `<section class="unit" style="--uc:${u.c};--ud:${u.d}">
       <div class="uhead"><div><div class="n">${SUBJ_T[sj]} · Unidad ${ui+1}</div><h2>${u.t}</h2><div class="src">Basado en: ${u.src}</div>${REVIEWS[`${s.cc.toLowerCase()}-${sj}-u${ui+1}`]?`<button class="rvb" data-rv="${s.cc.toLowerCase()}-${sj}-u${ui+1}">Ver repaso</button>`:''}</div>
@@ -2220,7 +2737,8 @@ function renderPath(){
   app.querySelectorAll('.node').forEach(b=>b.onclick=()=>startLesson(b.dataset.l));
   app.querySelectorAll('[data-rv]').forEach(b=>b.onclick=()=>showReview(b.dataset.rv, ()=>{ view='path'; render(); }, {go:'Volver a la ruta'}));
   app.querySelectorAll('.subj').forEach(b=>b.onclick=()=>{ setSubj(b.dataset.s); renderPath(); });
-  if (weak.length) $('#bWeak').onclick=()=>startLesson('repaso', weak);
+  if (due.length) $('#bWeak').onclick=()=>startLesson('repaso', due, false, true);
+  else if (weak.length) $('#bWeak').onclick=()=>startLesson('repaso', weak);
 }
 
 /* ============ repasos por unidad (basados en las guías del colegio) ============ */
@@ -2978,6 +3496,151 @@ Object.assign(REVIEWS, {
   TALLER_GEO, TALLER_GEO_CHECK),
 });
 
+/* ---------- repasos v3: Física, Química (8°) e Inglés (6°) ---------- */
+delete REVIEWS['8c-cie-u4']; delete REVIEWS['8c-cie-u5'];
+Object.assign(REVIEWS, {
+'8c-fis-u1': rv('Física',1,'Corriente, voltaje y resistencia','#c43b6c',
+  '¡Guau! Antes de calcular, repasemos de qué está hecha la electricidad.',
+  'Electricidad II: Ley de Ohm (PPT); Guía N°3 de Ley de Ohm (Taller de Física 8°C)',
+  [C('Tres magnitudes clave', `<table class="rv"><tr><td><b>Intensidad (i)</b></td><td>Carga que pasa por un conductor en cada segundo. <b>i = q : t</b>. Se mide en <b>ampere (A)</b>.</td></tr>
+     <tr><td><b>Voltaje (V)</b></td><td>Energía para mover cada carga. También se llama tensión o diferencia de potencial. Se mide en <b>volt (V)</b>.</td></tr>
+     <tr><td><b>Resistencia (R)</b></td><td>Oposición al paso de la corriente. Se mide en <b>ohm (Ω)</b>.</td></tr></table>
+     <p class="exm">5 A durante 1 min (60 s) → q = 5 · 60 = 300 C</p>`),
+   C('Corriente continua y alterna', `<ul><li><b>Continua:</b> las cargas van siempre en el mismo sentido. La dan las <b>pilas y baterías</b>.</li>
+     <li><b>Alterna:</b> las cargas van y vuelven. La producen los <b>generadores</b>; es la del enchufe.</li></ul>`),
+   C('¿De qué depende la resistencia de un cable?', `<p class="rule">R = ρ · L : A</p>
+     <ul><li>Más <b>largo</b> (L) → más resistencia.</li><li>Más <b>grueso</b> (A) → menos resistencia.</li><li>Material con menor <b>resistividad</b> (ρ) → conduce mejor. La plata es la mejor; el cobre es casi igual y más barato.</li></ul>`),
+   C('Conductores y aislantes', `<p><b>Conductores:</b> metales como cobre, aluminio y hierro. <b>Aislantes:</b> plástico, caucho, madera seca y vidrio.</p>
+     <p>Un circuito necesita <b>fuente</b> (pila), <b>conductores</b> (cables), <b>receptor</b> (ampolleta) y un <b>interruptor</b>.</p>`)],
+  ['Un alambre conduce mejor si es:','Corto, grueso y de baja resistividad',['Largo, delgado y de alta resistividad','Largo y grueso','De plástico'],'La resistencia crece con la longitud y baja con el grosor. Un material de baja resistividad, como el cobre, conduce mejor.']),
+
+'8c-fis-u2': rv('Física',2,'Ley de Ohm','#d9771a',
+  '¡Guau! Una sola fórmula y tres formas de usarla. Vamos.',
+  'Guías de Ley de Ohm de las clases del 14, 21 y 28 de julio (Taller de Física 8°C)',
+  [C('La Ley de Ohm', `<p class="rule">V = i · R</p><p>Despeja según lo que buscas:</p>
+     <div class="signs"><span>V = i · R</span><span>i = V : R</span><span>R = V : i</span></div>
+     <p>En un gráfico de voltaje versus intensidad, la <b>resistencia es la pendiente</b>.</p>`),
+   C('Ejemplos de la guía', `<ul class="steps"><li>Brasero de 22 Ω enchufado a 110 V → <b>i = 110 : 22 = 5 A</b></li>
+     <li>Calientaplatos de 24 Ω que absorbe 5 A → <b>V = 5 · 24 = 120 V</b></li>
+     <li>Ampolleta de 120 V que absorbe 1,6 A → <b>R = 120 : 1,6 = 75 Ω</b></li></ul>`),
+   C('Cuidado con las unidades', `<p>1 A = 1.000 mA. Si te piden miliamperes, calcula en ampere y multiplica por 1.000.</p>
+     <p class="exm">220 V : 1.500 Ω ≈ 0,147 A ≈ 147 mA</p>
+     <p>Si R aumenta y V se mantiene, i <b>disminuye</b> (son inversamente proporcionales).</p>`)],
+  ['Un tostador de 8 Ω funciona a 120 V. ¿Qué corriente circula?','15 A',['960 A','128 A','0,07 A'],'i = V : R = 120 : 8 = <b>15 A</b>.']),
+
+'8c-fis-u3': rv('Física',3,'Circuitos en serie y en paralelo','#2c62d8',
+  '¡Guau! Serie o paralelo: esa es la pregunta.',
+  'Clase 7 de julio; Guía de circuitos y energía eléctrica; Desafío científico N°1 (Taller de Física 8°C)',
+  [C('Circuito en serie', `<p>Un solo camino: las resistencias van una tras otra.</p>
+     <div class="signs"><span>R = R₁ + R₂ + R₃</span><span>i igual en todas</span><span>V = V₁ + V₂ + V₃</span></div>
+     <p>Si se desconecta una ampolleta, <b>se apagan todas</b>.</p>`),
+   C('Circuito en paralelo', `<p>Varios caminos: cada resistencia se conecta directo a la fuente.</p>
+     <div class="signs"><span>1/R = 1/R₁ + 1/R₂</span><span>V igual en todas</span><span>i = i₁ + i₂</span></div>
+     <p class="rule">Atajo para dos resistencias: R = (R₁ · R₂) : (R₁ + R₂)</p>
+     <p>Si se desconecta una, <b>las otras siguen</b>. Así son las casas.</p>`),
+   C('Ejemplo resuelto', `<ul class="steps"><li>Batería de 12 V con R₁ = 2 Ω y R₂ = 4 Ω en serie</li><li>R total = 2 + 4 = 6 Ω → i = 12 : 6 = 2 A</li><li class="exm">Voltaje en R₂ = 2 · 4 = 8 V</li></ul>
+     <p>Circuito <b>mixto</b>: primero resuelve el grupo en paralelo y luego suma lo que está en serie.</p>`)],
+  ['Dos resistencias de 6 Ω y 3 Ω en paralelo equivalen a:','2 Ω',['9 Ω','18 Ω','4,5 Ω'],'R = (6 · 3) : (6 + 3) = 18 : 9 = <b>2 Ω</b>. En paralelo siempre queda menor que la menor.']),
+
+'8c-fis-u4': rv('Física',4,'Potencia y energía eléctrica','#1f8a4c',
+  '¡Guau! ¿Cuánto gasta la plancha de la casa? Hoy lo averiguamos.',
+  'Electricidad III: Potencia eléctrica; Potencia, energía y efecto Joule; Guía de circuitos y energía (Taller de Física 8°C)',
+  [C('Cómo se genera la electricidad', `<p>Las centrales <b>transforman</b> otra energía en eléctrica:</p>
+     <ul><li><b>Hidroeléctrica:</b> agua de un embalse (como Ralco en el Biobío).</li><li><b>Termoeléctrica:</b> quema carbón, petróleo o gas.</li><li><b>Eólica:</b> viento. <b>Fotovoltaica:</b> luz del sol.</li><li><b>Geotérmica:</b> calor del subsuelo. <b>Mareomotriz:</b> mareas. <b>Termonuclear:</b> fisión del uranio.</li></ul>`),
+   C('Potencia', `<p>Es la rapidez con que un aparato transforma la energía eléctrica. Se mide en <b>watt (W)</b> = joule por segundo.</p>
+     <div class="signs"><span>P = V · i</span><span>P = i² · R</span><span>P = V² : R</span></div>
+     <p class="exm">Plancha de 1.100 W en 220 V → i = 1.100 : 220 = 5 A</p>`),
+   C('Energía y la cuenta de la luz', `<p class="rule">E = P · t</p>
+     <ul class="steps"><li>Plancha de 1.100 W = 1,1 kW, usada 20 h al mes</li><li>E = 1,1 · 20 = 22 kWh</li><li class="exm">Si el kWh cuesta $150: 22 · 150 = $3.300</li></ul>`),
+   C('Efecto Joule', `<p>Cuando circula corriente, parte de la energía se transforma en <b>calor</b>. Lo aprovechan planchas, hervidores y estufas.</p>
+     <p>El <b>fusible</b> se funde y corta la corriente si esta es demasiado alta. Hoy se usan protectores termomagnéticos.</p>`)],
+  ['Un hervidor de 2.000 W funciona media hora. ¿Cuánta energía consume?','1 kWh',['1.000 kWh','4 kWh','2 kWh'],'2.000 W = 2 kW. E = P · t = 2 · 0,5 = <b>1 kWh</b>.']),
+
+'8c-qui-u1': rv('Química',1,'Modelos atómicos','#7b4fd6',
+  '¡Guau! Repasemos cómo los científicos fueron descubriendo el átomo.',
+  'Guía Constitución atómica de la materia 2026; Trabajo Evolución de los modelos atómicos (Taller de Química 8°C)',
+  [C('Dalton (1808)', `<ul><li>La materia está hecha de átomos <b>indivisibles</b>, que no se crean ni se destruyen.</li><li>Los átomos de un mismo elemento son <b>idénticos</b>.</li><li>Se combinan en proporciones enteras y sencillas.</li></ul>
+     <p class="rule">Fallas: el átomo sí tiene partes, y átomos del mismo elemento pueden ser distintos (isótopos).</p>`),
+   C('Descubriendo las partículas', `<table class="rv"><tr><td><b>Crookes</b></td><td>Rayos catódicos: van del cátodo (−) al ánodo (+), tienen masa y se desvían con un imán.</td></tr>
+     <tr><td><b>Thomson</b></td><td>Descubre el <b>electrón</b>. Modelo del "budín de pasas".</td></tr>
+     <tr><td><b>Millikan</b></td><td>Gota de aceite: mide la carga del electrón.</td></tr>
+     <tr><td><b>Goldstein</b></td><td>Rayos canales positivos → <b>protón</b>.</td></tr>
+     <tr><td><b>Chadwick (1932)</b></td><td>Detecta el <b>neutrón</b> que había propuesto Rutherford.</td></tr></table>`),
+   C('Rutherford, Bohr y hoy', `<ul><li><b>Rutherford:</b> lámina de oro. Núcleo pequeño, denso y positivo; casi todo el átomo es vacío.</li>
+     <li><b>Bohr:</b> electrones en <b>niveles de energía</b> fijos.</li><li><b>Mecano-cuántico:</b> electrones en <b>orbitales</b>, zonas de probabilidad.</li></ul>
+     <p class="rule">Los modelos cambian cuando aparecen evidencias que los anteriores no pueden explicar.</p>`)],
+  ['¿Qué descubrió Rutherford con la lámina de oro?','Un núcleo pequeño, denso y positivo',['El electrón','Que el átomo es indivisible','Los orbitales'],'Casi todas las partículas atravesaban la lámina (mucho vacío) y unas pocas rebotaban al chocar con el <b>núcleo</b>.']),
+
+'8c-qui-u2': rv('Química',2,'Constitución atómica','#0f8f8a',
+  '¡Guau! Protones, neutrones y electrones: a contar se ha dicho.',
+  'Guía Constitución atómica de la materia 2026 (Taller de Química 8°C)',
+  [C('Partículas del átomo', `<table class="rv"><tr><td><b>Protón (p⁺)</b></td><td>Carga positiva, en el núcleo.</td></tr>
+     <tr><td><b>Neutrón (n)</b></td><td>Sin carga, en el núcleo.</td></tr>
+     <tr><td><b>Electrón (e⁻)</b></td><td>Carga negativa y masa muy pequeña, alrededor del núcleo.</td></tr></table>`),
+   C('Z, A y cómo contar', `<p>${nuc('C',14,6)} → arriba <b>A = 14</b>, abajo <b>Z = 6</b>.</p>
+     <ul><li><b>Protones = Z</b> (identifica al elemento).</li><li><b>Neutrones = A − Z</b> → 14 − 6 = 8.</li><li>Átomo neutro: <b>electrones = Z</b>.</li></ul>`),
+   C('Iones', `<p class="rule">Carga = protones − electrones</p>
+     <ul><li><b>Catión (+):</b> perdió electrones. Mg²⁺ (Z = 12) → 12 − 2 = 10 e⁻.</li><li><b>Anión (−):</b> ganó electrones. O²⁻ (Z = 8) → 8 + 2 = 10 e⁻.</li></ul>`),
+   C('Isótopos, isóbaros e isótonos', `<ul><li><b>Isótopos:</b> mismo Z, distinto A (protio, deuterio y tritio).</li><li><b>Isóbaros:</b> igual A, distinto Z (¹⁴C y ¹⁴N).</li><li><b>Isótonos:</b> igual número de neutrones.</li><li><b>Isoelectrónicos:</b> igual número de electrones.</li></ul>
+     <p class="rule">Truco: isóto<b>p</b>os = mismos <b>p</b>rotones; isóto<b>n</b>os = mismos <b>n</b>eutrones.</p>`)],
+  ['¿Cuántos neutrones tiene un átomo con Z = 11 y A = 23?','12',['11','23','34'],'Neutrones = A − Z = 23 − 11 = <b>12</b>.']),
+
+'8c-qui-u3': rv('Química',3,'Números cuánticos','#d9771a',
+  '¡Guau! Los números cuánticos son la dirección de cada electrón.',
+  'Guía de ejercicios Números cuánticos 8° básico (Taller de Química 8°C)',
+  [C('La dirección del electrón', `<table class="rv"><tr><th>Número</th><th>¿Qué indica?</th><th>Valores</th></tr>
+     <tr><td><b>n</b> principal</td><td>Nivel de energía</td><td>1, 2, 3, …</td></tr>
+     <tr><td><b>l</b> secundario</td><td>Tipo de subnivel</td><td>0 hasta n − 1</td></tr>
+     <tr><td><b>mₗ</b> magnético</td><td>Orbital dentro del subnivel</td><td>−l hasta +l</td></tr>
+     <tr><td><b>mₛ</b> espín</td><td>Giro del electrón</td><td>+½ o −½</td></tr></table>`),
+   C('Subniveles', `<table class="rv"><tr><th>Subnivel</th><th>l</th><th>Orbitales</th></tr>
+     <tr><td>s</td><td>0</td><td>1 (0)</td></tr><tr><td>p</td><td>1</td><td>3 (−1, 0, +1)</td></tr>
+     <tr><td>d</td><td>2</td><td>5 (−2 a +2)</td></tr><tr><td>f</td><td>3</td><td>7 (−3 a +3)</td></tr></table>
+     <p class="exm">3d → n = 3, l = 2</p>`),
+   C('¿Posible o imposible?', `<ul class="steps"><li>¿l es menor que n?</li><li>¿mₗ está entre −l y +l?</li><li>¿mₛ es +½ o −½?</li></ul>
+     <p>Si las tres respuestas son sí, es <b>posible</b>. Ej.: n = 2, l = 2 es imposible porque l debe ser menor que n.</p>`)],
+  ['¿Es posible n = 3, l = 1, mₗ = −1, mₛ = +½?','Sí, es posible',['No, porque l debe ser 3','No, porque mₗ no puede ser negativo','No, porque mₛ debe ser 0'],'l = 1 es menor que 3, mₗ = −1 está entre −1 y +1, y mₛ = +½. Es <b>posible</b> (subnivel 3p).']),
+
+'6c-ing-u1': rv('Inglés',1,'Fashion (Unit 1)','#0f8f8a',
+  '¡Guau! Hello! Repasemos la ropa y cómo comparar.',
+  'Be Curious 6, Unit 1: Vocabulary 1 y 2, Grammar 1 y 2 (Inglés 6°C)',
+  [C('Clothes', `<table class="rv"><tr><td><b>jumper</b></td><td>chaleco, suéter</td><td><b>raincoat</b></td><td>impermeable</td></tr>
+     <tr><td><b>blouse</b></td><td>blusa</td><td><b>tracksuit</b></td><td>buzo</td></tr>
+     <tr><td><b>trainers</b></td><td>zapatillas</td><td><b>suit</b></td><td>traje</td></tr>
+     <tr><td><b>tie</b></td><td>corbata</td><td><b>boots</b></td><td>botas</td></tr>
+     <tr><td><b>trousers</b></td><td>pantalones</td><td><b>swimming costume</b></td><td>traje de baño</td></tr></table>`),
+   C('Materials and details', `<p><b>cotton</b> algodón · <b>silk</b> seda · <b>leather</b> cuero · <b>sleeves</b> mangas · <b>collar</b> cuello · <b>buttons</b> botones · <b>size</b> talla · <b>price</b> precio · <b>chain</b> cadena · <b>pattern</b> estampado</p>`),
+   C('Comparatives', `<ul><li>Corto: <b>-er than</b> → cheap → cheaper, long → longer, big → bigger.</li><li>Termina en -y: <b>-ier</b> → pretty → prettier.</li><li>Largo: <b>more … than</b> → more expensive, more comfortable.</li><li>Irregular: good → <b>better</b>, bad → <b>worse</b>.</li></ul>
+     <p class="rule">Iguales: as … as → Jumper A is as expensive as jumper B.</p>`),
+   C('Timetables', `<p>Para horarios se usa el <b>present simple</b>. Con he/she/it se agrega -s:</p>
+     <p class="exm">The market opens at 10 am. It closes at 6 pm.</p>
+     <p>Preguntas: <b>What time / What day / When / Where does</b> … ?</p>`)],
+  ['The red blouse is ___ than the yellow one. (pretty)','prettier',['more pretty','prettyer','prettiest'],'Termina en consonante + y: cambia la y por <b>-ier</b> → prettier.']),
+
+'6c-ing-u2': rv('Inglés',2,'Sport (Unit 3)','#d9771a',
+  '¡Guau! Let’s play! Repasemos deportes y la voz pasiva.',
+  'Be Curious 6, Unit 3: Vocabulary 1 y 2, Grammar 1 (Inglés 6°C)',
+  [C('Sports', `<p><b>golf</b> · <b>ice hockey</b> · <b>waterskiing</b> esquí acuático · <b>surfing</b> · <b>cycling</b> ciclismo · <b>gymnastics</b> gimnasia · <b>athletics</b> atletismo · <b>diving</b> clavados · <b>boxing</b> · <b>rugby</b> · <b>cricket</b></p>`),
+   C('Equipment and people', `<table class="rv"><tr><td><b>coach</b></td><td>entrenador</td><td><b>court</b></td><td>cancha</td></tr>
+     <tr><td><b>helmet</b></td><td>casco</td><td><b>net</b></td><td>red</td></tr>
+     <tr><td><b>racket</b></td><td>raqueta</td><td><b>track</b></td><td>pista</td></tr>
+     <tr><td><b>goal</b></td><td>gol, arco</td><td><b>surfboard</b></td><td>tabla de surf</td></tr>
+     <tr><td><b>cyclist</b></td><td>ciclista</td><td><b>training</b></td><td>entrenamiento</td></tr></table>`),
+   C('Present simple passive', `<p class="rule">is / are + participio</p>
+     <ul><li>Cricket <b>is played</b> in the summer in the UK.</li><li>The winners <b>are given</b> a trophy.</li><li>Negativo: This cake <b>isn’t made</b> with chocolate.</li><li>Pregunta: <b>Is</b> gymnastics <b>taught</b> at your school?</li></ul>
+     <p>Activa: el sujeto hace la acción (<i>Children use phones</i>). Pasiva: la acción le pasa al sujeto.</p>`)],
+  ['Ice hockey ___ in the winter in Canada.','is played',['plays','are played','is play'],'Voz pasiva en singular: <b>is + played</b>.']),
+
+'6c-ing-u3': rv('Inglés',3,'Health (Unit 4)','#c43b6c',
+  '¡Guau! Repasemos el cuerpo, el doctor y los planes futuros.',
+  'Be Curious 6, Unit 4: Vocabulary 1 y 2, Grammar 2 (Inglés 6°C)',
+  [C('Body and injuries', `<p><b>ankle</b> tobillo · <b>knee</b> rodilla · <b>heart</b> corazón · <b>injured</b> lesionado · <b>painful</b> doloroso · <b>broken</b> quebrado · <b>accident</b> · <b>patient</b> paciente · <b>appointment</b> hora médica</p>`),
+   C('At the doctor’s', `<p><b>flu</b> gripe · <b>sore throat</b> dolor de garganta · <b>cough</b> tos · <b>sneeze</b> estornudar · <b>prescription</b> receta · <b>medicine</b> remedio · <b>pills</b> pastillas · <b>bandage</b> venda · <b>rest</b> descansar · <b>lie down</b> acostarse · <b>feel better</b> mejorarse</p>`),
+   C('Future plans: present continuous', `<p>Para planes ya organizados: <b>am / is / are + -ing</b>.</p>
+     <ul><li>We <b>are going</b> on holiday next weekend.</li><li>My sister <b>isn’t doing</b> the class.</li><li><b>Is</b> Peter <b>resting</b> this week? — Yes, he is. / No, he isn’t.</li></ul>`)],
+  ['Next weekend we ___ to Corfu. (travel)','are travelling',['travel','is travelling','travelling'],'Plan organizado con <b>we</b>: <b>are travelling</b>.']),
+});
+
 const unitKey = L => L && L.cc ? `${L.cc.toLowerCase()}-${L.sj}-u${L.u+1}` : null;
 let RV = null;
 function showReview(key, onDone, opts={}){
@@ -3002,6 +3665,7 @@ function showReview(key, onDone, opts={}){
     const pickI = +b.dataset.i, right = pickI===item.correct;
     app.querySelectorAll('.rv-check .opt').forEach((x,i)=>{ if(i===item.correct) x.classList.add('right'); else if(i===pickI) x.classList.add('wrong'); });
     $('#rvFb').innerHTML = `<div class="fb ${right?'ok':'no'}" style="padding:12px 14px"><h3>${right?IC.check+' ¡Correcto!':'Respuesta correcta: '+ok}</h3><div class="ex">${ex}</div></div>`;
+    bark(right?'happy':'cheer');
     $('#buddy').innerHTML = buddy(right?'happy':'sad', right?'¡Guau guau! Entendiste. ¡Ahora a practicar!':'Casi. Lee la explicación; si quieres, vuelve a mirar el repaso.', right?'ok':'no');
     $('#rvGo').disabled = false; $('#rvHint').hidden = true;
     (S.reviews || (S.reviews = {}))[key] = Date.now(); S.updatedAt = Date.now(); saveLocal(who);
@@ -3012,30 +3676,35 @@ function showReview(key, onDone, opts={}){
 }
 
 /* ============ lección ============ */
-function startLesson(id, skills, skipRv){
+function startLesson(id, skills, skipRv, errMode=false){
   const rvKey = skills ? null : unitKey(LESSONS[id]);
   if (rvKey && REVIEWS[rvKey] && !skipRv && !((ST[who].reviews||{})[rvKey]))
     return showReview(rvKey, ()=>startLesson(id, null, true), {back:()=>{ view='path'; render(); }});
   const sk = skills || LESSONS[id].sk;
-  let q=[]; while(q.length<PER_LESSON) q=q.concat(shuffle(sk));
-  LS = {who, id, title: id==='repaso'?'Repaso de errores · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,PER_LESSON), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false, combo:0, rv: rvKey && REVIEWS[rvKey] ? rvKey : null};
+  const target = errMode ? Math.min(PER_LESSON, sk.length) : PER_LESSON;
+  let q=[]; if (errMode) q=shuffle(sk); else while(q.length<PER_LESSON) q=q.concat(shuffle(sk));
+  LS = {who, id, target, wrongRefs:new Set(), title: id==='repaso'?(errMode?'Repaso de errores':'Practicar lo difícil')+' · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,target), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false, combo:0, rv: rvKey && REVIEWS[rvKey] ? rvKey : null};
   view='lesson'; setTab('path'); window.scrollTo({top:0}); nextQ();
 }
 function nextQ(){
-  if (LS.correct>=PER_LESSON || LS.hearts<=0) return finish();
-  const key = LS.queue[LS.i];
-  LS.cur = Object.assign({key}, SKILLS[key].gen()); LS.sel=null; LS.done=false;
+  if (LS.correct>=LS.target || LS.hearts<=0) return finish();
+  const [base, qi] = String(LS.queue[LS.i]).split('#');
+  let item = qi!==undefined && SKILLS[base].at ? SKILLS[base].at(+qi) : null;
+  if (!item) item = SKILLS[base].gen();
+  LS.cur = Object.assign({key:base, ref: item.qi!=null ? base+'#'+item.qi : base}, item); LS.sel=null; LS.done=false;
   drawQ();
+  if (LS.cur.listen) speak(LS.cur.say);
 }
 function drawQ(){
   const q=LS.cur;
   app.innerHTML = `<div class="lesson">
     <div class="lbar"><button class="x" id="bQuit" aria-label="Salir de la lección">${IC.x}</button>
-      <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="${PER_LESSON}" aria-valuenow="${LS.correct}"><i style="width:${LS.correct/PER_LESSON*100}%"></i></div>
+      <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="${LS.target}" aria-valuenow="${LS.correct}"><i style="width:${LS.correct/LS.target*100}%"></i></div>
       <div class="hearts" aria-label="${LS.hearts} vidas">${[1,2,3].map(i=>`<span class="${i<=LS.hearts?'':'off'}">${IC.heart}</span>`).join('')}</div></div>
     <div id="buddy">${buddy('idle', pick(LS.i===0?BUD.start:BUD.next))}</div>
     <div class="skill">${SKILLS[q.key].name}</div>
-    <div class="prompt">${q.prompt}</div>
+    <div class="prompt">${q.prompt}${q.listen && !SPEAK_OK ? `<br><b>${q.say}</b>` : ''}</div>
+    ${q.say && SPEAK_OK ? `<button class="say${q.listen?' big':''}" id="bSay" aria-label="Escuchar en inglés">${IC.spk} ${q.listen?'Escuchar otra vez':'Escuchar'}</button>` : ''}
     ${q.figure?`<div class="fig">${q.figure}</div>`:''}
     ${q.type==='mc'
       ? `<div class="opts">${q.options.map((o,i)=>`<button class="opt" data-i="${i}" aria-pressed="false">${o}</button>`).join('')}</div>`
@@ -3045,6 +3714,7 @@ function drawQ(){
     <div class="foot" id="footBox"><button class="btn" id="bCheck" disabled>Comprobar</button></div>
   </div>`;
   $('#bQuit').onclick=()=>{ view='path'; render(); };
+  const bs=$('#bSay'); if (bs) bs.onclick=()=>speak(q.say);
   const bc=$('#bCheck');
   if (q.type==='mc'){
     app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ if(LS.done) return; app.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); LS.sel=+b.dataset.i; bc.disabled=false; });
@@ -3066,11 +3736,13 @@ function check(){
   }
   LS.done=true;
   const t=LS.tally[q.key]||(LS.tally[q.key]={ok:0,n:0}); t.n++;
-  if (ok){ LS.correct++; t.ok++; LS.combo++; } else { LS.mistakes++; LS.hearts--; LS.queue.push(q.key); LS.combo=0; }
+  if (ok){ LS.correct++; t.ok++; LS.combo++; } else { LS.mistakes++; LS.hearts--; LS.queue.push(q.ref); LS.combo=0; }
   LS.i++;
+  srsMark(ST[LS.who], q.ref, ok, SKILL_SUBJ[q.key]); saveLocal(LS.who);
   const bmood = ok ? (LS.combo>=3 ? 'party' : 'happy') : (LS.hearts<=0 ? 'cry' : 'sad');
   const bmsg = ok ? (LS.combo>=3 ? BUD.combo(LS.combo) : pick(BUD.ok)) : (LS.hearts<=0 ? BUD.out : pick(BUD.no));
   $('#buddy').innerHTML = buddy(bmood, bmsg, ok?'ok':'no');
+  bark(ok ? (LS.combo>=3 ? 'party' : 'happy') : (LS.hearts<=0 ? 'sad' : 'cheer'));
   const right = q.type==='mc' ? q.options[q.correct] : `${q.unit==='$'?'$':''}${fmt(q.ans)}${q.unit&&q.unit!=='$'?' '+q.unit:''}`;
   $('#footBox').innerHTML='';
   $('#fbBox').innerHTML = `<div class="fb ${ok?'ok':'no'}" role="status">
@@ -3078,14 +3750,14 @@ function check(){
     <div class="ex">${q.explain}</div>
     <button class="btn" id="bNext">${LS.hearts<=0?'Ver resultado':'Continuar'}</button>
     ${!ok && LS.rv && LS.hearts>0 ? `<button class="btn ghost" id="bRv">Ver el repaso de la unidad</button>` : ''}</div>`;
-  document.querySelector('.prog i').style.width = (LS.correct/PER_LESSON*100)+'%';
+  document.querySelector('.prog i').style.width = (LS.correct/LS.target*100)+'%';
   document.querySelectorAll('.hearts > span').forEach((h,i)=>h.className = i<LS.hearts?'':'off');
   const bn=$('#bNext'); bn.focus({preventScroll:true}); bn.onclick=nextQ;
   const brv=$('#bRv'); if (brv) brv.onclick=()=>showReview(LS.rv, ()=>{ view='lesson'; window.scrollTo({top:0}); nextQ(); }, {go:'Volver a la lección'});
   bn.scrollIntoView({block:'nearest', behavior:'smooth'});
 }
 function finish(){
-  const S=ST[LS.who], won=LS.correct>=PER_LESSON;
+  const S=ST[LS.who], won=LS.correct>=LS.target;
   const stars = !won ? 0 : LS.mistakes===0 ? 3 : LS.mistakes<=2 ? 2 : 1;
   const xp = won ? 10 + LS.correct + (LS.mistakes===0?5:0) : LS.correct;
   const answered = LS.correct + LS.mistakes;
@@ -3112,6 +3784,7 @@ function finish(){
     <button class="btn" id="bBack">Continuar</button>
     <button class="btn ghost" id="bAgain">Repetir con otros números</button>
   </div>`;
+  if (won && stars===3) setTimeout(()=>bark('party'), 250);
   const id=LS.id, sk=LS.id==='repaso'?Object.keys(LS.tally):null;
   $('#bBack').onclick=()=>{ view='path'; render(); };
   $('#bAgain').onclick=()=>startLesson(id, sk);
@@ -3331,11 +4004,11 @@ function renderPanel(){
     <h2 class="det">Detalle de ${esc(s.name)}</h2>
     <section class="sec"><h3>XP de los últimos 14 días</h3><div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="XP por día">${ch}</svg></div></section>
     <section class="sec"><h3>Avance por unidad</h3>
-      ${SUBJ.map(x=>`<h4 class="sgrp">${x.t}</h4>`+COURSES[s.cc][x.id].map(u=>{ const st=u.L.reduce((a,l)=>a+((S.lessons[l.id]||{}).stars||0),0), mx=u.L.length*3; return `<div class="umeter" style="--uc:${u.c}"><span>${u.t}</span><div class="bar"><i style="width:${st/mx*100}%"></i></div><span class="p">${st}/${mx}</span></div>`; }).join('')).join('')}
+      ${subjOf(s.cc).map(x=>`<h4 class="sgrp">${x.t}</h4>`+COURSES[s.cc][x.id].map(u=>{ const st=u.L.reduce((a,l)=>a+((S.lessons[l.id]||{}).stars||0),0), mx=u.L.length*3; return `<div class="umeter" style="--uc:${u.c}"><span>${u.t}</span><div class="bar"><i style="width:${st/mx*100}%"></i></div><span class="p">${st}/${mx}</span></div>`; }).join('')).join('')}
     </section>
     <section class="sec"><h3>Habilidades</h3><div class="tbl-wrap"><table class="sk">
       <tr><th>Habilidad</th><th style="text-align:right">Intentos</th><th style="text-align:right">Acierto</th><th>Estado</th></tr>
-      ${SUBJ.map(x=>{ const rs=rowsFor(x.id).filter(r=>r.n>0); return `<tr class="grp"><td colspan="4">${x.t}</td></tr>`+(rs.length?rs.map(r=>`<tr><td>${r.name}</td><td class="n">${r.n}</td><td class="n">${Math.round(r.p*100)}%</td><td>${r.pill}</td></tr>`).join(''):`<tr><td colspan="4" class="muted">Sin práctica todavía</td></tr>`); }).join('')}
+      ${subjOf(s.cc).map(x=>{ const rs=rowsFor(x.id).filter(r=>r.n>0); return `<tr class="grp"><td colspan="4">${x.t}</td></tr>`+(rs.length?rs.map(r=>`<tr><td>${r.name}</td><td class="n">${r.n}</td><td class="n">${Math.round(r.p*100)}%</td><td>${r.pill}</td></tr>`).join(''):`<tr><td colspan="4" class="muted">Sin práctica todavía</td></tr>`); }).join('')}
     </table></div></section>
     <section class="sec"><h3>Últimas sesiones</h3>
       ${S.sessions.length?`<div class="tbl-wrap"><table class="sk"><tr><th>Cuándo</th><th>Lección</th><th style="text-align:right">Correctas</th><th style="text-align:right">XP</th></tr>
