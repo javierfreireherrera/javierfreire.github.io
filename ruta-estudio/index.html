@@ -293,6 +293,28 @@ td.act{white-space:nowrap;text-align:right}
 .legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
 @media (max-width:520px){.top .in{gap:8px}.brand{font-size:1.1rem}.stats{gap:8px}}
 
+/* repaso */
+.rv-top{display:flex;align-items:center;gap:10px;padding-block:16px 0}
+.rv-tag{font:800 .78rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--uc)}
+.review h1{font-size:1.7rem;margin-top:4px}
+.rv-card{background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--uc);border-radius:16px;padding:14px 16px;margin-top:14px}
+.rv-card h3{font-size:1.2rem;margin-bottom:4px}
+.rv-card p{margin:8px 0}
+.rv-card ul,.rv-card ol{margin:6px 0;padding-left:20px}.rv-card li{margin:4px 0}
+.rule{background:color-mix(in srgb,var(--uc) 11%,var(--surface));border-radius:10px;padding:8px 12px;font-weight:700}
+.exm{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.1rem}
+.steps{list-style:none;padding:0!important}.steps li{padding:5px 0;border-bottom:1px dashed var(--line)}.steps li:last-child{border-bottom:none}
+.steps.num{list-style:decimal;padding-left:22px!important}
+.signs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:8px 0}
+.signs span{background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:6px;text-align:center;font-weight:800;font-size:1.1rem}
+table.rv{border-collapse:collapse;width:100%;font-size:.95rem}
+table.rv th{text-align:left;color:var(--uc);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;padding:10px 6px 4px}
+table.rv td{border-top:1px solid var(--line);padding:7px 6px;vertical-align:top}
+.rv-q{font-weight:700;font-size:1.08rem}
+.rv-src{font-size:.82rem;color:var(--muted);margin-top:14px}
+.rvb{margin-top:8px;background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.65);border-radius:10px;padding:4px 10px;font-weight:800;font-size:.82rem}
+.fb.no .btn.ghost,.fb.ok .btn.ghost{background:var(--surface);color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+
 /* mascota Goliat */
 .buddy{display:flex;align-items:center;gap:12px;margin-top:12px}
 .masc{width:70px;height:70px;flex:none;background:none;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -1062,7 +1084,7 @@ BANKS6.len = [
       ['Las preguntas qué, quién, cuándo, dónde, cómo y por qué sirven para:','Comprobar que la noticia tenga la información esencial',['Escribir un poema','Hacer una receta','Inventar personajes'],'Son las preguntas básicas del periodismo.'],
     ]},
   ]},
-  {t:'Textos discontinuos', c:'#0f8f8a', d:'#0a6a66', src:'Hoja de información textos discontinuos; PPT La infografía; anuncio publicitario', L:[
+  {t:'Textos discontinuos', c:'#0f8f8a', d:'#0a6a66', src:'Hoja de información textos discontinuos; PPT La infografía; Características de la infografía y Póster infografía (nuevos); anuncio publicitario', L:[
     {t:'Infografías y textos discontinuos', q:[
       ['¿Qué es un texto discontinuo?','Un texto que combina información en tablas, gráficos, imágenes o listas, sin párrafos seguidos',['Un texto que no tiene final','Un texto mal escrito','Un cuento sin título'],'Se lee “saltando” entre elementos, no de corrido.'],
       ['¿Cuál de estos es un texto discontinuo?','Un horario de clases',['Un cuento','Una carta','Una novela'],'El horario es una tabla.'],
@@ -1077,6 +1099,10 @@ BANKS6.len = [
       ['Si una infografía sobre el reciclaje muestra que el 40% de la basura es orgánica, ¿qué tipo de información es?','Un dato estadístico',['Una opinión','Un diálogo','Una rima'],'Es información numérica verificable.'],
       ['¿Qué texto discontinuo usarías para mostrar el camino a un lugar?','Un mapa o plano',['Un poema','Una biografía','Una noticia'],'El mapa muestra ubicaciones y recorridos.'],
       ['¿Qué texto discontinuo usarías para comparar la temperatura de cada mes?','Un gráfico o una tabla',['Una carta','Un cuento','Una adivinanza'],'Sirven para comparar datos numéricos.'],
+      ['La palabra “infografía” está formada por “información” y “gráfica”. ¿Qué tipo de palabra es?','Una palabra compuesta',['Un diminutivo','Un antónimo','Una onomatopeya'],'Una palabra compuesta une dos o más palabras y reúne el significado de ambas.'],
+      ['¿Qué información NO es buena para presentar en una infografía?','Una explicación muy compleja y larga',['Pasos de un proceso en orden','Datos que se pueden poner en un gráfico','Una lista de hechos breves'],'La infografía necesita información que se pueda resumir en fragmentos breves.'],
+      ['¿Por qué las infografías ayudan a recordar la información?','Porque las imágenes respaldan el texto y la hacen más visual',['Porque tienen párrafos largos','Porque no tienen título','Porque usan solo números'],'El cerebro procesa muy rápido la información visual; las imágenes ayudan a entender y recordar.'],
+      ['¿Qué error de diseño hace difícil leer una infografía?','Texto claro sobre un fondo claro',['Usar títulos y subtítulos','Usar viñetas en las listas','Destacar con marcos lo importante'],'Si el texto y el fondo son claros, no hay contraste y cuesta leer.'],
     ]},
     {t:'Publicidad y propaganda', q:[
       ['¿Cuál es el propósito de un anuncio publicitario?','Convencer al público de comprar o usar un producto o servicio',['Informar una noticia','Contar una leyenda','Explicar un experimento'],'La publicidad busca persuadir para consumir.'],
@@ -1165,11 +1191,11 @@ BANKS6.cie = [
       ['¿Cómo se forma el suelo?','Por la desintegración de rocas y la acumulación de materia orgánica durante mucho tiempo',['En pocos días','Solo por la lluvia de un año','Lo fabrican las personas'],'Es un proceso lento: miles de años.'],
       ['¿Qué es la meteorización?','La desintegración de las rocas por agentes como agua, viento y temperatura',['El transporte de suelo','La caída de meteoritos','El riego de cultivos'],'Es el primer paso en la formación del suelo.'],
       ['¿Qué es el humus?','Materia orgánica descompuesta que hace fértil el suelo',['Una roca dura','Un insecto','Un tipo de arena'],'Se forma de hojas y restos descompuestos.'],
-      ['¿Cuál es la capa superior del suelo, más rica en humus?','Horizonte A (suelo superficial)',['Roca madre','Horizonte C','Subsuelo profundo'],'Es oscura y fértil.'],
-      ['¿Cómo se llama la capa más profunda, de roca sólida?','Roca madre',['Humus','Horizonte A','Hojarasca'],'De ella se origina el suelo.'],
+      ['¿Cuál es la capa más superficial del suelo, oscura, donde los restos de plantas y animales forman humus?','Horizonte O',['Horizonte R (roca madre)','Horizonte C','Horizonte B'],'El horizonte O es el más superficial; justo debajo está el A, también rico en materia orgánica, donde crecen las raíces.'],
+      ['¿Cómo se llama la capa más profunda, de roca entera (horizonte R)?','Roca madre',['Humus','Horizonte A','Horizonte O'],'Sobre la roca madre (horizonte R) se originan los demás horizontes.'],
       ['¿Qué tipo de suelo tiene partículas grandes y deja pasar el agua rápido?','Arenoso',['Arcilloso','Humífero','Rocoso compacto'],'Retiene poca agua.'],
       ['¿Qué tipo de suelo retiene mucha agua y se pone pegajoso?','Arcilloso',['Arenoso','Pedregoso','Volcánico seco'],'Sus partículas son muy finas.'],
-      ['¿Qué tipo de suelo es más adecuado para cultivar?','Humífero (rico en materia orgánica)',['Arenoso seco','Arcilloso compacto','Rocoso'],'Tiene nutrientes y buena retención de agua.'],
+      ['¿Qué tipo de suelo es más adecuado para cultivar?','Orgánico (rico en humus)',['Arenoso','Arcilloso','Rocoso'],'El suelo orgánico es esponjoso, tiene nutrientes y retiene bien el agua.'],
       ['¿Qué componentes tiene el suelo?','Minerales, materia orgánica, agua, aire y seres vivos',['Solo arena','Solo agua','Solo rocas'],'Es una mezcla compleja.'],
       ['¿Qué seres vivos ayudan a airear el suelo?','Las lombrices',['Los peces','Los pájaros','Las ballenas'],'Cavan túneles que dejan pasar aire y agua.'],
       ['¿Qué es la permeabilidad del suelo?','La capacidad de dejar pasar el agua',['Su color','Su temperatura','Su edad'],'El arenoso es muy permeable.'],
@@ -1181,6 +1207,8 @@ BANKS6.cie = [
       ['¿Qué actividad humana aumenta la erosión?','La tala de bosques',['Plantar árboles','Hacer terrazas','Usar cobertura vegetal'],'Sin raíces, el suelo queda desprotegido.'],
       ['¿Cómo protegen las raíces de las plantas al suelo?','Lo sujetan y evitan que el agua y el viento se lo lleven',['Lo calientan','Lo vuelven arena','No lo protegen'],'Por eso la reforestación ayuda.'],
       ['¿Qué es la erosión eólica?','La causada por el viento',['La causada por el agua','La causada por animales','La causada por volcanes'],'Eolo era el dios del viento.'],
+      ['¿Cómo se llama la pérdida de suelo causada por la acción humana, que deja el terreno como un desierto?','Desertificación',['Desertización','Meteorización','Fotosíntesis'],'Si la causa es natural se llama desertización; si es humana, desertificación.'],
+      ['¿Qué es la erosión antrópica?','La causada por actividades humanas',['La causada solo por el viento','La causada por los glaciares','La formación de humus'],'Ej.: cultivar en pendientes, sobrepastoreo, tala de bosques e incendios repetidos.'],
       ['¿Qué es la erosión hídrica?','La causada por el agua',['La causada por el viento','La causada por el fuego','La causada por el Sol'],'Ej.: lluvias intensas que arrastran tierra.'],
       ['Las terrazas de cultivo en laderas sirven para:','Disminuir la velocidad del agua y evitar la erosión',['Decorar el cerro','Hacer caminos','Calentar el suelo'],'Forman escalones que retienen suelo.'],
       ['¿Qué efecto tiene el sobrepastoreo?','Elimina la vegetación y deja el suelo expuesto',['Mejora el suelo','Produce lluvia','Crea humus rápido'],'Demasiados animales comen toda la cubierta vegetal.'],
@@ -1400,8 +1428,8 @@ BANKS8.len = [
   {t:'Mundo narrativo', c:'#c43b6c', d:'#952450', src:'Clase 1 Mundo narrativo; Ficción y verosimilitud; Niveles y estrategias', L:[
     {t:'Narrador y elementos', q:[
       ['¿Cuál es la diferencia entre autor y narrador?','El autor es la persona real que escribe; el narrador es la voz ficticia que cuenta',['Son siempre la misma persona','El narrador es quien lee','El autor es un personaje'],'El narrador pertenece al mundo de la obra.'],
-      ['¿Qué narrador conoce los pensamientos de todos los personajes?','Omnisciente',['Testigo','Protagonista','De conocimiento relativo'],'Sabe todo, incluso lo que nadie dice.'],
-      ['¿Qué narrador solo describe lo que se ve, como una cámara, sin entrar en pensamientos?','Objetivo o de conocimiento relativo',['Omnisciente','Protagonista','Lírico'],'Se limita a lo observable.'],
+      ['¿Qué narrador conoce los pensamientos de todos los personajes?','Externo omnisciente',['Interno testigo','Interno protagonista','Externo objetivo'],'Sabe todo lo que sucede y sucederá, incluidos los pensamientos.'],
+      ['¿Qué narrador solo describe lo que se ve, como una cámara, sin entrar en pensamientos?','Externo objetivo',['Externo omnisciente','Interno protagonista','Interno testigo'],'No participa en la historia (externo) y relata solo lo que observa, sin conocer lo que piensan los personajes (objetivo).'],
       ['En “Juan apagó la lámpara… y comenzó a contar los latidos de su corazón”, ¿qué narrador hay?','Tercera persona que conoce lo que siente Juan',['Primera persona protagonista','Segunda persona','Narrador testigo en primera persona'],'Usa “él” pero sabe lo que Juan piensa.','mina'],
       ['¿Qué es el tiempo del relato?','El orden y la forma en que se presentan los hechos',['La hora en que se leyó','La época del autor','La duración del libro en páginas'],'Puede ser lineal o tener saltos.'],
       ['Una analepsis o retrospección es:','Un salto al pasado en la narración',['Un salto al futuro','El final de la historia','Una descripción'],'También se le llama flashback.'],
@@ -1420,8 +1448,8 @@ BANKS8.len = [
       ['¿Qué significa que las abuelas dejaban pan “por si acaso”?','Que lo hacían por precaución o tradición, aunque nadie viera al dragón',['Que querían alimentar a los niños','Que el pan estaba malo','Que el dragón lo pidió'],'Inferencia a partir del contexto.','dragon'],
       ['¿Qué enseñanza deja el relato del dragón?','Que hay que devolver lo que no nos pertenece',['Que los dragones son peligrosos','Que el pan es caro','Que los ríos cambian'],'La aldea lo convierte en un dicho.','dragon'],
       ['“El río ya había cambiado de curso dos veces” sugiere que:','El dragón durmió muchísimo tiempo',['El río era artificial','Llovió mucho ese día','El dragón movió el río'],'Los ríos tardan mucho en cambiar de curso.','dragon'],
-      ['¿Cuál es el nivel de comprensión que exige deducir información no escrita?','Inferencial',['Literal','Fonológico','Ortográfico'],'Se lee “entre líneas”.'],
-      ['¿Qué nivel de comprensión implica opinar y evaluar el texto?','Crítico-valorativo',['Literal','Inferencial','Silábico'],'Se juzga con argumentos.'],
+      ['¿Cuál es el nivel de comprensión que exige deducir información no escrita?','Implícito (inferencial)',['Explícito (literal)','Fonológico','Ortográfico'],'En el texto solo hay pistas que permiten deducir la respuesta: se lee “entre líneas”.'],
+      ['¿Qué nivel de comprensión implica opinar y evaluar el texto?','Crítico-valorativo',['Explícito (literal)','Implícito (inferencial)','Silábico'],'Se juzga con argumentos.'],
       ['Subrayar ideas principales y hacer preguntas mientras lees son:','Estrategias de comprensión lectora',['Errores de lectura','Figuras literarias','Tipos de narrador'],'Ayudan a entender y recordar.'],
       ['Un relato realista es aquel que:','Presenta hechos que podrían ocurrir en el mundo real',['Tiene magia y criaturas','Siempre ocurre en el futuro','Está en verso'],'Ej.: relatos sobre mineros del carbón.'],
       ['Un relato de ciencia ficción se caracteriza por:','Imaginar avances científicos o tecnológicos y sus consecuencias',['Hablar solo del pasado','Tener hadas y dragones','Ser una noticia'],'Ej.: un relato sobre una colonia humana en Marte.'],
@@ -1790,6 +1818,139 @@ BANKS8.his = [
   ]},
 ];
 
+/* ============ ejercicios nuevos 8°C: estadística (Guías 11–13) y Taller de Geometría ============ */
+const sup = (b, e) => `${b}<sup>${e}</sup>`;
+function rightTriFig(a, b, c, unk){
+  // a = cateto horizontal, b = cateto vertical, c = hipotenusa; unk: 'a' | 'b' | 'c'
+  const W=260, H=170, x0=40, y0=140, sx=170, sy=110;
+  const lab = (k, v) => k===unk ? `<tspan class="unk">x</tspan>` : `${fmt(v)} cm`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Triángulo rectángulo">
+    <polygon class="g-shape" points="${x0},${y0} ${x0+sx},${y0} ${x0},${y0-sy}"/>
+    <path d="M${x0} ${y0-14} h14 v14" fill="none" stroke="var(--muted)" stroke-width="1.6"/>
+    <text class="g-lbl ${unk==='a'?'unk':''}" x="${x0+sx/2}" y="${y0+20}" text-anchor="middle">${lab('a',a)}</text>
+    <text class="g-lbl ${unk==='b'?'unk':''}" x="${x0-8}" y="${y0-sy/2+5}" text-anchor="end">${lab('b',b)}</text>
+    <text class="g-lbl ${unk==='c'?'unk':''}" x="${x0+sx/2+14}" y="${y0-sy/2-6}" text-anchor="start">${lab('c',c)}</text>
+  </svg>`;
+}
+const TRIPLES = [[3,4,5],[6,8,10],[5,12,13],[9,12,15],[8,15,17],[12,16,20],[7,24,25],[15,20,25],[20,21,29],[10,24,26]];
+const pt = (x, y) => `(${fmt(x)}, ${fmt(y)})`;
+
+Object.assign(SKILLS, {
+  est_conc: {name:'Conceptos de estadística', gen(){
+    const v=R(1,3);
+    if (v===1){
+      const vs=[['color favorito','Cualitativa nominal'],['preferencia de género musical','Cualitativa nominal'],['comuna donde vive','Cualitativa nominal'],['medalla obtenida (oro, plata o bronce)','Cualitativa ordinal'],['nivel de habilidad en un idioma (básico, intermedio, avanzado)','Cualitativa ordinal'],['grado de satisfacción (baja, media, alta)','Cualitativa ordinal'],['número de hermanos','Cuantitativa discreta'],['cantidad de pruebas desarrolladas en el colegio','Cuantitativa discreta'],['cantidad de mascotas','Cuantitativa discreta'],['estatura en cm','Cuantitativa continua'],['tiempo de espera en el doctor','Cuantitativa continua'],['masa corporal en kg','Cuantitativa continua']];
+      const [vr,t]=pick(vs);
+      return mc(t,['Cualitativa nominal','Cualitativa ordinal','Cuantitativa discreta','Cuantitativa continua'].filter(x=>x!==t),{prompt:`¿Qué tipo de variable es “${vr}”?`, explain:`Nominal = categorías sin orden. Ordinal = categorías con orden. Discreta = se cuenta. Continua = se mide y admite decimales. “${vr}” es <b>${t.toLowerCase()}</b>.`});
+    }
+    if (v===2){
+      const P=R(4,12)*100, n=R(2,8)*10, tema=pick(['su deporte favorito','cuántas horas duermen','su comida favorita','cómo llegan al colegio']);
+      const ok=`Los ${n} estudiantes encuestados`;
+      return mc(ok,[`Los ${P} estudiantes del colegio`,`${tema[0].toUpperCase()+tema.slice(1)}`,`El colegio completo`],{prompt:`En un colegio de ${P} estudiantes se encuesta a ${n} de ellos sobre ${tema}. ¿Cuál es la <b>muestra</b>?`, explain:`La población son los ${P} estudiantes; la muestra es el grupo que se estudia de verdad: <b>${ok.toLowerCase()}</b>.`});
+    }
+    const N=pick([400,500,600,800,1000]), n=pick([40,50,60,80,100]), k=R(2,Math.floor(n/2)), pct=round(k/n*100,1);
+    return num(pct,{unit:'%', tol:.11, prompt:`En un colegio hay ${fmt(N)} estudiantes. Se encuesta al azar a ${n} y ${k} dicen que usan lentes. ¿Qué porcentaje aproximado de estudiantes usa lentes?`, explain:`En la muestra: ${k} : ${n} · 100 = <b>${fmt(pct)}%</b>. Ese porcentaje se usa para estimar el de todo el colegio.`});
+  }},
+  est_frec: {name:'Tablas de frecuencia', gen(){
+    const vals=[0,1,2,3,4], f=vals.map(()=>R(1,9)), n=f.reduce((a,b)=>a+b,0), v=R(1,4), k=R(0,4);
+    const ctx=pick(['hermanos','mascotas por hogar','libros leídos en vacaciones']);
+    const data=shuffle(vals.flatMap((x,i)=>Array(f[i]).fill(x)));
+    if (v===1) return num(f[k],{prompt:`Respuestas sobre cantidad de ${ctx}:<br><span class="math" style="font-size:1.1rem;white-space:normal">${data.join(', ')}</span><br>¿Cuál es la <b>frecuencia absoluta</b> del dato ${k}?`, explain:`La frecuencia absoluta es cuántas veces aparece el dato: el ${k} aparece <b>${f[k]}</b> veces.`});
+    const tbl = (showF, hideIdx) => `<table class="tv"><tr><th>Dato</th><th>f</th><th>F</th></tr>${vals.map((x,i)=>{ const F=f.slice(0,i+1).reduce((a,b)=>a+b,0); return `<tr><td>${x}</td><td>${showF||i!==hideIdx?f[i]:'A'}</td><td>${showF&&i===hideIdx?'A':F}</td></tr>`; }).join('')}</table>`;
+    if (v===2){ const F=f.slice(0,k+1).reduce((a,b)=>a+b,0);
+      return num(F,{prompt:`En la tabla de cantidad de ${ctx}, ¿cuál es el valor de A (frecuencia acumulada)?`, figure:tbl(true,k), explain:`La frecuencia acumulada suma las frecuencias hasta ese dato: ${f.slice(0,k+1).join(' + ')} = <b>${F}</b>.`}); }
+    if (v===3){ const kk=R(1,4);
+      return num(f[kk],{prompt:`En la tabla de cantidad de ${ctx}, ¿cuál es el valor de A (frecuencia absoluta)?`, figure:tbl(false,kk), explain:`Resta las acumuladas: ${f.slice(0,kk+1).reduce((a,b)=>a+b,0)} − ${f.slice(0,kk).reduce((a,b)=>a+b,0)} = <b>${f[kk]}</b>.`}); }
+    const tot=pick([20,25,40,50]), a=R(1,tot-1), p=round(a/tot*100,2);
+    return num(p,{unit:'%', prompt:`En un curso de ${tot} estudiantes, ${a} prefieren el fútbol. ¿Cuál es la <b>frecuencia relativa porcentual</b> de esa respuesta?`, explain:`fr = ${a} : ${tot} = ${fmt(round(a/tot,4))}. Multiplica por 100: <b>${fmt(p)}%</b>.`});
+  }},
+  est_rango: {name:'Rango y comparación de medidas', gen(){
+    const v=R(1,3);
+    if (v===1){ const xs=Array.from({length:R(6,9)},()=>R(1,40)); const r=Math.max(...xs)-Math.min(...xs);
+      return num(r,{prompt:`¿Cuál es el <b>rango</b> de: <span class="math">${xs.join(', ')}</span>?`, explain:`Rango = dato mayor − dato menor = ${Math.max(...xs)} − ${Math.min(...xs)} = <b>${r}</b>.`}); }
+    if (v===2){ const it=[['al dato central cuando los datos están ordenados','Mediana'],['al dato que más se repite','Moda'],['a la suma de todos los datos dividida por la cantidad de datos','Media'],['a la diferencia entre el dato mayor y el menor','Rango']]; const [d,t]=pick(it);
+      return mc(t,['Mediana','Moda','Media','Rango'].filter(x=>x!==t),{prompt:`¿Qué medida corresponde ${d}?`, explain:`Media = promedio · Mediana = dato central · Moda = el que más se repite · Rango = mayor − menor. Respuesta: <b>${t}</b>.`}); }
+    const vals=[1,2,3,4], f=vals.map(()=>R(1,8)), n=f.reduce((a,b)=>a+b,0), s=vals.reduce((a,x,i)=>a+x*f[i],0), m=round(s/n,2);
+    return num(m,{tol:.011, prompt:`La tabla muestra cuántos talleres toman los estudiantes de un curso. ¿Cuál es el promedio? (redondea a dos decimales)`, figure:`<table class="tv"><tr><th>Talleres</th>${vals.map(x=>`<td>${x}</td>`).join('')}</tr><tr><th>f</th>${f.map(x=>`<td>${x}</td>`).join('')}</tr></table>`,
+      explain:`Multiplica cada dato por su frecuencia y suma: ${vals.map((x,i)=>`${x}·${f[i]}`).join(' + ')} = ${s}. Divide por el total (${n}): <b>${fmt(m)}</b>.`});
+  }},
+  geo_pot: {name:'Potencias', gen(){
+    const v=R(1,3);
+    if (v===1){ const b=R(2,10), e=b<=3?R(2,5):b<=5?R(2,4):R(2,3);
+      return num(b**e,{prompt:`Calcula:<br><span class="math">${sup(b,e)}</span>`, explain:`${sup(b,e)} = ${Array(e).fill(b).join(' · ')} = <b>${fmt(b**e)}</b>.`}); }
+    if (v===2){ const b=R(2,9), e=R(3,6), ok=sup(b,e);
+      return mc(ok,[sup(e,b),`${b} · ${e}`,`${b*e}`],{prompt:`Escribe como potencia:<br><span class="math">${Array(e).fill(b).join(' · ')}</span>`, explain:`Son ${e} factores iguales a ${b}: <b>${ok}</b>. La base es el factor que se repite y el exponente, cuántas veces.`}); }
+    const b=R(2,9); return num(1,{prompt:`¿Cuánto es <span class="math">${sup(b*R(2,40),0)}</span>?`, explain:`Toda potencia con exponente cero (y base distinta de 0) es igual a <b>1</b>.`});
+  }},
+  geo_prop: {name:'Propiedades de las potencias', gen(){
+    const v=R(1,4), b=R(2,9), m=R(2,9), n=R(1,6);
+    if (v===1) return num(m+n,{prompt:`Completa el exponente:<br><span class="math">${sup(b,m)} · ${sup(b,n)} = ${sup(b,'?')}</span>`, explain:`Igual base en una multiplicación: se suman los exponentes. ${m} + ${n} = <b>${m+n}</b>.`});
+    if (v===2){ const mm=m+n; return num(mm-n,{prompt:`Completa el exponente:<br><span class="math">${sup(b,mm)} : ${sup(b,n)} = ${sup(b,'?')}</span>`, explain:`Igual base en una división: se restan los exponentes. ${mm} − ${n} = <b>${mm-n}</b>.`}); }
+    if (v===3){ const p=R(2,4), q=R(2,4); return num(p*q,{prompt:`Completa el exponente:<br><span class="math">(${sup(b,p)})<sup>${q}</sup> = ${sup(b,'?')}</span>`, explain:`Potencia de una potencia: se multiplican los exponentes. ${p} · ${q} = <b>${p*q}</b>.`}); }
+    const a=R(2,6), c=R(2,6), e=R(2,3); return num(a*c,{prompt:`Completa la base:<br><span class="math">${sup(a,e)} · ${sup(c,e)} = ${sup('?',e)}</span>`, explain:`Igual exponente: se multiplican las bases. ${a} · ${c} = <b>${a*c}</b>, así que ${sup(a,e)} · ${sup(c,e)} = ${sup(a*c,e)}.`});
+  }},
+  geo_raiz: {name:'Raíz cuadrada', gen(){
+    const v=R(1,3);
+    if (v===1){ const k=R(2,20); return num(k,{prompt:`Calcula:<br><span class="math">√${k*k}</span>`, explain:`${k} · ${k} = ${k*k}, entonces √${k*k} = <b>${k}</b>.`}); }
+    if (v===2){ const k=R(3,15); return num(k,{unit:'cm', prompt:`Un cuadrado tiene un área de ${k*k} cm². ¿Cuánto mide su lado?`, explain:`Área = lado · lado, entonces lado = √${k*k} = <b>${k} cm</b>.`}); }
+    let n; do{ n=R(5,150); }while(Number.isInteger(Math.sqrt(n))); const lo=Math.floor(Math.sqrt(n)), ok=`Entre ${lo} y ${lo+1}`;
+    return mc(ok,[`Entre ${lo-1} y ${lo}`,`Entre ${lo+1} y ${lo+2}`,`Entre ${Math.floor(n/2)} y ${Math.floor(n/2)+1}`],{prompt:`¿Entre qué números naturales está <span class="math">√${n}</span>?`, explain:`${lo}² = ${lo*lo} y ${lo+1}² = ${(lo+1)**2}. Como ${lo*lo} &lt; ${n} &lt; ${(lo+1)**2}, la raíz está <b>entre ${lo} y ${lo+1}</b>.`});
+  }},
+  pit_hip: {name:'Calcular la hipotenusa', gen(){
+    const [a,b,c]=pick(TRIPLES);
+    return num(c,{unit:'cm', prompt:`¿Cuánto mide la hipotenusa x?`, figure:rightTriFig(a,b,c,'c'), explain:`x² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${c*c}. Entonces x = √${c*c} = <b>${c} cm</b>.`});
+  }},
+  pit_cat: {name:'Calcular un cateto', gen(){
+    const [a,b,c]=pick(TRIPLES), unk=pick(['a','b']), known=unk==='a'?b:a, ans=unk==='a'?a:b;
+    return num(ans,{unit:'cm', prompt:`¿Cuánto mide el cateto x?`, figure:rightTriFig(a,b,c,unk), explain:`Para un cateto se resta: x² = ${c}² − ${known}² = ${c*c} − ${known*known} = ${ans*ans}. Entonces x = <b>${ans} cm</b>.`});
+  }},
+  pit_prob: {name:'Problemas con Pitágoras', gen(){
+    const v=R(1,3), [a,b,c]=pick(TRIPLES);
+    if (v===1) return num(c,{unit:'cm', prompt:`Un rectángulo mide ${a} cm de ancho y ${b} cm de largo. ¿Cuánto mide su diagonal?`, explain:`La diagonal es la hipotenusa: √(${a}² + ${b}²) = √${c*c} = <b>${c} cm</b>.`});
+    if (v===2) return num(a,{unit:'m', prompt:`Una escalera de ${c} m está apoyada en una pared y llega a ${b} m de altura. ¿A qué distancia de la pared está el pie de la escalera?`, explain:`La escalera es la hipotenusa: √(${c}² − ${b}²) = √(${c*c} − ${b*b}) = √${a*a} = <b>${a} m</b>.`});
+    const yes=Math.random()<.5, s=yes?[a,b,c]:[a,b,c+R(1,3)], ok=yes?'Sí, es rectángulo':'No, no es rectángulo';
+    return mc(ok,[yes?'No, no es rectángulo':'Sí, es rectángulo'],{prompt:`Un triángulo tiene lados de ${s[0]} cm, ${s[1]} cm y ${s[2]} cm. ¿Es un triángulo rectángulo?`, explain:`${s[0]}² + ${s[1]}² = ${s[0]**2+s[1]**2} y ${s[2]}² = ${s[2]**2}. ${yes?'Son iguales: cumple Pitágoras.':'No son iguales: no cumple Pitágoras.'} <b>${ok}</b>.`});
+  }},
+  cuer_area: {name:'Área de prismas', gen(){
+    if (Math.random()<.4){ const a=R(2,12); return num(6*a*a,{unit:'cm²', prompt:`¿Cuál es el área total de un cubo de arista ${a} cm?`, explain:`El cubo tiene 6 caras cuadradas: 6 · ${a}² = 6 · ${a*a} = <b>${6*a*a} cm²</b>.`}); }
+    const l=R(3,15), w=R(2,10), h=R(2,10), A=2*(l*w+l*h+w*h);
+    return num(A,{unit:'cm²', prompt:`¿Cuánto papel se necesita, como mínimo, para envolver una caja de ${l} cm × ${w} cm × ${h} cm?`, explain:`A = 2(${l}·${w} + ${l}·${h} + ${w}·${h}) = 2(${l*w} + ${l*h} + ${w*h}) = <b>${A} cm²</b>.`});
+  }},
+  cil_area: {name:'Área del cilindro', gen(){
+    const r=R(1,8), h=R(2,15), lat=round(2*3.14*r*h,2), tot=round(2*3.14*r*r+lat,2);
+    if (Math.random()<.5) return num(lat,{tol:.02, unit:'cm²', prompt:`¿Cuál es el área lateral (manto) de un cilindro de radio ${r} cm y altura ${h} cm? (π ≈ 3,14)`, explain:`Área lateral = 2 · π · r · h = 2 · 3,14 · ${r} · ${h} = <b>${fmt(lat)} cm²</b>.`});
+    return num(tot,{tol:.02, unit:'cm²', prompt:`¿Cuál es el área total de un cilindro de radio ${r} cm y altura ${h} cm? (π ≈ 3,14)`, explain:`2 bases: 2 · 3,14 · ${r}² = ${fmt(round(2*3.14*r*r,2))}. Manto: 2 · 3,14 · ${r} · ${h} = ${fmt(lat)}. Total: <b>${fmt(tot)} cm²</b>.`});
+  }},
+  cuer_vol: {name:'Volumen de prismas y cilindros', gen(){
+    const v=R(1,3);
+    if (v===1){ const l=R(2,12), w=R(2,10), h=R(2,12); return num(l*w*h,{unit:'cm³', prompt:`¿Cuál es el volumen de un prisma de base rectangular de ${l} cm × ${w} cm y altura ${h} cm?`, explain:`V = área basal · altura = (${l} · ${w}) · ${h} = ${l*w} · ${h} = <b>${l*w*h} cm³</b>.`}); }
+    if (v===2){ let b,t; do{ b=R(3,12); t=R(2,10); }while((b*t)%2); const h=R(3,15), AB=b*t/2;
+      return num(AB*h,{unit:'cm³', prompt:`Un prisma tiene base triangular de base ${b} cm y altura ${t} cm. Si el prisma mide ${h} cm de alto, ¿cuál es su volumen?`, explain:`Área basal = ${b} · ${t} : 2 = ${AB} cm². V = ${AB} · ${h} = <b>${AB*h} cm³</b>.`}); }
+    const r=R(1,6), h=R(2,12), V=round(3.14*r*r*h,2);
+    return num(V,{tol:.02, unit:'cm³', prompt:`¿Cuál es el volumen de un cilindro de radio ${r} cm y altura ${h} cm? (π ≈ 3,14)`, explain:`V = π · r² · h = 3,14 · ${r*r} · ${h} = <b>${fmt(V)} cm³</b>.`});
+  }},
+  tras_pt: {name:'Trasladar un punto', gen(){
+    const x=R(-6,6), y=R(-6,6), a=nz(-7,7), b=nz(-7,7), ok=`P'${pt(x+a,y+b)}`;
+    return mc(ok,[`P'${pt(x-a,y-b)}`,`P'${pt(x+b,y+a)}`,`P'${pt(x+a,y-b)}`,`P'${pt(a,b)}`],{prompt:`Al punto P${pt(x,y)} se le aplica el vector de traslación T${pt(a,b)}. ¿Cuáles son las coordenadas de P'?`, explain:`P'(x + a, y + b) = (${fmt(x)} + ${par(a)}, ${fmt(y)} + ${par(b)}) = <b>${pt(x+a,y+b)}</b>.`});
+  }},
+  tras_vec: {name:'Encontrar el vector de traslación', gen(){
+    const x=R(-6,6), y=R(-6,6), a=nz(-9,9), b=nz(-9,9), ok=`T${pt(a,b)}`;
+    return mc(ok,[`T${pt(-a,-b)}`,`T${pt(b,a)}`,`T${pt(x+a,y+b)}`,`T${pt(a,-b)}`],{prompt:`El punto ${pt(x,y)} se trasladó al punto ${pt(x+a,y+b)}. ¿Cuál es el vector de traslación?`, explain:`T = (x' − x, y' − y) = (${fmt(x+a)} − ${par(x)}, ${fmt(y+b)} − ${par(y)}) = <b>${pt(a,b)}</b>.`});
+  }},
+  tras_conc: {name:'Conceptos de traslación', gen(){
+    if (Math.random()<.5){
+      const a=nz(-8,8), b=nz(-8,8), ok=`${Math.abs(a)} unidad${Math.abs(a)===1?'':'es'} a la ${a>0?'derecha':'izquierda'} y ${Math.abs(b)} hacia ${b>0?'arriba':'abajo'}`;
+      const wrong=(sa,sb)=>`${Math.abs(a)} unidad${Math.abs(a)===1?'':'es'} a la ${sa>0?'derecha':'izquierda'} y ${Math.abs(b)} hacia ${sb>0?'arriba':'abajo'}`;
+      return mc(ok,[wrong(-a,b),wrong(a,-b),wrong(-a,-b)],{prompt:`¿Cómo se desplaza una figura con el vector T${pt(a,b)}?`, explain:`La primera coordenada es horizontal (positiva = derecha) y la segunda vertical (positiva = arriba): <b>${ok}</b>.`});
+    }
+    return pick([
+      ()=>mc('Su forma y su tamaño',['Su posición','Sus coordenadas','El lugar donde está'],{prompt:`En una transformación isométrica, ¿qué NO cambia en la figura?`, explain:`Isometría significa "igual medida": la figura mantiene su <b>forma y tamaño</b>; solo cambia su posición.`}),
+      ()=>mc('Rectas paralelas entre sí',['Círculos alrededor de un punto','Rectas que se cortan en un punto','Curvas distintas para cada punto'],{prompt:`Al trasladar una figura, todos sus puntos se mueven describiendo…`, explain:`En una traslación todos los puntos se desplazan lo mismo, en <b>rectas paralelas entre sí</b>.`}),
+      ()=>mc('Sentido, dirección y magnitud',['Color, forma y tamaño','Radio, centro y ángulo','Base, altura y área'],{prompt:`¿Qué tres elementos describen una traslación?`, explain:`Una traslación tiene <b>sentido</b> (hacia dónde), <b>dirección</b> (horizontal, vertical u oblicua) y <b>magnitud</b> (cuánto se mueve).`}),
+    ])();
+  }},
+});
+
 /* ============ cursos y estudiantes ============ */
 const MATH = {
   '8C': [
@@ -1800,7 +1961,11 @@ const MATH = {
     {t:'Ecuaciones', c:'#c43b6c', d:'#952450', src:'Guía N°9', L:[['Uno y dos pasos',['ecu_1']],['x a ambos lados',['ecu_2']],['Problemas',['ecu_prob']]]},
     {t:'Inecuaciones', c:'#1f8a4c', d:'#146536', src:'PPT Inecuaciones', L:[['Símbolos y verificación',['ine_sim']],['Resolver',['ine_sol']],['Intervalos y recta',['ine_int']]]},
     {t:'Función lineal y afín', c:'#3a7bbf', d:'#255a91', src:'PPT y guías complementarias 00–01', L:[['Evaluar',['fun_eval']],['Pendiente y posición',['fun_id']],['Leer gráficos',['fun_graf']]]},
-    {t:'Estadística', c:'#a8521f', d:'#7e3a12', src:'PPT Conceptos básicos y Tipos de gráficos', L:[['Conceptos básicos',['est_conc']],['Gráficos',['est_graf']],['Media, mediana y moda',['est_mtc']]]},
+    {t:'Estadística', c:'#a8521f', d:'#7e3a12', src:'PPT Conceptos básicos y Tipos de gráficos; Guías N°11, N°12 y N°13', L:[['Conceptos básicos',['est_conc']],['Tablas de frecuencia',['est_frec']],['Gráficos',['est_graf']],['Media, mediana, moda y rango',['est_mtc','est_rango']]]},
+    {t:'Potencias y raíz cuadrada', c:'#2c62d8', d:'#1d48a6', src:'Taller de Geometría: Guías N°1 Potencias y N°2 Raíz cuadrada', L:[['Potencias',['geo_pot']],['Propiedades',['geo_prop']],['Raíz cuadrada',['geo_raiz']]]},
+    {t:'Teorema de Pitágoras', c:'#0f8f8a', d:'#0a6a66', src:'Taller de Geometría: PPT Teorema de Pitágoras', L:[['Hipotenusa',['pit_hip']],['Catetos',['pit_cat']],['Problemas',['pit_prob']]]},
+    {t:'Área y volumen de cuerpos', c:'#d9771a', d:'#a85808', src:'Taller de Geometría: Guías N°4, N°5 y N°6', L:[['Área de prismas',['cuer_area']],['Área del cilindro',['cil_area']],['Volumen',['cuer_vol']]]},
+    {t:'Traslación', c:'#7b4fd6', d:'#5a33ad', src:'Taller de Geometría: PPT Traslación (guía nueva)', L:[['Trasladar puntos',['tras_pt']],['Vector de traslación',['tras_vec']],['Conceptos',['tras_conc']]]},
   ],
   '6C': [
     {t:'Números naturales', c:'#2c62d8', d:'#1d48a6', src:'Guía 1 Numeración', L:[['Múltiplos y divisores',['n6_mult']],['Primos y compuestos',['n6_primo']],['Mínimo común múltiplo',['n6_mcm']],['Operaciones combinadas',['n6_comb']]]},
@@ -2047,21 +2212,813 @@ function renderPath(){
   <nav class="subjects" aria-label="Asignaturas">${SUBJ.map(x=>`<button class="subj" data-s="${x.id}" aria-pressed="${x.id===sj}" style="--sc:${x.c}"><span>${x.t}</span><small>${IC.star.replace('<svg','<svg class="ico"')} ${subStars(x.id)}/${subMax(x.id)}</small></button>`).join('')}</nav>
   ${COURSES[s.cc][sj].map((u,ui)=>{ const st=u.L.reduce((a,l)=>a+((S.lessons[l.id]||{}).stars||0),0);
     return `<section class="unit" style="--uc:${u.c};--ud:${u.d}">
-      <div class="uhead"><div><div class="n">${SUBJ_T[sj]} · Unidad ${ui+1}</div><h2>${u.t}</h2><div class="src">Basado en: ${u.src}</div></div>
+      <div class="uhead"><div><div class="n">${SUBJ_T[sj]} · Unidad ${ui+1}</div><h2>${u.t}</h2><div class="src">Basado en: ${u.src}</div>${REVIEWS[`${s.cc.toLowerCase()}-${sj}-u${ui+1}`]?`<button class="rvb" data-rv="${s.cc.toLowerCase()}-${sj}-u${ui+1}">Ver repaso</button>`:''}</div>
       <div class="meter">${IC.star.replace('<svg','<svg class="ico"')} ${st}/${u.L.length*3}</div></div>
       <div class="nodes">${u.L.map(l=>{ const n=(S.lessons[l.id]||{}).stars||0, dx=offs[(k++)%offs.length];
         return `<button class="node ${n?'':'fresh'}" style="--dx:${dx}px" data-l="${l.id}" aria-label="${l.t}, ${n} de 3 estrellas"><span class="disc">${n===3?IC.crown:IC.play}</span>${starsHtml(n)}<span class="lbl">${l.t}</span></button>`; }).join('')}</div>
     </section>`; }).join('')}`;
   app.querySelectorAll('.node').forEach(b=>b.onclick=()=>startLesson(b.dataset.l));
+  app.querySelectorAll('[data-rv]').forEach(b=>b.onclick=()=>showReview(b.dataset.rv, ()=>{ view='path'; render(); }, {go:'Volver a la ruta'}));
   app.querySelectorAll('.subj').forEach(b=>b.onclick=()=>{ setSubj(b.dataset.s); renderPath(); });
   if (weak.length) $('#bWeak').onclick=()=>startLesson('repaso', weak);
 }
 
+/* ============ repasos por unidad (basados en las guías del colegio) ============ */
+const REVIEWS = {
+  '8c-mat-u1': {
+    subj:'Matemáticas', n:1, t:'Números enteros', c:'#2c62d8',
+    intro:'¡Guau! Antes de practicar, repasemos lo esencial de los números enteros. Son solo dos minutos.',
+    src:'Clase 0 – Números Enteros; Guías N°0, N°1, N°2 y N°4 (Matemáticas 8°C)',
+    cards:[
+      {h:'¿Qué son los números enteros?', b:`
+        <p>Son los números <b>Z = {…, −3, −2, −1, 0, 1, 2, 3, …}</b>: los naturales, el cero y los negativos.</p>
+        <p>En la recta numérica, los negativos están a la <b>izquierda del 0</b>. Mientras más a la izquierda, más pequeño es el número.</p>
+        <p class="rule">Ejemplo: −3 °C es más frío que 2 °C, porque −3 está a la izquierda de 2.</p>`},
+      {h:'Sumar y restar', b:`
+        <p class="rule">Signos iguales SE SUMAN y se conserva el signo en común.</p>
+        <p class="exm">−5 + −3 = −8</p>
+        <p class="rule">Signos diferentes SE RESTAN y se conserva el signo del número mayor (el que está más lejos del 0).</p>
+        <p class="exm">−9 + 4 = −5 &nbsp;·&nbsp; 9 + −4 = 5</p>
+        <p class="rule">Restar es sumar el opuesto: el menos de afuera cambia el signo del número.</p>
+        <p class="exm">6 − (−8) = 6 + 8 = 14</p>
+        <p>Si hay varias operaciones, resuelve siempre de <b>izquierda a derecha</b>.</p>`},
+      {h:'Multiplicar y dividir: regla de los signos', b:`
+        <p>Se opera como con los números naturales, pero cuidando el signo:</p>
+        <div class="signs"><span>+ · + = +</span><span>− · − = +</span><span>+ · − = −</span><span>− · + = −</span></div>
+        <p class="rule">Signos iguales dan positivo. Signos diferentes dan negativo.</p>
+        <p class="exm">−3 · −4 = 12 &nbsp;·&nbsp; 3 · −4 = −12</p>
+        <p>La regla funciona <b>igual para la división</b>:</p>
+        <p class="exm">−12 : −3 = 4 &nbsp;·&nbsp; 12 : −3 = −4</p>`},
+      {h:'Operaciones combinadas: PAPOMUDAS', b:`
+        <p>El orden para resolver es:</p>
+        <ol class="steps num"><li><b>PA</b>réntesis</li><li><b>PO</b>tencias</li><li><b>MU</b>ltiplicación y <b>DI</b>visión, de izquierda a derecha</li><li><b>A</b>dición y <b>S</b>ustracción, de izquierda a derecha</li></ol>
+        <p>Ejemplo resuelto paso a paso:</p>
+        <ul class="steps"><li class="exm">8 − 3 · (−2)</li><li>Primero la multiplicación: 3 · (−2) = −6</li><li class="exm">8 − (−6) = 8 + 6 = 14</li></ul>`},
+    ],
+    check:['¿Cuánto es (−6) · (−2) + (−5)?','7',['−17','17','−7'],'Primero la multiplicación: (−6) · (−2) = 12, porque signos iguales dan positivo. Luego 12 + (−5): signos diferentes se restan y queda el signo del 12. Resultado: <b>7</b>.'],
+  },
+  '8c-len-u1': {
+    subj:'Lenguaje', n:1, t:'Mundo narrativo', c:'#c43b6c',
+    intro:'¡Guau! Repasemos cómo funciona un relato antes de responder preguntas.',
+    src:'Clase 1 Mundo Narrativo; Guía N°1 Elementos del mundo narrativo; Clase 2 Ficción y verosimilitud; Clase 1 Niveles y estrategias (Lengua y Literatura 8°C)',
+    cards:[
+      {h:'Autor y narrador', b:`
+        <p>El <b>autor</b> es la persona real que crea la historia.</p>
+        <p>El <b>narrador</b> es la voz ficticia que cuenta la historia. Es parte del mundo narrado, aunque use "yo".</p>
+        <p class="rule">El autor existe en la vida real; el narrador existe solo dentro del texto.</p>`},
+      {h:'Tipos de narrador', b:`
+        <table class="rv"><tr><th colspan="2">Externo: no participa de la historia</th></tr>
+          <tr><td><b>Omnisciente</b></td><td>Sabe todo lo que sucede y sucederá, incluidos los pensamientos de los personajes.</td></tr>
+          <tr><td><b>Objetivo</b></td><td>Relata solo lo que observa; no conoce lo que piensan los personajes.</td></tr>
+          <tr><th colspan="2">Interno: participa de la historia</th></tr>
+          <tr><td><b>Protagonista</b></td><td>Cuenta su propia historia; tiene el papel principal.</td></tr>
+          <tr><td><b>Testigo</b></td><td>Participa en la historia, pero como observador.</td></tr></table>`},
+      {h:'Acciones, conflicto y personajes', b:`
+        <ul><li><b>Acciones principales:</b> las más importantes, desarrollan la historia.</li>
+          <li><b>Acciones secundarias:</b> acciones menores que ayudan a unir las principales.</li>
+          <li><b>Conflicto:</b> el problema que pone en movimiento a los personajes y cambia el curso de la historia. Puede haber varios, pero siempre hay uno central.</li></ul>
+        <p>Los <b>personajes</b> se clasifican:</p>
+        <ul><li>Según su evolución: <b>dinámico</b> (cambia, crece o madura) o <b>estático</b> (se mantiene igual).</li>
+          <li>Según su importancia: <b>principales</b>, <b>secundarios</b> (complementan al principal) e <b>incidentales</b> (aparecen en un momento puntual).</li></ul>
+        <p class="rule">En Oliver Twist, el conflicto central aparece cuando Oliver descubre que vive con una pandilla de ladrones y lo acusan de un robo que no cometió.</p>`},
+      {h:'Ficción y verosimilitud', b:`
+        <p>Un relato es <b>ficción</b>: un mundo creado por el autor. El lector hace un <b>pacto de credibilidad</b>: acepta lo ficticio como posible, aunque sabe que no es real.</p>
+        <p class="rule">Verosímil = creíble, porque el relato es coherente con las reglas de su propio mundo.</p>
+        <p>En "El bigote del tigre", desde el inicio hay un sabio que hace pociones mágicas. Por eso es creíble que una mujer le arranque un bigote al tigre y que este no se enoje.</p>`},
+      {h:'Niveles de comprensión', b:`
+        <ul><li><b>Explícito (literal):</b> la respuesta está escrita en el texto y se puede subrayar.</li>
+          <li><b>Implícito (inferencial):</b> la respuesta no está escrita; se deduce a partir de pistas.</li></ul>
+        <p class="rule">"Marcela dibujó dos tomates maduros y los pintó con témpera."</p>
+        <p>¿Cuántos tomates dibujó? → <b>dos</b> (explícito). ¿De qué color los pintó? → <b>rojo</b>: si estaban maduros, se deduce (implícito).</p>`},
+    ],
+    check:['Un narrador que NO participa en la historia y cuenta solo lo que se ve, sin saber lo que piensan los personajes, es:','Externo objetivo',['Externo omnisciente','Interno testigo','Interno protagonista'],'No participa, así que es <b>externo</b>. Como no conoce los pensamientos y solo relata lo que observa, es <b>objetivo</b>. El omnisciente, en cambio, sabe incluso lo que piensan.'],
+  },
+};
+/* ============ repasos: resto de las unidades (basados en las guías del Drive) ============ */
+const rv = (subj, n, t, c, intro, src, cards, check) => ({subj, n, t, c, intro, src, cards, check});
+const C = (h, b) => ({h, b});
+const TALLER_GEO = [
+  C('¿Qué es una región?', `<p>Una <b>región</b> es un espacio con características comunes que lo diferencian de otros.</p>
+    <ul><li><b>Natural:</b> se define por el clima, el relieve o la vegetación.</li>
+    <li><b>Político-administrativa:</b> la define el Estado para administrar, como las 16 regiones de Chile.</li>
+    <li><b>Cultural:</b> se define por lengua, tradiciones o costumbres comunes.</li></ul>`),
+  C('Índice de Desarrollo Humano (IDH)', `<p>Lo creó el <b>PNUD</b> y mide tres cosas: <b>salud</b> (esperanza de vida), <b>educación</b> e <b>ingresos</b>.</p>
+    <p class="rule">Va de 0 a 1: mientras más cerca de 1, mayor desarrollo.</p>
+    <p>Chile tiene uno de los IDH más altos de América del Sur, pero también una gran <b>desigualdad de ingresos</b>.</p>`),
+  C('Chile productivo y la Región del Biobío', `<ul><li><b>Norte:</b> minería del cobre y del litio, y gran potencial solar.</li>
+    <li><b>Zona central:</b> agricultura, vino y fruta de exportación.</li>
+    <li><b>Biobío:</b> industria forestal y puertos (Talcahuano, San Vicente, Coronel). Su capital es Concepción y sus provincias son Concepción, Arauco y Biobío.</li>
+    <li><b>Sur austral:</b> salmonicultura.</li></ul>
+    <p class="rule">Desarrollo sustentable: satisfacer lo que necesitamos hoy sin dañar lo que necesitarán las futuras generaciones.</p>`),
+  C('Herramientas del geógrafo', `<ul><li><b>Escala:</b> relación entre la distancia en el mapa y la real (ej. 1:100.000).</li>
+    <li><b>Rosa de los vientos:</b> indica los puntos cardinales.</li>
+    <li><b>Maqueta de relieve:</b> representación a escala del terreno en 3D.</li>
+    <li><b>Infografía geográfica:</b> mapas, datos e imágenes de un territorio.</li></ul>`),
+];
+const TALLER_GEO_CHECK = ['¿Qué tres aspectos mide el Índice de Desarrollo Humano?','Salud, educación e ingresos',['Población, superficie y clima','Cantidad de autos, casas y calles','Exportaciones, importaciones y turismo'],'El IDH combina <b>salud</b> (esperanza de vida), <b>educación</b> e <b>ingresos</b>, en una escala de 0 a 1.'];
+
+Object.assign(REVIEWS, {
+/* ---------- 8° Matemáticas ---------- */
+'8c-mat-u2': rv('Matemáticas',2,'Números racionales','#0f8f8a',
+  '¡Guau! Repasemos fracciones y decimales antes de practicar.',
+  'Clase 1 – Números Racionales; Guía N°3; Fichas MC 2, 3 y 4 (Matemáticas 8°C)',
+  [C('¿Qué son los racionales (ℚ)?', `<p>Son los números que se pueden escribir como fracción <b>a/b</b>, con a y b enteros y <b>b ≠ 0</b>.</p>
+     <p>Incluyen a los naturales (ℕ) y a los enteros (ℤ): todo entero tiene denominador 1, por ejemplo 5 = 5/1.</p>
+     <p>Los decimales <b>finitos</b> (0,5), <b>periódicos</b> (3,777…) y <b>semiperiódicos</b> (2,1666…) también son racionales.</p>`),
+   C('Amplificar, simplificar y sumar', `<p class="rule">Amplificar o simplificar: multiplicar o dividir numerador y denominador por el mismo número.</p>
+     <p class="exm">2/5 = 8/20 &nbsp;·&nbsp; 150/120 = 15/12 = 5/4</p>
+     <p class="rule">Igual denominador: se suman o restan los numeradores. Distinto denominador: se usa el m.c.m.</p>
+     <ul class="steps"><li class="exm">1/2 + 1/3 + 1/6</li><li>m.c.m.(2, 3, 6) = 6</li><li class="exm">3/6 + 2/6 + 1/6 = 6/6 = 1</li></ul>`),
+   C('Multiplicar y dividir', `<p class="rule">Multiplicar: numerador por numerador y denominador por denominador.</p>
+     <p class="exm">7/2 · 4/3 = 28/6 = 14/3</p>
+     <p class="rule">Dividir: multiplicar por el inverso del segundo número.</p>
+     <p class="exm">3/5 : 2/6 = 3/5 · 6/2 = 18/10 = 9/5</p>
+     <p>Con decimales: multiplica sin comas y luego cuenta las cifras decimales: 0,3 · 0,4 = 0,12.</p>`),
+   C('Comparar y transformar', `<p>Para pasar de fracción a decimal, divide el numerador por el denominador: 3/4 = 3 : 4 = 0,75.</p>
+     <p>Para pasar un decimal finito a fracción, escribe el número sin coma sobre una potencia de 10: 0,25 = 25/100 = 1/4.</p>
+     <p class="rule">Para comparar decimales, mira primero los décimos: 1,8 &gt; 1,75, aunque 1,75 tenga más cifras.</p>`)],
+  ['¿Cuánto es 2/3 : 4/9?','3/2',['8/27','6/12','2/3'],'Dividir es multiplicar por el inverso: 2/3 · 9/4 = 18/12 = <b>3/2</b>.']),
+
+'8c-mat-u3': rv('Matemáticas',3,'Variación porcentual','#d9771a',
+  '¡Guau! Repasemos porcentajes, descuentos e IVA.',
+  'PPT 3 – Variación Porcentual; Ficha MC 1 (Matemáticas 8°C)',
+  [C('¿Qué es un porcentaje?', `<p>Un porcentaje (%) es una fracción de un total dividido en <b>100 partes iguales</b>.</p>
+     <p class="rule">Para calcular el a% de un número: número · a : 100.</p>
+     <p class="exm">20% de 1.000 = 1.000 · 20 : 100 = 200</p>`),
+   C('Variación porcentual', `<p>Mide cuánto cambió un valor respecto del inicial, en porcentaje.</p>
+     <p class="rule">VP = (Valor final − Valor inicial) : Valor inicial · 100</p>
+     <ul class="steps"><li>Un producto pasa de $50.000 a $65.000.</li><li>(65.000 − 50.000) : 50.000 · 100</li><li class="exm">= 30% de aumento</li></ul>
+     <p>Si el resultado es negativo, es una <b>disminución</b>: de $120.000 a $90.000 es −25%.</p>`),
+   C('Descuentos e IVA', `<p class="rule">Un descuento del a% equivale a pagar el (100 − a)% del precio.</p>
+     <p class="exm">$1.000 con 20% de descuento → pagas el 80% = $800</p>
+     <p class="rule">El IVA en Chile es 19%: precio final = precio neto · 1,19.</p>
+     <p class="exm">$10.000 + 19% = $11.900</p>`),
+   C('Ofertas en palabras', `<ul><li>"Lleve 4 y pague 3" → regalan 1 de 4 = <b>25%</b> de descuento.</li>
+     <li>"Lleve 6 y pague 5" → 1 de 6 ≈ <b>16,67%</b>.</li>
+     <li>"Rebaja en un tercio" ≈ <b>33,33%</b> · "en un quinto" = <b>20%</b> · "a la mitad" = <b>50%</b>.</li></ul>`)],
+  ['Una tienda tenía 500 clientes al mes y ahora tiene 450. ¿Cuál es la variación porcentual?','−10%',['−50%','10%','−45%'],'(450 − 500) : 500 · 100 = −50 : 500 · 100 = <b>−10%</b>: una disminución del 10%.']),
+
+'8c-mat-u4': rv('Matemáticas',4,'Expresiones algebraicas','#7b4fd6',
+  '¡Guau! Repasemos el lenguaje del álgebra.',
+  'Guías N°6, N°7 y N°8 (Matemáticas 8°C)',
+  [C('Partes de un término algebraico', `<p>En <b>−3ab</b> se distinguen:</p>
+     <ul><li><b>Signo:</b> −</li><li><b>Coeficiente numérico:</b> 3</li><li><b>Factor literal:</b> ab</li><li><b>Grado:</b> suma de los exponentes = 1 + 1 = 2</li></ul>
+     <p>Según la cantidad de términos: <b>monomio</b> (1), <b>binomio</b> (2), <b>trinomio</b> (3), <b>polinomio</b> (más de uno).</p>`),
+   C('Valorizar', `<p>Valorizar es <b>reemplazar las letras por números</b> y calcular.</p>
+     <ul class="steps"><li>Si x = −2 e y = 3, ¿cuánto vale 4x + 2y − 1?</li><li>4 · (−2) + 2 · 3 − 1</li><li class="exm">= −8 + 6 − 1 = −3</li></ul>`),
+   C('Términos semejantes', `<p>Son los que tienen el <b>mismo factor literal</b> (mismas letras con los mismos exponentes). Solo esos se suman o restan.</p>
+     <p class="exm">5x + 3y − 2x + y = 3x + 4y</p>
+     <p class="rule">x e y no se juntan: 3x + 4y ya está reducido.</p>`),
+   C('Multiplicar', `<p class="rule">Se multiplican los coeficientes y se suman los exponentes de letras iguales.</p>
+     <p class="exm">3x²y · (−5xy) = −15x³y²</p>
+     <p class="rule">Monomio por polinomio: propiedad distributiva.</p>
+     <p class="exm">−2y · (8x − 4y) = −16xy + 8y²</p>`)],
+  ['Reduce: 7a − 2b − 3a + 5b','4a + 3b',['4a − 3b','10a + 3b','7ab'],'Términos en a: 7a − 3a = 4a. Términos en b: −2b + 5b = 3b. Resultado: <b>4a + 3b</b>.']),
+
+'8c-mat-u5': rv('Matemáticas',5,'Ecuaciones','#c43b6c',
+  '¡Guau! Una ecuación es como una balanza en equilibrio. Repasemos.',
+  'Guía N°9 – Ecuaciones (Matemáticas 8°C)',
+  [C('¿Qué es una ecuación?', `<p>Es una <b>igualdad</b> entre dos expresiones que tiene uno o más valores desconocidos, llamados <b>incógnitas</b>.</p>
+     <p class="rule">Funciona como una balanza en equilibrio: lo que hagas a un lado, hazlo también al otro.</p>`),
+   C('Reglas para resolver', `<ul><li><b>Regla de la adición:</b> puedes sumar o restar el mismo número en ambos lados.</li>
+     <li><b>Regla de la multiplicación:</b> puedes multiplicar o dividir ambos lados por el mismo número (distinto de 0).</li></ul>
+     <ul class="steps"><li class="exm">5x + 12 = 37</li><li>Resto 12 en ambos lados: 5x = 25</li><li>Divido por 5: <b>x = 5</b></li></ul>`),
+   C('x a ambos lados y paréntesis', `<ul class="steps"><li class="exm">2x + 7 = 12 − 3x</li><li>Junto las x a la izquierda: 2x + 3x = 12 − 7</li><li class="exm">5x = 5 → x = 1</li></ul>
+     <p>Si hay paréntesis, primero aplica la distributiva: 2(x − 6) = 2x − 12.</p>`),
+   C('Problemas', `<p>1) Llama <b>x</b> a lo que no sabes. 2) Escribe la ecuación. 3) Resuélvela. 4) Comprueba.</p>
+     <p class="rule">"El doble de un número más 4" → 2x + 4 &nbsp;·&nbsp; "30 menos que su padre" → x − 30</p>
+     <p class="exm">Libro + triple del libro = $10.500 → x + 3x = 10.500 → x = $2.625</p>`)],
+  ['Resuelve: 8x − 19 = 45','x = 8',['x = 3,25','x = 26','x = 64'],'Suma 19 en ambos lados: 8x = 64. Divide por 8: <b>x = 8</b>.']),
+
+'8c-mat-u6': rv('Matemáticas',6,'Inecuaciones','#1f8a4c',
+  '¡Guau! Las inecuaciones se parecen a las ecuaciones, con una trampa. Repasemos.',
+  'PPT – Introducción a las Inecuaciones Lineales; Actividad inecuaciones de un paso (Matemáticas 8°C)',
+  [C('Símbolos', `<div class="signs"><span>&lt; menor que</span><span>&gt; mayor que</span><span>≤ menor o igual</span><span>≥ mayor o igual</span></div>
+     <p>Para verificar si un valor cumple, <b>reemplázalo</b>: si x = 8, ¿x + 1 &gt; 5? → 9 &gt; 5, verdadero.</p>`),
+   C('Resolver', `<p>Se despeja la x igual que en una ecuación.</p>
+     <ul class="steps"><li class="exm">3x − 4 ≥ 8</li><li>Sumo 4: 3x ≥ 12</li><li>Divido por 3: <b>x ≥ 4</b></li></ul>
+     <p class="rule">¡Ojo! Si multiplicas o divides por un número NEGATIVO, el símbolo se da vuelta.</p>
+     <p class="exm">−3x &gt; 6 → x &lt; −2</p>`),
+   C('Recta numérica e intervalos', `<table class="rv"><tr><td><b>&lt; o &gt;</b></td><td>Círculo <b>abierto</b>: el número no se incluye. Corchete hacia afuera: ]a, +∞[</td></tr>
+     <tr><td><b>≤ o ≥</b></td><td>Círculo <b>cerrado</b>: el número sí se incluye. Corchete hacia el número: [a, +∞[</td></tr></table>
+     <p>x &lt; 3 → ]−∞, 3[ &nbsp;·&nbsp; x ≥ 4 → [4, +∞[</p>`)],
+  ['Resuelve: −x + 5 &lt; 4','x &gt; 1',['x &lt; 1','x &lt; −1','x &gt; −1'],'Resta 5: −x &lt; −1. Multiplica por −1 y <b>da vuelta el símbolo</b>: <b>x &gt; 1</b>.']),
+
+'8c-mat-u7': rv('Matemáticas',7,'Función lineal y afín','#3a7bbf',
+  '¡Guau! Repasemos las rectas y sus fórmulas.',
+  'PPT – Función Lineal y Afín; Guías complementarias 00 y 01 (Matemáticas 8°C)',
+  [C('Función lineal', `<p class="rule">f(x) = mx, con m ≠ 0. Su gráfico es una recta que pasa por el origen (0, 0).</p>
+     <p><b>m</b> es la <b>pendiente</b> y también la constante de proporcionalidad directa.</p>
+     <p>Si m &gt; 0 la recta es <b>creciente</b>; si m &lt; 0, <b>decreciente</b>. f(x) = x se llama función identidad.</p>`),
+   C('Función afín', `<p class="rule">f(x) = mx + n, con n ≠ 0. Es una recta que NO pasa por el origen.</p>
+     <ul><li><b>m:</b> pendiente (cuánto sube o baja por cada paso a la derecha).</li><li><b>n:</b> coeficiente de posición (donde la recta corta al eje y).</li></ul>`),
+   C('Evaluar y leer gráficos', `<ul class="steps"><li>Si f(x) = 2x + 3, ¿cuánto es f(4)?</li><li class="exm">2 · 4 + 3 = 11</li></ul>
+     <p>Desde un gráfico: mira dónde corta al eje y (n) y cuántas unidades sube o baja por cada unidad a la derecha (m).</p>`)],
+  ['En f(x) = −4x + 7, ¿cuál es la pendiente y es creciente o decreciente?','m = −4, decreciente',['m = 7, creciente','m = −4, creciente','m = 4, decreciente'],'La pendiente es el número que acompaña a x: <b>−4</b>. Como es negativa, la función es <b>decreciente</b>. El 7 es el coeficiente de posición.']),
+
+'8c-mat-u8': rv('Matemáticas',8,'Estadística','#a8521f',
+  '¡Guau! Repasemos cómo se organizan y resumen los datos.',
+  'PPT Conceptos básicos de estadística; PPT Tipos de gráficos y medidas de tendencia central; Guías N°11, N°12 y N°13 (Matemáticas 8°C)',
+  [C('Población, muestra y variables', `<ul><li><b>Población:</b> todo el grupo que se quiere estudiar.</li><li><b>Muestra:</b> la parte de la población que se estudia de verdad.</li></ul>
+     <table class="rv"><tr><td><b>Cualitativa nominal</b></td><td>Categorías sin orden: color de pelo, género musical.</td></tr>
+       <tr><td><b>Cualitativa ordinal</b></td><td>Categorías con orden: medallas, nivel educacional.</td></tr>
+       <tr><td><b>Cuantitativa discreta</b></td><td>Se cuenta: número de hermanos.</td></tr>
+       <tr><td><b>Cuantitativa continua</b></td><td>Se mide y admite decimales: estatura, tiempo.</td></tr></table>`),
+   C('Tablas de frecuencia', `<ul><li><b>Frecuencia absoluta (f):</b> cuántas veces se repite un dato.</li>
+     <li><b>Frecuencia acumulada (F):</b> suma de las frecuencias hasta ese dato.</li>
+     <li><b>Frecuencia relativa (fr):</b> f dividido por el total de datos.</li>
+     <li><b>Frecuencia relativa porcentual (fr%):</b> fr · 100.</li></ul>
+     <p class="rule">Si 4 de 25 futbolistas tienen 20 años: fr = 4/25 = 0,16 = 16%.</p>`),
+   C('Gráficos', `<ul><li><b>Barras:</b> comparar frecuencias de categorías (simple, agrupado o apilado).</li>
+     <li><b>Circular:</b> partes de un total en porcentaje.</li><li><b>Líneas:</b> cambios en el tiempo.</li>
+     <li><b>Ojiva:</b> frecuencias acumuladas.</li></ul>`),
+   C('Medidas de tendencia central y rango', `<ul><li><b>Media (promedio):</b> suma de los datos dividida por la cantidad de datos.</li>
+     <li><b>Mediana:</b> el dato central con los datos ordenados; si son pares, el promedio de los dos centrales.</li>
+     <li><b>Moda:</b> el dato que más se repite (puede no existir o haber más de una).</li>
+     <li><b>Rango:</b> dato mayor − dato menor.</li></ul>
+     <p class="exm">{5, 6, 10, 11, 12, 16}: mediana = (10 + 11) : 2 = 10,5 · rango = 16 − 5 = 11</p>`)],
+  ['¿Cuál de estas variables es cualitativa ordinal?','Medalla obtenida (oro, plata, bronce)',['Color de pelo','Cantidad de hermanos','Estatura en cm'],'Las medallas son categorías que tienen un <b>orden</b>: oro, plata, bronce. El color de pelo no tiene orden (nominal) y las otras son cuantitativas.']),
+
+'8c-mat-u9': rv('Matemáticas',9,'Potencias y raíz cuadrada','#2c62d8',
+  '¡Guau! Repasemos potencias y raíces, que vienen del Taller de Geometría.',
+  'Guía N°1 – Potencias; Guía N°2 – Raíces cuadradas (Taller de Geometría 8°C)',
+  [C('¿Qué es una potencia?', `<p>Es un producto de factores iguales: <b>a<sup>n</sup> = a · a · … · a</b> (n veces).</p>
+     <p class="exm">2<sup>4</sup> = 2 · 2 · 2 · 2 = 16</p>
+     <p><b>a</b> es la base y <b>n</b> el exponente.</p>`),
+   C('Propiedades', `<table class="rv"><tr><td>Igual base, multiplicación</td><td class="exm">a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></td></tr>
+     <tr><td>Igual base, división</td><td class="exm">a<sup>m</sup> : a<sup>n</sup> = a<sup>m−n</sup></td></tr>
+     <tr><td>Igual exponente</td><td class="exm">a<sup>n</sup> · b<sup>n</sup> = (a·b)<sup>n</sup></td></tr>
+     <tr><td>Potencia de potencia</td><td class="exm">(a<sup>m</sup>)<sup>n</sup> = a<sup>m·n</sup></td></tr>
+     <tr><td>Exponente cero</td><td class="exm">a<sup>0</sup> = 1</td></tr></table>`),
+   C('Raíz cuadrada', `<p>La raíz cuadrada de un número es el valor que, multiplicado por sí mismo, da ese número.</p>
+     <p class="exm">√49 = 7, porque 7 · 7 = 49</p>
+     <p class="rule">Si un cuadrado tiene área A, su lado mide √A: un cuadrado de 64 cm² tiene lados de 8 cm.</p>
+     <p>√50 no es exacta: está entre 7 y 8, porque 49 &lt; 50 &lt; 64.</p>`)],
+  ['¿Cuánto es 5<sup>3</sup> : 5<sup>1</sup>?','25',['5','125','15'],'Igual base en una división: se restan los exponentes. 5<sup>3−1</sup> = 5<sup>2</sup> = <b>25</b>.']),
+
+'8c-mat-u10': rv('Matemáticas',10,'Teorema de Pitágoras','#0f8f8a',
+  '¡Guau! Repasemos el teorema más famoso de los triángulos rectángulos.',
+  'PPT – Teorema de Pitágoras (Taller de Geometría 8°C)',
+  [C('El teorema', `<p>En todo triángulo <b>rectángulo</b> (con un ángulo de 90°):</p>
+     <p class="rule">a² + b² = c²: la suma de los catetos al cuadrado es igual a la hipotenusa al cuadrado.</p>
+     <p>La <b>hipotenusa</b> (c) es el lado más largo, opuesto al ángulo recto. Los <b>catetos</b> (a y b) forman el ángulo recto.</p>`),
+   C('Calcular la hipotenusa', `<ul class="steps"><li>Catetos 6 cm y 8 cm.</li><li>c² = 6² + 8² = 36 + 64 = 100</li><li class="exm">c = √100 = 10 cm</li></ul>`),
+   C('Calcular un cateto', `<ul class="steps"><li>Hipotenusa 13 cm y un cateto 5 cm.</li><li>b² = 13² − 5² = 169 − 25 = 144</li><li class="exm">b = √144 = 12 cm</li></ul>
+     <p class="rule">Para un cateto se RESTA; para la hipotenusa se SUMA.</p>`)],
+  ['Un triángulo rectángulo tiene catetos de 9 cm y 12 cm. ¿Cuánto mide la hipotenusa?','15 cm',['21 cm','225 cm','10,5 cm'],'c² = 9² + 12² = 81 + 144 = 225, entonces c = √225 = <b>15 cm</b>.']),
+
+'8c-mat-u11': rv('Matemáticas',11,'Área y volumen de prismas y cilindros','#d9771a',
+  '¡Guau! Repasemos cuánto papel envuelve una caja y cuánta agua cabe en un tarro.',
+  'Guía N°4 – Área de Prismas; Guía N°5 – Área de Cilindro; Guía N°6 – Volumen de Prismas y Cilindro (Taller de Geometría 8°C)',
+  [C('Área de un prisma', `<p>El área total de un prisma es el área de su <b>red</b>: las dos bases más todas las caras laterales.</p>
+     <p class="rule">Caja (paralelepípedo) de largo l, ancho a y alto h: A = 2(l·a + l·h + a·h)</p>
+     <p class="exm">Caja de 10 × 8 × 4 cm: 2(80 + 40 + 32) = 304 cm²</p>
+     <p>Cubo de arista a: A = 6a².</p>`),
+   C('Área del cilindro', `<p>Su red tiene dos círculos (bases) y un rectángulo (manto).</p>
+     <ul><li>Área basal: π · r²</li><li>Área lateral (manto): 2 · π · r · h</li><li>Área total: 2πr² + 2πrh</li></ul>
+     <p class="rule">En las guías se usa π ≈ 3,14.</p>`),
+   C('Volumen', `<p class="rule">V = Área de la base · altura (sirve para prismas y cilindros).</p>
+     <p class="exm">Prisma de base rectangular 5 × 4 cm y altura 10 cm: V = 20 · 10 = 200 cm³</p>
+     <p class="exm">Cilindro de radio 2 cm y altura 10 cm: V = 3,14 · 2² · 10 = 125,6 cm³</p>`)],
+  ['¿Cuál es el volumen de un cilindro de radio 3 cm y altura 5 cm? (π ≈ 3,14)','141,3 cm³',['47,1 cm³','94,2 cm³','282,6 cm³'],'V = π · r² · h = 3,14 · 9 · 5 = <b>141,3 cm³</b>.']),
+
+'8c-mat-u12': rv('Matemáticas',12,'Traslación','#7b4fd6',
+  '¡Guau! Esta unidad viene de la guía nueva de traslaciones. Repasemos.',
+  'PPT – Transformaciones isométricas: Traslación (Taller de Geometría 8°C)',
+  [C('Transformaciones isométricas', `<p><b>Isometría</b> significa "igual medida".</p>
+     <p class="rule">La figura NO cambia su forma ni su tamaño (queda congruente); solo cambia su posición.</p>`),
+   C('¿Qué es una traslación?', `<p>Es <b>deslizar</b> una figura en línea recta. Todos sus puntos se mueven igual, en líneas paralelas.</p>
+     <p>Tiene tres elementos: <b>sentido</b> (derecha, izquierda, arriba, abajo), <b>dirección</b> (horizontal, vertical u oblicua) y <b>magnitud</b> (cuánto se desplaza).</p>`),
+   C('Vector de traslación T(a, b)', `<p class="rule">El punto P(x, y) se traslada a P'(x + a, y + b).</p>
+     <ul><li><b>a</b> positivo → derecha; negativo → izquierda.</li><li><b>b</b> positivo → arriba; negativo → abajo.</li></ul>
+     <ul class="steps"><li>P(2, 1) con T(3, −5)</li><li class="exm">P'(2 + 3, 1 + (−5)) = P'(5, −4)</li></ul>
+     <p>Para encontrar el vector: T = (x' − x, y' − y).</p>`)],
+  ['El punto (2, 5) se trasladó al punto (−9, 2). ¿Cuál fue el vector de traslación?','T(−11, −3)',['T(−7, 7)','T(11, 3)','T(−11, 3)'],'T = (x\' − x, y\' − y) = (−9 − 2, 2 − 5) = <b>(−11, −3)</b>: 11 a la izquierda y 3 hacia abajo.']),
+
+/* ---------- 8° Lenguaje ---------- */
+'8c-len-u2': rv('Lenguaje',2,'Lenguaje poético','#7b4fd6',
+  '¡Guau! Repasemos el mundo de la poesía.',
+  'Clase 1 Interpretar lenguaje figurado; Clase 3 Lenguaje poético; Clase 4 Mundo lírico; Clase 5 Figuras literarias (Lengua y Literatura 8°C)',
+  [C('Denotación y connotación', `<ul><li><b>Denotativo:</b> sentido literal. "La víbora se arrastra por el piso."</li>
+     <li><b>Connotativo:</b> sentido figurado. "Esa persona es una víbora" (falsa, poco confiable).</li></ul>
+     <p class="rule">El contexto decide si una palabra se usa en sentido denotativo o connotativo.</p>`),
+   C('El mundo lírico', `<table class="rv"><tr><td><b>Hablante lírico</b></td><td>La voz ficticia que habla en el poema (no es el autor).</td></tr>
+     <tr><td><b>Objeto lírico</b></td><td>El ser, objeto o situación real que provoca los sentimientos.</td></tr>
+     <tr><td><b>Motivo lírico</b></td><td>La idea central, casi siempre un sustantivo abstracto: amor, soledad, nostalgia.</td></tr>
+     <tr><td><b>Temple de ánimo</b></td><td>El sentimiento o estado de ánimo que expresa el hablante.</td></tr></table>`),
+   C('Actitudes líricas', `<ul><li><b>Enunciativa:</b> el hablante se centra en lo externo (hechos, paisaje, personas).</li>
+     <li><b>Apostrófica:</b> el hablante le habla directamente a un "tú".</li>
+     <li><b>Carmínica o de la canción:</b> expresa su mundo interior, en primera persona.</li></ul>`),
+   C('Figuras literarias', `<ul><li><b>Comparación:</b> usa "como", "igual que": "duro como el acero".</li>
+     <li><b>Metáfora:</b> comparación sin nexo: "el oro que cae en tus hombros" (tu cabello).</li>
+     <li><b>Antítesis:</b> ideas opuestas: "Es tan corto el amor y tan largo el olvido".</li>
+     <li><b>Anáfora:</b> repetir palabras al inicio de versos.</li>
+     <li><b>Personificación</b>, <b>hipérbole</b> (exageración), <b>aliteración</b> (repetir sonidos) y <b>sinestesia</b> (mezclar sentidos: "dulce mirada").</li></ul>`)],
+  ['"Es tan corto el amor y tan largo el olvido" contiene principalmente una:','Antítesis',['Anáfora','Comparación','Onomatopeya'],'Contrapone ideas opuestas: <b>corto / largo</b> y <b>amor / olvido</b>. Eso es una antítesis.']),
+
+'8c-len-u3': rv('Lenguaje',3,'Epopeya y drama','#0f8f8a',
+  '¡Guau! Repasemos a los héroes y el teatro.',
+  'Clase 5 La epopeya; Beowulf y Helena de Troya; Orígenes del drama; Estructura interna y externa; Guía de actividades texto dramático (Lengua y Literatura 8°C)',
+  [C('La epopeya', `<p>Narración en verso o prosa que cuenta las <b>hazañas de un héroe</b>, que representa los ideales de su pueblo. Al principio se transmitía de forma <b>oral</b>.</p>
+     <ul><li><b>Temas:</b> guerras y viajes. La Ilíada (guerra de Troya) y la Odisea (regreso de Ulises).</li>
+     <li><b>Epítetos:</b> frases fijas que destacan al héroe: "el de los pies ligeros".</li>
+     <li><b>Dioses</b> que ayudan o castigan, como Atenea y Poseidón.</li></ul>
+     <p>La epopeya escrita más antigua es la de <b>Gilgamesh</b> (sumeria).</p>`),
+   C('El género dramático', `<p>Obras creadas para ser <b>representadas</b> ante un público. Presentan un <b>conflicto humano</b> mediante el <b>diálogo</b>, sin narrador.</p>
+     <p>Nació en la <b>antigua Grecia</b>, en fiestas en honor al dios <b>Dionisio</b>. "Theatron" significa "lugar para contemplar".</p>
+     <p class="rule">Las acotaciones (entre paréntesis) indican gestos, movimientos y lugares.</p>`),
+   C('Estructura del drama', `<ul><li><b>Interna:</b> inicio (presentación), desarrollo del conflicto, clímax y desenlace. El conflicto enfrenta al protagonista con el antagonista.</li>
+     <li><b>Externa:</b> <b>acto</b> (gran división), <b>escena</b> (cambia cuando entran o salen personajes) y <b>cuadro</b> (cambio de escenografía).</li></ul>`),
+   C('Tragedia y comedia', `<ul><li><b>Tragedia:</b> conflictos graves y un final de sufrimiento o destrucción del protagonista.</li>
+     <li><b>Comedia:</b> hace reír, pero también <b>critica a la sociedad</b> mostrando vicios y malos hábitos con personajes tipo. Ej.: "El estornudo".</li></ul>`)],
+  ['En un texto dramático, ¿qué marca el cambio de escena?','La entrada o salida de personajes',['La caída del telón al final de la obra','El cambio de narrador','El final de cada estrofa'],'La <b>escena</b> cambia cuando entran o salen personajes. El acto se marca con el telón y el cuadro con un cambio de escenografía.']),
+
+'8c-len-u4': rv('Lenguaje',4,'Taller de Lenguaje','#d9771a',
+  '¡Guau! Repasemos cómo funcionan las palabras.',
+  'Clase 1 ¿Quién inventó las palabras?; Clase 2 Signo lingüístico; Clases 3 y 4 Las palabras y sus fenómenos; Clase 7 Vocabulario (Taller de Lenguaje 8°C)',
+  [C('El signo lingüístico (Saussure)', `<ul><li><b>Significante:</b> la imagen acústica, los sonidos o letras de la palabra.</li>
+     <li><b>Significado:</b> la imagen mental o concepto.</li></ul>
+     <p class="rule">Son dos caras inseparables, como una moneda que no se puede partir.</p>`),
+   C('El signo es arbitrario', `<p>No hay una relación natural entre la palabra y lo que nombra: nada en un perro obliga a llamarlo "perro". Es una <b>convención</b>, un acuerdo entre hablantes.</p>
+     <p>Por eso "perro", "dog" y "chien" nombran lo mismo.</p>`),
+   C('Fenómenos de las palabras', `<table class="rv"><tr><td><b>Polisemia</b></td><td>Una palabra con varios significados (banco).</td></tr>
+     <tr><td><b>Sinonimia</b></td><td>Significado igual o parecido (alegre / contento).</td></tr>
+     <tr><td><b>Antonimia</b></td><td>Significado opuesto (claro / oscuro).</td></tr>
+     <tr><td><b>Hiperonimia</b></td><td>Palabra general que incluye a otras (fruta).</td></tr>
+     <tr><td><b>Hiponimia</b></td><td>Palabra incluida en otra más general (manzana).</td></tr>
+     <tr><td><b>Denotación / connotación</b></td><td>Sentido literal / sentido figurado.</td></tr></table>`)],
+  ['"Fruta" respecto de "manzana", "pera" y "plátano" es un:','Hiperónimo',['Hipónimo','Sinónimo','Antónimo'],'"Fruta" es la palabra general que incluye a las otras: es un <b>hiperónimo</b>. Manzana, pera y plátano son sus hipónimos.']),
+
+/* ---------- 8° Ciencias ---------- */
+'8c-cie-u1': rv('Ciencias',1,'Método científico y célula','#1f8a4c',
+  '¡Guau! Repasemos cómo investigan los científicos y de qué estamos hechos.',
+  'Guía Método científico 2026; Guía Célula estructura y función 2026 (Ciencias Naturales 8°C)',
+  [C('Etapas del método científico', `<p><b>Observación → problema → hipótesis → diseño experimental → análisis de datos → conclusión.</b></p>
+     <p class="rule">Hipótesis: "Si… (causa), entonces… (efecto)". Debe poder ponerse a prueba.</p>`),
+   C('Variables y grupo control', `<ul><li><b>Variable independiente:</b> la que el investigador manipula (causa). Ej.: cantidad de compost.</li>
+     <li><b>Variable dependiente:</b> la que responde (efecto). Ej.: crecimiento de la lechuga.</li>
+     <li><b>Variables controladas:</b> las que se mantienen iguales (luz, riego, macetero).</li>
+     <li><b>Grupo control:</b> sin el cambio, para comparar con el grupo experimental.</li></ul>`),
+   C('La célula', `<p>Todos los seres vivos están formados por células.</p>
+     <ul><li><b>Procarionte:</b> sin núcleo definido (bacterias).</li><li><b>Eucarionte:</b> con núcleo verdadero que contiene el ADN.</li></ul>
+     <p><b>Vegetal vs. animal:</b> la vegetal tiene <b>pared celular</b>, <b>cloroplastos</b> y una vacuola grande; la animal tiene centriolos y no tiene pared.</p>`),
+   C('Organelos y su función', `<table class="rv"><tr><td><b>Núcleo</b></td><td>Controla las actividades de la célula; contiene el ADN.</td></tr>
+     <tr><td><b>Mitocondria</b></td><td>Produce energía (ATP).</td></tr><tr><td><b>Ribosomas</b></td><td>Fabrican proteínas.</td></tr>
+     <tr><td><b>Retículo E. rugoso / liso</b></td><td>Proteínas / lípidos.</td></tr>
+     <tr><td><b>Aparato de Golgi</b></td><td>Modifica, empaqueta y distribuye proteínas.</td></tr>
+     <tr><td><b>Lisosomas</b></td><td>Digestión celular.</td></tr><tr><td><b>Cloroplasto</b></td><td>Fotosíntesis (solo vegetales).</td></tr>
+     <tr><td><b>Membrana plasmática</b></td><td>Delimita la célula y controla lo que entra y sale.</td></tr></table>`)],
+  ['En un experimento se cambia la cantidad de compost para ver cómo crecen las lechugas. ¿Cuál es la variable independiente?','La cantidad de compost',['El crecimiento de las lechugas','El tipo de macetero','La luz que reciben'],'La variable independiente es la que el investigador <b>manipula</b>: la cantidad de compost. El crecimiento es la dependiente; la luz y el macetero son controladas.']),
+
+'8c-cie-u2': rv('Ciencias',2,'Membrana y tejidos','#3a7bbf',
+  '¡Guau! Repasemos cómo entran y salen las sustancias de la célula.',
+  'PPT Membrana celular: transporte pasivo y activo; Guía Mecanismos de transporte; Guía Tejidos animales (Ciencias Naturales 8°C)',
+  [C('La membrana plasmática', `<p>Es una <b>bicapa de lípidos con proteínas</b> (modelo de mosaico fluido). Es <b>semipermeable</b>: deja pasar algunas sustancias y otras no.</p>`),
+   C('Transporte pasivo (sin gastar energía)', `<ul><li><b>Difusión:</b> partículas de mayor a menor concentración.</li>
+     <li><b>Difusión facilitada:</b> con ayuda de proteínas de membrana.</li>
+     <li><b>Osmosis:</b> paso de agua a través de la membrana, hacia donde hay más solutos.</li></ul>
+     <p class="rule">En agua muy salada la célula pierde agua y se arruga; en agua destilada gana agua y puede reventar.</p>`),
+   C('Transporte activo (gasta ATP)', `<ul><li>Mueve sustancias <b>en contra</b> del gradiente (de menor a mayor concentración).</li>
+     <li><b>Endocitosis:</b> entrada de partículas grandes. <b>Exocitosis:</b> salida en vesículas.</li></ul>`),
+   C('Tejidos', `<p><b>Célula → tejido → órgano → sistema → organismo.</b></p>
+     <ul><li><b>Epitelial:</b> cubre y reviste (piel).</li><li><b>Conectivo:</b> une y sostiene (hueso, cartílago, sangre, grasa).</li>
+     <li><b>Muscular:</b> esquelético (voluntario), cardíaco y liso (involuntarios).</li><li><b>Nervioso:</b> neuronas que transmiten impulsos.</li></ul>`)],
+  ['¿Por qué se marchita una lechuga si le echas mucha sal?','Pierde agua por osmosis',['Gana agua por osmosis','Gasta ATP por transporte activo','Hace fotosíntesis más rápido'],'La sal hace que afuera haya más solutos: el agua sale de las células por <b>osmosis</b> y la lechuga se marchita.']),
+
+'8c-cie-u3': rv('Ciencias',3,'Nutrición y sistemas','#d9771a',
+  '¡Guau! Repasemos qué pasa con lo que comemos y respiramos.',
+  'PPT Alimentación y nutrientes; PPT Nutrición; Retroalimentación Sistema digestivo y enzimas; PPT Sistema respiratorio (Ciencias Naturales 8°C)',
+  [C('Nutrientes y sus funciones', `<ul><li><b>Energéticos:</b> carbohidratos y lípidos. Los lípidos aportan más energía (9 kcal por gramo).</li>
+     <li><b>Estructurales o constructores:</b> proteínas.</li><li><b>Reguladores:</b> vitaminas, sales minerales y agua.</li></ul>
+     <p class="rule">Alimentarse es elegir y comer; nutrirse es el proceso del cuerpo para aprovechar los nutrientes.</p>`),
+   C('Sistema digestivo', `<p>Etapas: <b>ingestión → digestión → absorción → egestión</b>.</p>
+     <table class="rv"><tr><td><b>Boca</b></td><td>Saliva con <b>amilasa</b> (almidón). Se forma el <b>bolo</b>.</td></tr>
+       <tr><td><b>Estómago</b></td><td>pH ácido; <b>pepsina</b> digiere proteínas. Se forma el <b>quimo</b>.</td></tr>
+       <tr><td><b>Intestino delgado</b></td><td>Tripsina, lipasa pancreática; se absorben los nutrientes. Se forma el <b>quilo</b>.</td></tr>
+       <tr><td><b>Hígado</b></td><td>Produce <b>bilis</b>, que emulsiona las grasas.</td></tr>
+       <tr><td><b>Intestino grueso</b></td><td>Absorbe agua; sus bacterias producen vitamina K.</td></tr></table>`),
+   C('Sistema respiratorio', `<p>Recorrido del aire: <b>nariz → faringe → laringe → tráquea → bronquios → bronquiolos → alvéolos</b>.</p>
+     <p class="rule">Hematosis: en los alvéolos el O₂ pasa a la sangre y el CO₂ sale de ella, por difusión.</p>
+     <p><b>Inspiración:</b> el diafragma se contrae y baja. <b>Espiración:</b> se relaja y sube.</p>`)],
+  ['¿Qué enzima comienza la digestión de las proteínas en el estómago?','Pepsina',['Amilasa salival','Lipasa pancreática','Bilis'],'La <b>pepsina</b> actúa en el medio ácido del estómago y transforma las proteínas en péptidos.']),
+
+'8c-cie-u4': rv('Ciencias',4,'Electricidad (Física)','#c43b6c',
+  '¡Guau! Repasemos corriente, voltaje y resistencia.',
+  'Electricidad II Ley de Ohm; Guías N°1, 2 y 3 de Ley de Ohm; Electricidad III Potencia eléctrica; Guía de circuitos y energía eléctrica (Taller de Física 8°C)',
+  [C('Conceptos básicos', `<table class="rv"><tr><td><b>Intensidad (i)</b></td><td>Carga que circula por unidad de tiempo. Se mide en <b>ampere (A)</b>.</td></tr>
+     <tr><td><b>Voltaje (V)</b></td><td>Energía para mover cada carga. Se mide en <b>volt (V)</b>.</td></tr>
+     <tr><td><b>Resistencia (R)</b></td><td>Oposición al paso de la corriente. Se mide en <b>ohm (Ω)</b>.</td></tr></table>
+     <p><b>Corriente continua:</b> siempre en un sentido (pilas). <b>Alterna:</b> va y vuelve (generadores, enchufes).</p>`),
+   C('Ley de Ohm', `<p class="rule">V = i · R</p>
+     <ul class="steps"><li>V = 12 V y R = 4 Ω</li><li class="exm">i = V : R = 12 : 4 = 3 A</li></ul>
+     <p>Un cable conduce mejor si es más corto, más grueso y de un material de baja resistividad (como el cobre).</p>`),
+   C('Circuitos', `<ul><li><b>Serie:</b> un solo camino. Si se quema una ampolleta, se apagan todas.</li>
+     <li><b>Paralelo:</b> varios caminos. Si se quema una, las otras siguen. Así son las instalaciones de las casas.</li></ul>`),
+   C('Potencia y energía', `<p class="rule">P = V · i, en watts (W). La energía consumida se cobra en kilowatt-hora (kWh).</p>
+     <p class="exm">Hervidor de 220 V y 10 A → P = 2.200 W</p>
+     <p><b>Efecto Joule:</b> un conductor se calienta cuando circula corriente (estufas, hervidores).</p>`)],
+  ['Si por una resistencia de 10 Ω circulan 2 A, ¿cuál es el voltaje?','20 V',['5 V','12 V','0,2 V'],'Ley de Ohm: V = i · R = 2 · 10 = <b>20 V</b>.']),
+
+'8c-cie-u5': rv('Ciencias',5,'El átomo (Química)','#7b4fd6',
+  '¡Guau! Repasemos cómo fuimos descubriendo el átomo.',
+  'Guía Constitución atómica de la materia 2026; Trabajo Modelos atómicos; Guía Números cuánticos (Taller de Química 8°C)',
+  [C('Partículas del átomo', `<table class="rv"><tr><td><b>Protón</b></td><td>Carga positiva, en el núcleo.</td></tr>
+     <tr><td><b>Neutrón</b></td><td>Sin carga, en el núcleo. Masa parecida a la del protón.</td></tr>
+     <tr><td><b>Electrón</b></td><td>Carga negativa, alrededor del núcleo. Masa muy pequeña.</td></tr></table>`),
+   C('Z, A e iones', `<ul><li><b>Número atómico (Z):</b> cantidad de protones; identifica al elemento.</li>
+     <li><b>Número másico (A):</b> protones + neutrones. Neutrones = A − Z.</li>
+     <li><b>Catión:</b> perdió electrones (+). <b>Anión:</b> ganó electrones (−).</li></ul>
+     <p class="exm">Z = 6, A = 14 → 14 − 6 = 8 neutrones</p>`),
+   C('Isótopos, isóbaros e isótonos', `<ul><li><b>Isótopos:</b> mismo elemento (igual Z) con distinto número de neutrones. Ej.: protio, deuterio y tritio (hidrógeno).</li>
+     <li><b>Isóbaros:</b> elementos distintos con igual A.</li><li><b>Isótonos:</b> elementos distintos con igual número de neutrones.</li></ul>`),
+   C('Modelos atómicos', `<ul><li><b>Dalton (1808):</b> esfera indivisible.</li><li><b>Thomson:</b> descubre el electrón; modelo del "budín de pasas".</li>
+     <li><b>Rutherford:</b> lámina de oro; núcleo pequeño, denso y positivo; casi todo el átomo es vacío.</li>
+     <li><b>Bohr:</b> electrones en niveles de energía. <b>Chadwick (1932):</b> descubre el neutrón.</li></ul>
+     <p class="rule">Los modelos cambian cuando nuevas evidencias muestran sus límites.</p>`)],
+  ['Dos átomos del mismo elemento con distinto número de neutrones son:','Isótopos',['Isóbaros','Isótonos','Iones'],'Mismo elemento significa igual Z (mismos protones). Si cambian los neutrones, son <b>isótopos</b>.']),
+
+/* ---------- 8° Historia ---------- */
+'8c-his-u1': rv('Historia y Geografía',1,'Humanismo y Renacimiento','#2c62d8',
+  '¡Guau! Repasemos el paso de la Edad Media a la Edad Moderna.',
+  'Guías N°1, N°2 y N°3 Unidad 1; Comprensión lectora Renacimiento; Obras de arte del Renacimiento (Historia 8°C)',
+  [C('Humanismo', `<p>Movimiento intelectual nacido en la <b>Italia del siglo XV</b> (Florencia, Roma, Venecia).</p>
+     <p class="rule">Se pasa del teocentrismo (Dios al centro) al antropocentrismo (el ser humano y su razón al centro).</p>
+     <p>Se vuelve a estudiar a los autores <b>grecorromanos</b>. Humanistas: Erasmo de Róterdam, Maquiavelo ("El Príncipe"), Montaigne (el ensayo) y Christine de Pizan.</p>`),
+   C('Renacimiento', `<ul><li>Retoma los modelos de la Antigüedad clásica, con mayor interés por la figura humana y la <b>perspectiva</b>.</li>
+     <li>Aparecen los <b>mecenas</b>, que financian a los artistas.</li>
+     <li><b>Leonardo da Vinci:</b> Mona Lisa, La Última Cena, bocetos de inventos y estudios de anatomía.</li></ul>`),
+   C('Reforma, imprenta y ciencia', `<ul><li><b>Reforma protestante (1517):</b> Lutero publica sus 95 tesis contra la venta de indulgencias. La Iglesia responde con el <b>Concilio de Trento</b>.</li>
+     <li><b>Imprenta de Gutenberg (c. 1440):</b> tipos móviles; los libros se multiplican y se abaratan.</li>
+     <li><b>Revolución Científica:</b> Copérnico (heliocentrismo), Galileo y Newton (gravedad).</li></ul>`),
+   C('Estado moderno y mercantilismo', `<ul><li>Poder <b>centralizado</b> en el rey, con <b>burocracia</b>, <b>sistema fiscal</b> (impuestos) y <b>ejércitos profesionales</b>.</li>
+     <li><b>Absolutismo:</b> el rey concentra todo el poder, justificado por el derecho divino.</li>
+     <li><b>Mercantilismo:</b> el Estado interviene para acumular metales preciosos, exportar más que importar y monopolizar rutas comerciales.</li></ul>`)],
+  ['¿Qué significa antropocentrismo?','Que el ser humano y su razón están en el centro',['Que Dios es el centro de todo','Que la Tierra es el centro del universo','Que el rey concentra todo el poder'],'El Humanismo pasó del <b>teocentrismo</b> medieval al <b>antropocentrismo</b>: el ser humano y su razón al centro.']),
+
+'8c-his-u2': rv('Historia y Geografía',2,'Conquista y Colonia','#c43b6c',
+  '¡Guau! Repasemos la llegada de los europeos y la vida en la frontera.',
+  'Forjamiento del mundo moderno y América; Amanecer del mundo moderno; Guías 1, 2 y 3 Unidad 2; La frontera viva; Actividades económicas (Historia 8°C)',
+  [C('Expansión europea', `<ul><li>Los europeos buscaron nuevas rutas a Oriente porque los otomanos controlaban las antiguas (Constantinopla, 1453).</li>
+     <li>Avances técnicos: <b>brújula, astrolabio y carabela</b>.</li>
+     <li><b>1492:</b> Colón llega a América. <b>Tratado de Tordesillas (1494):</b> divide las tierras entre España y Portugal.</li></ul>`),
+   C('Conquista', `<ul><li>Cortés conquista a los aztecas y Pizarro a los incas.</li>
+     <li>A Chile llega primero <b>Almagro (1536)</b>; <b>Pedro de Valdivia</b> funda Santiago en 1541.</li>
+     <li>La población indígena disminuye por enfermedades, guerras y trabajo forzado (<b>encomienda</b>).</li></ul>`),
+   C('Sociedad de frontera en el Biobío', `<p>Tras la batalla de <b>Curalaba (1598)</b>, se destruyen las ciudades al sur del Biobío y el río se convierte en <b>frontera</b>.</p>
+     <table class="rv"><tr><td><b>Guerra de Arauco</b></td><td>Conflicto largo entre españoles y mapuche por el territorio al sur del Biobío.</td></tr>
+       <tr><td><b>Parlamentos</b></td><td>Encuentros diplomáticos para negociar paz e intercambios.</td></tr>
+       <tr><td><b>Malones</b></td><td>Incursiones mapuche contra estancias españolas.</td></tr>
+       <tr><td><b>Malocas</b></td><td>Incursiones españolas para capturar personas y esclavizarlas.</td></tr>
+       <tr><td><b>Real Situado</b></td><td>Dinero enviado desde Perú para pagar un ejército permanente.</td></tr></table>
+     <p class="rule">"Frontera viva": además de guerra, hubo comercio, mestizaje y misiones.</p>`),
+   C('Economía y sociedad colonial', `<ul><li>Base económica: <b>hacienda</b>, agricultura y ganadería; trabajadores como <b>inquilinos</b>.</li>
+     <li>En la cima social, los españoles peninsulares; luego criollos, mestizos, indígenas y africanos esclavizados.</li></ul>`)],
+  ['¿Qué eran los parlamentos en la frontera del Biobío?','Encuentros para negociar acuerdos entre españoles y mapuche',['Incursiones mapuche contra estancias','Dinero enviado desde Perú','El Congreso Nacional de Chile'],'Los <b>parlamentos</b> eran encuentros diplomáticos y festivos entre autoridades españolas y líderes mapuche para acordar la paz y el intercambio.']),
+
+'8c-his-u3': rv('Historia y Geografía',3,'La Ilustración','#7b4fd6',
+  '¡Guau! Repasemos el Siglo de las Luces.',
+  'Ficha informativa: Principios políticos de la Ilustración; Manual del redactor ilustrado; El Siglo de las Luces (Historia 8°C)',
+  [C('¿Qué fue la Ilustración?', `<p>Movimiento cultural e intelectual europeo del <b>siglo XVIII</b> que defendía la <b>razón</b> como herramienta para conocer el mundo.</p>
+     <p class="rule">Se le llamó "Siglo de las Luces" porque la razón venía a iluminar un pasado de superstición y obediencia ciega.</p>
+     <p><b>Secularización:</b> disminuye la influencia de la religión en la sociedad, promoviendo la libertad de pensamiento y la tolerancia.</p>`),
+   C('Principios políticos', `<ul><li><b>Ordenamiento constitucional:</b> una constitución que limite el poder y garantice derechos.</li>
+     <li><b>Separación de poderes:</b> Ejecutivo, Legislativo y Judicial (Montesquieu).</li>
+     <li><b>Libertad e igualdad</b> ante la ley, sin privilegios de nacimiento.</li>
+     <li><b>Soberanía popular:</b> el poder reside en el pueblo (Rousseau).</li></ul>`),
+   C('Pensadores y revoluciones', `<ul><li><b>Locke:</b> derechos naturales (vida, libertad y propiedad). <b>Voltaire:</b> tolerancia y libertad de expresión.</li>
+     <li><b>La Enciclopedia</b> (Diderot y D'Alembert) reunió el saber de la época.</li>
+     <li>Ideas aplicadas en la independencia de <b>EE. UU. (1776)</b> y la <b>Revolución Francesa (1789)</b>, y más tarde en las independencias americanas.</li></ul>`)],
+  ['¿Qué principio ilustrado dice que el poder político reside en los ciudadanos?','Soberanía popular',['Derecho divino','Absolutismo','Mercantilismo'],'La <b>soberanía popular</b> plantea que el poder se origina en el pueblo, y no en el rey como en el absolutismo.']),
+
+'8c-his-u4': rv('Historia y Geografía',4,'Taller de Geografía','#0f8f8a',
+  '¡Guau! Repasemos regiones, desarrollo y el Chile productivo.',
+  'Concepto de región y tipos de regiones; Guía Desarrollo Humano; Chile en tres capas; Chile’s Productive Geography; Guía Misión Biobío (Taller de Geografía)',
+  TALLER_GEO, TALLER_GEO_CHECK),
+
+/* ---------- 6° Matemáticas ---------- */
+'6c-mat-u1': rv('Matemáticas',1,'Números naturales','#2c62d8',
+  '¡Guau! Repasemos múltiplos, divisores y primos.',
+  'Guía 1 Numeración 6° 2026 (Matemáticas 6°C)',
+  [C('Múltiplos y divisores', `<p>Los <b>múltiplos</b> de un número se obtienen multiplicándolo por 1, 2, 3, 4…: múltiplos de 6 → 6, 12, 18, 24…</p>
+     <p>Un número es <b>divisor</b> de otro si al dividir el resto es cero: 4 es divisor de 32 porque 32 : 4 = 8.</p>
+     <p class="rule">Los factores de un número también son sus divisores.</p>`),
+   C('Primos y compuestos', `<ul><li><b>Primo:</b> tiene solo dos divisores, el 1 y él mismo (2, 3, 5, 7, 11, 13…).</li>
+     <li><b>Compuesto:</b> tiene más de dos divisores (4, 6, 8, 9…).</li></ul>
+     <p>Todo número compuesto se puede escribir como producto de primos: 60 = 2 · 2 · 3 · 5.</p>`),
+   C('Mínimo común múltiplo (mcm)', `<p>Es el <b>menor</b> de los múltiplos comunes, distinto de cero.</p>
+     <ul class="steps"><li>Claudia va a cerámica cada 2 días y Álvaro a guitarra cada 3 días.</li><li>Múltiplos de 2: 2, 4, <b>6</b>, 8… · Múltiplos de 3: 3, <b>6</b>, 9…</li><li class="exm">mcm(2, 3) = 6 → se vuelven a ver en 6 días</li></ul>`),
+   C('Operaciones combinadas', `<p>1° Paréntesis · 2° Multiplicación y división, de izquierda a derecha · 3° Adición y sustracción, de izquierda a derecha.</p>
+     <p class="exm">5 + 3 · 4 = 5 + 12 = 17</p>`)],
+  ['Juan visita a su abuela cada 3 días y Margarita cada 5 días. Si hoy coinciden, ¿en cuántos días volverán a coincidir?','15 días',['8 días','2 días','5 días'],'Buscamos el mcm de 3 y 5: múltiplos de 3 → 3, 6, 9, 12, <b>15</b>; de 5 → 5, 10, <b>15</b>. El mcm es <b>15</b>.']),
+
+'6c-mat-u2': rv('Matemáticas',2,'Fracciones','#0f8f8a',
+  '¡Guau! Repasemos las fracciones antes de practicar.',
+  'Guía 2 Fracciones 6° 2026 (Matemáticas 6°C)',
+  [C('Tipos de fracciones', `<ul><li><b>Propia:</b> numerador menor que el denominador (3/5).</li><li><b>Impropia:</b> numerador mayor (7/4).</li><li><b>Igual a la unidad:</b> numerador igual al denominador (5/5 = 1).</li></ul>`),
+   C('Amplificar y simplificar', `<p class="rule">Se multiplica o divide numerador y denominador por el mismo número: la fracción queda equivalente.</p>
+     <p class="exm">2/3 = 4/6 = 8/12 &nbsp;·&nbsp; 10/15 = 2/3</p>`),
+   C('Números mixtos', `<p>Un número mixto tiene una parte entera y una fracción: 2 ¾.</p>
+     <ul class="steps"><li>Mixto a impropia: 2 ¾ → 2 · 4 + 3 = 11 → <b>11/4</b></li><li>Impropia a mixto: 11/4 → 11 : 4 = 2, resto 3 → <b>2 ¾</b></li></ul>`),
+   C('Sumar y restar', `<p class="rule">Igual denominador: se suman los numeradores. Distinto denominador: se igualan con el mcm.</p>
+     <p class="exm">1/2 + 1/3 = 3/6 + 2/6 = 5/6</p>`)],
+  ['¿Cuánto es 3/4 + 1/8?','7/8',['4/12','4/8','1/2'],'El mcm de 4 y 8 es 8: 3/4 = 6/8. Luego 6/8 + 1/8 = <b>7/8</b>.']),
+
+'6c-mat-u3': rv('Matemáticas',3,'Números decimales','#7b4fd6',
+  '¡Guau! Repasemos los números con coma.',
+  'Guía 3 Decimales 6° 2026 (Matemáticas 6°C)',
+  [C('Sumar y restar', `<p class="rule">Ubica las comas una debajo de la otra y completa con ceros si hace falta.</p>
+     <p class="exm">6 − 4,30 = 1,70 m (el cable que le sobró a José)</p>`),
+   C('Multiplicar y dividir por 10, 100 y 1.000', `<ul><li>Multiplicar: la coma se corre a la <b>derecha</b> tantos lugares como ceros. 2,35 · 100 = 235.</li>
+     <li>Dividir: la coma se corre a la <b>izquierda</b>. 45,6 : 10 = 4,56.</li></ul>`),
+   C('Multiplicar y dividir decimales', `<p class="exm">1,25 · 3 = 3,75</p>
+     <p>Al dividir un decimal por un natural, divide normalmente y mantén la coma en su lugar: 7,5 : 3 = 2,5.</p>`),
+   C('Decimales y fracciones', `<p>0,5 = 1/2 · 0,25 = 1/4 · 0,75 = 3/4 · 0,2 = 1/5 · 0,1 = 1/10</p>
+     <p class="rule">Para pasar una fracción a decimal, divide el numerador por el denominador: 3/5 = 3 : 5 = 0,6.</p>`)],
+  ['¿Cuánto es 4,7 · 100?','470',['47','4.700','0,047'],'Multiplicar por 100 corre la coma <b>dos lugares a la derecha</b>: 4,7 → 470.']),
+
+'6c-mat-u4': rv('Matemáticas',4,'Razón y porcentaje','#d9771a',
+  '¡Guau! Repasemos razones y porcentajes.',
+  'Guía 4 Razón y porcentaje 6° 2026 (Matemáticas 6°C)',
+  [C('Razón', `<p>Una razón compara dos cantidades. Se escribe <b>a : b</b> y se lee "a es a b".</p>
+     <p class="rule">El orden importa: niñas a niños no es lo mismo que niños a niñas.</p>
+     <p class="exm">Si plantan 15 árboles en 5 días → 3 árboles por día → en 8 días plantan 24.</p>`),
+   C('¿Qué es un porcentaje?', `<p>Es una razón con denominador 100: 25% = 25/100 = 1/4 = 0,25.</p>
+     <p>En una cuadrícula de 100 cuadrados, el 30% son 30 cuadrados pintados.</p>`),
+   C('Calcular porcentajes', `<ul><li><b>10%</b> → dividir por 10. 10% de 400 = 40.</li><li><b>25%</b> → dividir por 4. 25% de 400 = 100.</li><li><b>50%</b> → la mitad. 50% de 400 = 200.</li></ul>`)],
+  ['¿Cuánto es el 25% de 80?','20',['25','40','8'],'El 25% es la cuarta parte: 80 : 4 = <b>20</b>.']),
+
+'6c-mat-u5': rv('Matemáticas',5,'Ángulos','#1f8a4c',
+  '¡Guau! Repasemos los ángulos antes de practicar.',
+  'Guía 1 Geometría ángulos; Guía 2 Ángulos entre rectas (Matemáticas 6°C)',
+  [C('Tipos de ángulos', `<table class="rv"><tr><td><b>Agudo</b></td><td>Menos de 90°</td></tr><tr><td><b>Recto</b></td><td>90°</td></tr>
+     <tr><td><b>Obtuso</b></td><td>Entre 90° y 180°</td></tr><tr><td><b>Extendido</b></td><td>180°</td></tr><tr><td><b>Completo</b></td><td>360°</td></tr></table>
+     <p>Se miden con el <b>transportador</b>, en grados.</p>`),
+   C('Complementarios y suplementarios', `<ul><li><b>Complementarios:</b> suman 90°. Complemento de 30° = 60°.</li><li><b>Suplementarios:</b> suman 180°. Suplemento de 130° = 50°.</li></ul>`),
+   C('Ángulos entre rectas', `<p>Cuando dos rectas se cortan:</p>
+     <ul><li><b>Opuestos por el vértice:</b> miden lo mismo.</li><li><b>Adyacentes:</b> están uno al lado del otro y suman 180°.</li></ul>`)],
+  ['¿Cuánto mide el suplemento de un ángulo de 65°?','115°',['25°','295°','65°'],'Suplementarios suman 180°: 180° − 65° = <b>115°</b>.']),
+
+'6c-mat-u6': rv('Matemáticas',6,'Triángulos y cuadriláteros','#c43b6c',
+  '¡Guau! Repasemos las figuras de 3 y 4 lados.',
+  'Guía 3 Geometría Triángulos; Guía 4 Geometría Teselaciones (Matemáticas 6°C)',
+  [C('Triángulos', `<p class="rule">Los ángulos interiores de un triángulo suman 180°.</p>
+     <ul><li>Según sus lados: <b>equilátero</b> (3 iguales), <b>isósceles</b> (2 iguales), <b>escaleno</b> (todos distintos).</li>
+     <li>Según sus ángulos: <b>acutángulo</b> (3 agudos), <b>rectángulo</b> (uno de 90°), <b>obtusángulo</b> (uno obtuso).</li></ul>`),
+   C('Cuadriláteros', `<p class="rule">Los ángulos interiores de un cuadrilátero suman 360°.</p>
+     <ul><li><b>Paralelogramos</b> (2 pares de lados paralelos): cuadrado, rectángulo, rombo y romboide.</li>
+     <li><b>Trapecio:</b> un solo par de lados paralelos. <b>Trapezoide:</b> ninguno.</li></ul>`),
+   C('Teselaciones', `<p>Cubrir el plano con figuras sin dejar huecos ni superponerlas.</p>
+     <p class="rule">Los ángulos que se juntan en un vértice deben sumar 360°.</p>
+     <p>Con un solo polígono regular solo funcionan: triángulos (6 × 60°), cuadrados (4 × 90°) y hexágonos (3 × 120°).</p>`)],
+  ['Un triángulo tiene ángulos de 50° y 60°. ¿Cuánto mide el tercero?','70°',['110°','90°','250°'],'Los ángulos de un triángulo suman 180°: 180° − 50° − 60° = <b>70°</b>.']),
+
+'6c-mat-u7': rv('Matemáticas',7,'Medición','#3a7bbf',
+  '¡Guau! Repasemos unidades, áreas y volúmenes.',
+  'Guía 5 Geometría área y volumen; Guía 6 Geometría Medición (Matemáticas 6°C)',
+  [C('Unidades de longitud', `<p>1 km = 1.000 m · 1 m = 100 cm · 1 cm = 10 mm</p>
+     <p class="rule">De una unidad mayor a una menor se multiplica; de una menor a una mayor se divide.</p>
+     <p>Superficie: <b>cm²</b> para cosas pequeñas (cuaderno), <b>m²</b> para espacios (habitación, parcela), <b>km²</b> para ciudades y regiones.</p>`),
+   C('Perímetro y área', `<ul><li><b>Perímetro:</b> la medida del contorno (suma de los lados).</li><li><b>Rectángulo:</b> A = largo · ancho.</li>
+     <li><b>Triángulo:</b> A = base · altura : 2.</li><li><b>Rombo y romboide:</b> A = base · altura.</li>
+     <li><b>Trapecio:</b> A = (base mayor + base menor) · altura : 2.</li></ul>`),
+   C('Volumen', `<ul><li><b>Cubo:</b> V = arista · arista · arista.</li><li><b>Paralelepípedo:</b> V = largo · ancho · alto.</li></ul>
+     <p class="rule">1 m³ = 1.000 litros.</p>`)],
+  ['¿Cuál es el área de un triángulo de base 10 cm y altura 6 cm?','30 cm²',['60 cm²','16 cm²','32 cm²'],'A = base · altura : 2 = 10 · 6 : 2 = <b>30 cm²</b>.']),
+
+'6c-mat-u8': rv('Matemáticas',8,'Ecuaciones','#a8521f',
+  '¡Guau! Repasemos cómo encontrar el número escondido.',
+  'Guía Ecuaciones 6° 2026 (Matemáticas 6°C)',
+  [C('¿Qué es una ecuación?', `<p>Una igualdad con un valor desconocido, la <b>incógnita</b> (x).</p>
+     <p class="rule">Es como una balanza en equilibrio: lo que haces a un lado, lo haces al otro.</p>`),
+   C('Operaciones inversas', `<table class="rv"><tr><td class="exm">x + 15 = 40</td><td>Resto 15 → x = 25</td></tr>
+     <tr><td class="exm">x − 8 = 12</td><td>Sumo 8 → x = 20</td></tr><tr><td class="exm">4 · x = 36</td><td>Divido por 4 → x = 9</td></tr>
+     <tr><td class="exm">x : 3 = 7</td><td>Multiplico por 3 → x = 21</td></tr></table>`),
+   C('Problemas', `<p>1) Llama x a lo que no conoces. 2) Escribe la ecuación. 3) Resuélvela.</p>
+     <p class="exm">Pienso un número, le sumo 12 y obtengo 30 → x + 12 = 30 → x = 18</p>`)],
+  ['Resuelve: 3x + 5 = 26','x = 7',['x = 21','x = 10,3','x = 31'],'Resta 5: 3x = 21. Divide por 3: <b>x = 7</b>.']),
+
+'6c-mat-u9': rv('Matemáticas',9,'Datos y probabilidades','#4d7a1f',
+  '¡Guau! Repasemos gráficos y azar.',
+  'Guías A y B de Datos y probabilidades 6° 2026 (Matemáticas 6°C)',
+  [C('Diagramas', `<ul><li><b>Diagrama de puntos:</b> cada punto es un dato. La columna más alta es la moda.</li>
+     <li><b>Tallo y hojas:</b> el tallo son las decenas y las hojas las unidades. Tallo 2 y hoja 7 → 27.</li></ul>`),
+   C('Gráficos', `<ul><li><b>Barras dobles:</b> comparan dos grupos (ej. 6°A y 6°B) en las mismas categorías.</li>
+     <li><b>Circular:</b> muestra partes de un total en porcentaje; el sector más grande es el más frecuente.</li></ul>`),
+   C('Azar', `<ul><li><b>Seguro:</b> siempre ocurre. <b>Posible:</b> puede ocurrir o no. <b>Imposible:</b> nunca ocurre.</li>
+     <li>Al lanzar una moneda muchas veces, esperamos cerca de la <b>mitad</b> de caras.</li>
+     <li>Al lanzar un dado, cada número tiene 1 de 6 posibilidades.</li></ul>`)],
+  ['Al lanzar un dado común, ¿cómo es el evento "obtener un 7"?','Imposible',['Seguro','Posible','Muy probable'],'Un dado común solo tiene los números del 1 al 6, así que obtener un 7 es <b>imposible</b>.']),
+
+/* ---------- 6° Lenguaje ---------- */
+'6c-len-u1': rv('Lenguaje',1,'Leer narraciones','#c43b6c',
+  '¡Guau! Repasemos cómo se arma una historia.',
+  'Guía N°1 6° Lenguaje (Ami, el niño de las estrellas); Guías N°2 y N°3; Lectura N°1 (Lenguaje 6°C)',
+  [C('Elementos de la narración', `<ul><li><b>Narrador:</b> la voz que cuenta la historia (no siempre es el autor).</li>
+     <li><b>Personajes:</b> protagonista, antagonista y secundarios.</li><li><b>Acciones:</b> los hechos que ocurren.</li>
+     <li><b>Ambiente:</b> el lugar, el tiempo y el clima emocional donde pasa la historia.</li></ul>`),
+   C('Tipos de narrador', `<ul><li><b>Protagonista:</b> cuenta su propia historia en primera persona ("yo"). Pedro, en "Ami, el niño de las estrellas", es narrador protagonista.</li>
+     <li><b>Testigo:</b> cuenta lo que vio, pero no es el principal.</li><li><b>Omnisciente:</b> lo sabe todo, incluso lo que piensan los personajes.</li></ul>`),
+   C('Estructura', `<p><b>Inicio</b> (se presenta la situación) → <b>desarrollo o nudo</b> (aparece el conflicto) → <b>desenlace</b> (se resuelve).</p>
+     <p class="rule">La raya (—) al comienzo de una línea indica que un personaje habla.</p>`),
+   C('Comprender lo que leo', `<ul><li><b>Literal:</b> la respuesta está escrita en el texto.</li><li><b>Inferencial:</b> la respuesta se deduce de pistas.</li></ul>
+     <p>Para descubrir el significado de una palabra nueva, fíjate en las palabras que la rodean (el contexto).</p>`)],
+  ['En "Yo estaba sobre unas rocas altas junto a la playa…", ¿qué tipo de narrador hay?','Protagonista',['Omnisciente','Testigo','No hay narrador'],'El narrador usa "yo" y le pasan los hechos a él: es <b>protagonista</b>, en primera persona.']),
+
+'6c-len-u2': rv('Lenguaje',2,'Biografía y noticia','#7b4fd6',
+  '¡Guau! Repasemos dos textos que informan.',
+  'Guía Biografía 6°; Guía N°2 Biografía; Póster La noticia (Lenguaje 6°C)',
+  [C('La biografía', `<p>Texto no literario que cuenta la vida de una persona, escrito por <b>otra</b> persona, en <b>tercera persona</b> y en <b>orden cronológico</b>.</p>
+     <p class="rule">Si la escribe la misma persona sobre sí misma, es una autobiografía (primera persona).</p>
+     <p>Usa marcadores de tiempo ("a los 20 años", "en 2011") y verbos en pasado.</p>`),
+   C('La noticia', `<p>Texto informativo sobre un hecho <b>reciente</b> y de interés para una comunidad. Es <b>objetiva</b> y se escribe en tercera persona.</p>
+     <p>Responde: <b>qué, quién, cuándo, dónde, cómo y por qué</b>.</p>`),
+   C('Partes de la noticia', `<table class="rv"><tr><td><b>Epígrafe o antetítulo</b></td><td>Va sobre el titular, lo complementa y llama la atención.</td></tr>
+     <tr><td><b>Titular</b></td><td>Presenta la noticia de manera breve.</td></tr><tr><td><b>Bajada o subtítulo</b></td><td>Resume lo más importante, bajo el titular.</td></tr>
+     <tr><td><b>Lead o entradilla</b></td><td>Primer párrafo; responde las preguntas básicas.</td></tr>
+     <tr><td><b>Cuerpo</b></td><td>Agrega información de lo más a lo menos importante (pirámide invertida).</td></tr></table>`)],
+  ['¿Qué parte de la noticia responde qué, quién, cuándo, dónde, cómo y por qué?','El lead o entradilla',['El titular','El epígrafe','La imagen'],'El <b>lead</b> es el primer párrafo y concentra la información esencial de la noticia.']),
+
+'6c-len-u3': rv('Lenguaje',3,'Textos discontinuos','#0f8f8a',
+  '¡Guau! Repasemos los textos que no se leen de corrido. Incluye la guía nueva de infografías.',
+  'Hoja de información Textos discontinuos; Guía 1 Infografía 6°; PPT Características de la infografía; Póster Infografía; Anuncio publicitario (Lenguaje 6°C)',
+  [C('Textos discontinuos', `<p>Presentan la información en <b>fragmentos</b> (tablas, gráficos, imágenes, listas), sin párrafos seguidos. Puedes leer solo la parte que te interesa.</p>
+     <p>Ejemplos: mapas, listas, tablas, gráficos, instructivos, carteles, esquemas, diagramas, infografías e historietas.</p>`),
+   C('La infografía', `<p class="rule">Información + gráfica = infografía. Es una palabra compuesta.</p>
+     <p>Presenta información de forma <b>visual</b>, con imágenes, datos y textos breves, para que sea fácil de entender y recordar.</p>
+     <ul><li>Sirve para información que se puede <b>resumir</b>, poner en una <b>lista</b>, <b>ordenar en secuencia</b>, <b>comparar</b> o mostrar en un gráfico.</li>
+       <li><b>No</b> sirve para información muy compleja y larga.</li>
+       <li>Usa título, viñetas, marcos, colores con cuidado, íconos y flechas que guían la lectura, y la fuente de los datos.</li></ul>`),
+   C('Publicidad y propaganda', `<ul><li><b>Publicidad:</b> busca que compres o uses un producto o servicio.</li>
+     <li><b>Propaganda:</b> promueve ideas o conductas (reciclar, vacunarse).</li></ul>
+     <p>Usan <b>eslogan</b> (frase breve), <b>logotipo</b>, imágenes llamativas y a veces exageraciones.</p>
+     <p class="rule">Hay que leerlas con actitud crítica: ¿es real lo que promete?</p>`)],
+  ['¿Qué tipo de información NO es buena para una infografía?','Una explicación muy compleja y larga',['Datos que se pueden poner en una lista','Los pasos de un proceso en orden','Una comparación entre dos cosas'],'La infografía funciona con información que se puede <b>resumir</b> en fragmentos breves. Una explicación compleja y larga no cabe bien.']),
+
+'6c-len-u4': rv('Lenguaje',4,'Comunicación oral y vocabulario','#d9771a',
+  '¡Guau! Repasemos cómo hablar frente al curso y ampliar tu vocabulario.',
+  'PPT Textos orales; Rúbricas de disertación y oralidad 6° (Lenguaje 6°C)',
+  [C('La disertación', `<p>Exposición oral de un tema investigado, con <b>introducción</b> (presenta el tema), <b>desarrollo</b> (lo explica) y <b>conclusión</b> (resume lo importante).</p>
+     <ul><li>Mira al público, habla con volumen claro y en registro <b>formal</b>.</li><li>Apoyo visual con imágenes y palabras clave, no párrafos largos.</li>
+     <li>Evita las <b>muletillas</b> ("eeh", "o sea").</li><li>Ensaya para manejar el tiempo.</li></ul>`),
+   C('Escuchar también es comunicar', `<p>Cuando un compañero diserta, el público escucha con atención y respeto.</p>
+     <p>El <b>lenguaje no verbal</b> (gestos, postura, expresión) acompaña a las palabras.</p>`),
+   C('Vocabulario', `<ul><li><b>Sinónimos:</b> significado parecido (contemplar / observar).</li><li><b>Antónimos:</b> significado contrario (aproximarse / alejarse).</li>
+     <li><b>Prefijos:</b> "in-" o "des-" suelen negar (invisible, inofensivo).</li><li><b>Sufijos:</b> "-ito" forma diminutivos (casita).</li></ul>`)],
+  ['¿Cuáles son las partes de una disertación?','Introducción, desarrollo y conclusión',['Inicio, nudo y desenlace','Titular, bajada y cuerpo','Estrofa, verso y rima'],'Una disertación se organiza en <b>introducción</b>, <b>desarrollo</b> y <b>conclusión</b>.']),
+
+/* ---------- 6° Ciencias ---------- */
+'6c-cie-u1': rv('Ciencias',1,'Ecosistemas','#1f8a4c',
+  '¡Guau! Repasemos cómo se relacionan los seres vivos con su ambiente.',
+  'PPT Ecosistemas 6°; Cadena y red trófica (Ciencias Naturales 6°C)',
+  [C('¿Qué es un ecosistema?', `<p>El conjunto de <b>seres vivos</b>, los <b>factores físicos</b> del lugar donde viven y las relaciones entre ellos.</p>
+     <ul><li><b>Bióticos:</b> todo lo que tiene vida (plantas, animales, microorganismos, personas).</li>
+     <li><b>Abióticos:</b> lo que no tiene vida (agua, luz, temperatura, rocas, suelo).</li></ul>`),
+   C('Niveles de organización', `<p><b>Organismo → población → comunidad → ecosistema</b></p>
+     <ul><li><b>Población:</b> individuos de la misma especie en un lugar.</li><li><b>Comunidad:</b> conjunto de poblaciones de distintas especies.</li></ul>`),
+   C('Cadenas y redes tróficas', `<ul><li><b>Productores:</b> fabrican su alimento con la fotosíntesis (plantas, algas).</li>
+     <li><b>Consumidores:</b> primarios (herbívoros), secundarios y terciarios.</li>
+     <li><b>Descomponedores:</b> hongos y bacterias que devuelven nutrientes al suelo.</li></ul>
+     <p class="rule">La flecha apunta desde el que es comido hacia el que come: pasto → conejo → zorro.</p>`)],
+  ['En la cadena pasto → conejo → zorro, ¿qué es el conejo?','Consumidor primario',['Productor','Consumidor secundario','Descomponedor'],'El conejo come al productor (el pasto): es un <b>consumidor primario</b>, herbívoro.']),
+
+'6c-cie-u2': rv('Ciencias',2,'El suelo','#a8521f',
+  '¡Guau! Repasemos de qué está hecho el suelo y cómo cuidarlo.',
+  'Guía 6° El suelo – Erosión; PPT Suelos (Ciencias Naturales 6°C)',
+  [C('Composición y formación', `<p>El suelo es la capa más superficial de la litósfera. Tiene <b>minerales, agua, aire y materia orgánica</b>.</p>
+     <p class="rule">Se forma por meteorización: la lluvia y los cambios de temperatura fragmentan las rocas durante miles de años.</p>
+     <p>Las <b>lombrices</b> remueven el suelo y dejan entrar aire y agua.</p>`),
+   C('Horizontes del suelo', `<table class="rv"><tr><td><b>O</b></td><td>El más superficial: oscuro, con restos de plantas y animales que forman <b>humus</b>.</td></tr>
+     <tr><td><b>A</b></td><td>Mucha materia orgánica; aquí crecen las raíces y viven lombrices e insectos.</td></tr>
+     <tr><td><b>B</b></td><td>Acumulación de minerales (arcilla, hierro) arrastrados por el agua.</td></tr>
+     <tr><td><b>C</b></td><td>Rocas fragmentadas.</td></tr><tr><td><b>R</b></td><td>Roca entera: la <b>roca madre</b>.</td></tr></table>`),
+   C('Tipos de suelo', `<ul><li><b>Arenoso:</b> partículas grandes, no retiene agua.</li><li><b>Arcilloso:</b> partículas finas, retiene mucha agua y se pone pegajoso.</li>
+     <li><b>Limoso</b> y <b>rocoso</b>.</li><li><b>Orgánico:</b> rico en humus, esponjoso; el mejor para cultivar.</li></ul>`),
+   C('Erosión', `<ul><li><b>Natural:</b> hídrica (lluvia, ríos, glaciares) y eólica (viento).</li>
+     <li><b>Antrópica (humana):</b> cultivos en pendientes, sobrepastoreo, tala de bosques e incendios.</li></ul>
+     <p class="rule">Desertización: pérdida de suelo por causas naturales. Desertificación: por acción humana.</p>`)],
+  ['¿Qué tipo de suelo es el mejor para cultivar, según la guía?','El suelo orgánico, rico en humus',['El suelo arenoso','El suelo rocoso','El horizonte C'],'El <b>suelo orgánico</b> tiene abundante humus y nutrientes, y retiene bien el agua.']),
+
+'6c-cie-u3': rv('Ciencias',3,'La energía','#d9771a',
+  '¡Guau! Repasemos qué es la energía y cómo cambia de forma.',
+  'Energía y sus transformaciones 6°; El viaje de la energía; Energy Explorer (Ciencias Naturales 6°C)',
+  [C('¿Qué es la energía?', `<p>La capacidad de un objeto para realizar un trabajo o <b>provocar un cambio</b> (de movimiento, forma o temperatura).</p>
+     <p class="rule">La energía no se crea ni se destruye: solo se transforma y se transfiere.</p>`),
+   C('Formas de energía', `<ul><li><b>Cinética:</b> la de los cuerpos en movimiento. Mayor masa o rapidez, más energía.</li>
+     <li><b>Potencial gravitatoria:</b> la de un cuerpo en altura.</li><li><b>Térmica:</b> agitación de las partículas (temperatura).</li>
+     <li><b>Lumínica</b> (luz) y <b>química</b> (alimentos, pilas, combustibles).</li></ul>`),
+   C('Fuentes de energía', `<ul><li><b>Renovables:</b> solar, eólica, hidráulica, undimotriz (olas), biomasa, geotérmica.</li>
+     <li><b>No renovables:</b> petróleo, carbón y gas natural.</li></ul>
+     <p>La mayoría de la energía viene directa o indirectamente del <b>Sol</b>.</p>
+     <p class="exm">Linterna: química (pila) → eléctrica → lumínica</p>`)],
+  ['Una pelota cae desde una mesa. ¿Qué transformación de energía ocurre?','Potencial en cinética',['Cinética en química','Lumínica en sonora','Eléctrica en potencial'],'Al caer pierde altura (energía <b>potencial</b>) y gana rapidez (energía <b>cinética</b>).']),
+
+'6c-cie-u4': rv('Ciencias',4,'La Tierra y la pubertad','#3a7bbf',
+  '¡Guau! Repasemos cómo es nuestro planeta y los cambios del cuerpo.',
+  'El planeta; Cambios en la pubertad; Aparato reproductor (Ciencias Naturales 6°C)',
+  [C('Capas de la Tierra', `<ul><li><b>Internas</b> (de afuera hacia adentro): <b>corteza</b> (donde vivimos, la más delgada), <b>manto</b> y <b>núcleo</b> (la más caliente).</li>
+     <li><b>Externas:</b> atmósfera (aire), hidrosfera (agua) y geosfera (roca).</li></ul>
+     <p class="rule">En Chile hay tantos sismos porque la placa de Nazca se mete bajo la placa Sudamericana.</p>`),
+   C('Ante un sismo', `<p>Agáchate, cúbrete bajo una mesa y sujétate. Ante alerta de tsunami, ve a zonas altas.</p>`),
+   C('La pubertad', `<p>Etapa de cambios en el cuerpo para pasar de niño o niña a adulto. La inician las <b>hormonas</b> y cada persona tiene su propio ritmo.</p>
+     <ul><li><b>Cambios físicos:</b> aumento de estatura (estirón), vello en axilas, sudor y acné.</li>
+     <li><b>Cambios psicológicos y sociales:</b> cambios de ánimo, intereses propios y amistades más intensas.</li></ul>
+     <p class="rule">La higiene diaria es clave: ducharse, usar desodorante y lavarse los dientes.</p>`)],
+  ['¿Qué capa de la Tierra es la más delgada y es donde vivimos?','La corteza',['El manto','El núcleo','La atmósfera'],'La <b>corteza</b> es la capa sólida más externa y delgada; ahí vivimos.']),
+
+/* ---------- 6° Historia ---------- */
+'6c-his-u1': rv('Historia y Geografía',1,'Geografía de Chile','#2c62d8',
+  '¡Guau! Repasemos el territorio de Chile.',
+  'Cuestionario 6° Básico; Guía organización del territorio; Mapas regionales (Historia 6°C)',
+  [C('Territorio', `<p>Espacio terrestre, marítimo y aéreo donde el Estado ejerce soberanía.</p>
+     <p class="rule">Chile es tricontinental: tiene territorio en América, Oceanía (Rapa Nui) y la Antártica.</p>
+     <p>Limita con Perú, Bolivia y Argentina.</p>`),
+   C('Regiones', `<p>La actual <b>regionalización</b> comenzó en la década de 1970 para administrar mejor el país. Hoy hay <b>16 regiones</b>.</p>
+     <p>Creadas en el siglo XXI: <b>Arica y Parinacota</b> y <b>Los Ríos</b> (2007) y <b>Ñuble</b> (2018). La capital del Biobío es Concepción.</p>`),
+   C('Relieve y zonas naturales', `<p>Macroformas (de oeste a este): <b>planicies litorales, cordillera de la Costa, depresión intermedia y cordillera de los Andes</b>.</p>
+     <p>Cinco zonas naturales: Norte Grande, Norte Chico, Zona Central, Zona Sur y Zona Austral.</p>`),
+   C('Ambientes', `<ul><li><b>Desértico</b> (Norte Grande): el desierto más árido del mundo.</li><li><b>Altiplánico:</b> gran altura, frío y lluvias de verano.</li>
+     <li><b>Mediterráneo</b> (Zona Central): veranos secos e inviernos lluviosos; concentra a la población.</li>
+     <li><b>Andino:</b> reserva de agua dulce (nieve y hielo).</li><li><b>Frío y lluvioso, patagónico y polar</b> en el sur.</li></ul>`)],
+  ['¿Por qué se dice que Chile es tricontinental?','Tiene territorio en América, Oceanía y la Antártica',['Limita con tres países','Tiene tres zonas naturales','Tiene tres cordilleras'],'Chile tiene territorio en <b>América</b>, <b>Oceanía</b> (Rapa Nui) y la <b>Antártica</b>.']),
+
+'6c-his-u2': rv('Historia y Geografía',2,'Independencia de Chile','#c43b6c',
+  '¡Guau! Repasemos cómo Chile se hizo independiente.',
+  'Antecedentes de la independencia; Procesos de independencia; Presentación Unidad 2 (Historia 6°C)',
+  [C('Antecedentes', `<ul><li>Ideas de la <b>Ilustración</b> y ejemplos de la independencia de EE. UU. (1776) y la Revolución Francesa (1789).</li>
+     <li>Malestar de los <b>criollos</b>, que no podían ocupar los cargos más altos.</li>
+     <li><b>1808:</b> Napoleón invade España y captura al rey Fernando VII.</li></ul>`),
+   C('Patria Vieja (1810-1814)', `<ul><li><b>18 de septiembre de 1810:</b> Primera Junta Nacional de Gobierno, presidida por Mateo de Toro y Zambrano.</li>
+     <li>Primer Congreso Nacional (1811): libertad de vientre. José Miguel Carrera, primera bandera y La Aurora de Chile.</li>
+     <li>Termina con el <b>Desastre de Rancagua</b> (1814).</li></ul>`),
+   C('Reconquista y Patria Nueva', `<ul><li><b>Reconquista (1814-1817):</b> España recupera el control. Destaca el guerrillero <b>Manuel Rodríguez</b>.</li>
+     <li>El Ejército de los Andes (San Martín y O'Higgins) se organiza en Mendoza y vence en <b>Chacabuco (1817)</b>.</li>
+     <li><b>12 de febrero de 1818:</b> Acta de Independencia. La batalla de <b>Maipú</b> la consolida.</li>
+     <li>O'Higgins es Director Supremo hasta su abdicación en 1823.</li></ul>`)],
+  ['¿Qué batalla puso fin a la Patria Vieja en 1814?','El Desastre de Rancagua',['Chacabuco','Maipú','Lircay'],'Con el <b>Desastre de Rancagua</b> (1814) los patriotas fueron derrotados y comenzó la Reconquista.']),
+
+'6c-his-u3': rv('Historia y Geografía',3,'Organización de la República','#7b4fd6',
+  '¡Guau! Repasemos cómo se organizó Chile después de la independencia.',
+  'Guía Autoritarismo conservador; Guía Reformas liberales; Organización democrática de Chile (Historia 6°C)',
+  [C('Ensayos y orden conservador', `<ul><li><b>1823-1830:</b> ensayos constitucionales (federalistas, liberales y conservadores).</li>
+     <li><b>Lircay (1830):</b> triunfan los conservadores. Ideólogo: <b>Diego Portales</b>.</li>
+     <li><b>Constitución de 1833:</b> presidente con mucho poder, <b>voto censitario</b> y religión católica oficial.</li>
+     <li>Decenios de Prieto, Bulnes y Montt. Se funda la Universidad de Chile (1842) con Andrés Bello.</li></ul>`),
+   C('Reformas liberales', `<ul><li>Buscaban limitar el poder del presidente y ampliar las libertades.</li><li><b>1871:</b> se prohíbe la reelección inmediata.</li>
+     <li><b>Leyes laicas (1883-1884):</b> registro civil, matrimonio civil y cementerios laicos.</li></ul>`),
+   C('La democracia hoy', `<p>La <b>Constitución</b> es la ley fundamental: organiza el gobierno, establece derechos y deberes y define los poderes del Estado.</p>
+     <table class="rv"><tr><td><b>Ejecutivo</b></td><td>Presidente y ministros: gobiernan.</td></tr>
+       <tr><td><b>Legislativo</b></td><td>Congreso (Senado y Cámara de Diputados): hace las leyes.</td></tr>
+       <tr><td><b>Judicial</b></td><td>Tribunales y Corte Suprema: aplican la ley y resuelven conflictos.</td></tr></table>
+     <p><b>Ciudadanos:</b> chilenos de 18 años o más, sin condena a pena aflictiva. El voto es personal, igualitario y secreto.</p>`)],
+  ['¿Qué poder del Estado hace las leyes?','El Legislativo (Congreso)',['El Ejecutivo','El Judicial','La municipalidad'],'El <b>Poder Legislativo</b>, el Congreso Nacional, discute y aprueba las leyes.']),
+
+'6c-his-u4': rv('Historia y Geografía',4,'Taller de Geografía','#0f8f8a',
+  '¡Guau! Repasemos regiones, desarrollo y el Chile productivo.',
+  'Concepto de región y tipos de regiones; Guía Desarrollo Humano; Chile en tres capas; Chile’s Productive Geography; Guía Misión Biobío (Taller de Geografía 6°C)',
+  TALLER_GEO, TALLER_GEO_CHECK),
+});
+
+const unitKey = L => L && L.cc ? `${L.cc.toLowerCase()}-${L.sj}-u${L.u+1}` : null;
+let RV = null;
+function showReview(key, onDone, opts={}){
+  const R = REVIEWS[key], S = ST[who];
+  const [q, ok, ds, ex] = R.check, item = mc(ok, shuffle(ds));
+  RV = {key, done:false};
+  view = 'review'; setTab('path');
+  app.innerHTML = `<div class="review" style="--uc:${R.c}">
+    <div class="rv-top"><button class="x" id="rvX" aria-label="Volver">${IC.x}</button><span class="rv-tag">Repaso · ${R.subj} · Unidad ${R.n}</span></div>
+    <h1>${R.t}</h1>
+    <div id="buddy">${buddy('idle', R.intro)}</div>
+    ${R.cards.map(c=>`<section class="rv-card"><h3>${c.h}</h3>${c.b}</section>`).join('')}
+    <section class="rv-card rv-check"><h3>¿Entendiste?</h3><p class="rv-q">${q}</p>
+      <div class="opts">${item.options.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+      <div id="rvFb"></div></section>
+    <p class="rv-src">Basado en: ${R.src}</p>
+    <div class="foot"><button class="btn" id="rvGo" disabled>${opts.go || '¡A practicar!'}</button><p class="hint" id="rvHint" style="text-align:center">Responde la pregunta para continuar.</p></div>
+  </div>`;
+  window.scrollTo({top:0});
+  app.querySelectorAll('.rv-check .opt').forEach(b=>b.onclick=()=>{
+    if (RV.done) return; RV.done = true;
+    const pickI = +b.dataset.i, right = pickI===item.correct;
+    app.querySelectorAll('.rv-check .opt').forEach((x,i)=>{ if(i===item.correct) x.classList.add('right'); else if(i===pickI) x.classList.add('wrong'); });
+    $('#rvFb').innerHTML = `<div class="fb ${right?'ok':'no'}" style="padding:12px 14px"><h3>${right?IC.check+' ¡Correcto!':'Respuesta correcta: '+ok}</h3><div class="ex">${ex}</div></div>`;
+    $('#buddy').innerHTML = buddy(right?'happy':'sad', right?'¡Guau guau! Entendiste. ¡Ahora a practicar!':'Casi. Lee la explicación; si quieres, vuelve a mirar el repaso.', right?'ok':'no');
+    $('#rvGo').disabled = false; $('#rvHint').hidden = true;
+    (S.reviews || (S.reviews = {}))[key] = Date.now(); S.updatedAt = Date.now(); saveLocal(who);
+    $('#rvFb').scrollIntoView({block:'nearest', behavior:'smooth'});
+  });
+  $('#rvGo').onclick = () => onDone();
+  $('#rvX').onclick = () => (opts.back || onDone)();
+}
+
 /* ============ lección ============ */
-function startLesson(id, skills){
+function startLesson(id, skills, skipRv){
+  const rvKey = skills ? null : unitKey(LESSONS[id]);
+  if (rvKey && REVIEWS[rvKey] && !skipRv && !((ST[who].reviews||{})[rvKey]))
+    return showReview(rvKey, ()=>startLesson(id, null, true), {back:()=>{ view='path'; render(); }});
   const sk = skills || LESSONS[id].sk;
   let q=[]; while(q.length<PER_LESSON) q=q.concat(shuffle(sk));
-  LS = {who, id, title: id==='repaso'?'Repaso de errores · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,PER_LESSON), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false, combo:0};
+  LS = {who, id, title: id==='repaso'?'Repaso de errores · '+SUBJ_T[getSubj()]:SUBJ_T[LESSONS[id].sj]+' · '+LESSONS[id].t, queue:q.slice(0,PER_LESSON), i:0, correct:0, mistakes:0, hearts:3, tally:{}, cur:null, sel:null, done:false, combo:0, rv: rvKey && REVIEWS[rvKey] ? rvKey : null};
   view='lesson'; setTab('path'); window.scrollTo({top:0}); nextQ();
 }
 function nextQ(){
@@ -2119,10 +3076,12 @@ function check(){
   $('#fbBox').innerHTML = `<div class="fb ${ok?'ok':'no'}" role="status">
     <h3>${ok?IC.check+' ¡Correcto!':'Respuesta correcta: '+right}</h3>
     <div class="ex">${q.explain}</div>
-    <button class="btn" id="bNext">${LS.hearts<=0?'Ver resultado':'Continuar'}</button></div>`;
+    <button class="btn" id="bNext">${LS.hearts<=0?'Ver resultado':'Continuar'}</button>
+    ${!ok && LS.rv && LS.hearts>0 ? `<button class="btn ghost" id="bRv">Ver el repaso de la unidad</button>` : ''}</div>`;
   document.querySelector('.prog i').style.width = (LS.correct/PER_LESSON*100)+'%';
   document.querySelectorAll('.hearts > span').forEach((h,i)=>h.className = i<LS.hearts?'':'off');
   const bn=$('#bNext'); bn.focus({preventScroll:true}); bn.onclick=nextQ;
+  const brv=$('#bRv'); if (brv) brv.onclick=()=>showReview(LS.rv, ()=>{ view='lesson'; window.scrollTo({top:0}); nextQ(); }, {go:'Volver a la lección'});
   bn.scrollIntoView({block:'nearest', behavior:'smooth'});
 }
 function finish(){
@@ -2397,7 +3356,6 @@ function renderPanel(){
 
 render();
 </script>
-
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
